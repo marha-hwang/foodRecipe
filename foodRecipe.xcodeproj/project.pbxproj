@@ -78,6 +78,241 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8332075D2C2302510079A8AE /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8396B95E2C1DBE36002F2B3F /* AppDelegate.swift */,
+				8396B9602C1DBE36002F2B3F /* SceneDelegate.swift */,
+				833207632C2303660079A8AE /* DIContainer */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		8332075E2C23026A0079A8AE /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				833207642C2304310079A8AE /* RecipeScene */,
+				833207652C2304680079A8AE /* FavoriteScene */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		8332075F2C23027F0079A8AE /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				833207762C23089A0079A8AE /* Entities */,
+				833207752C2308940079A8AE /* UseCases */,
+				833207742C23088F0079A8AE /* Interfaces */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		833207602C2302870079A8AE /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8332077A2C2309490079A8AE /* Repositories */,
+				833207792C2309460079A8AE /* Network */,
+				833207782C23093F0079A8AE /* PersistentStorage */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		833207612C2302BE0079A8AE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8396B96A2C1DBE37002F2B3F /* Assets.xcassets */,
+				8396B96C2C1DBE37002F2B3F /* LaunchScreen.storyboard */,
+				8396B96F2C1DBE37002F2B3F /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		833207632C2303660079A8AE /* DIContainer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DIContainer;
+			sourceTree = "<group>";
+		};
+		833207642C2304310079A8AE /* RecipeScene */ = {
+			isa = PBXGroup;
+			children = (
+				8332076C2C2305AB0079A8AE /* Flow */,
+				833207682C2304930079A8AE /* RecipeList */,
+				833207692C2304B30079A8AE /* RecipeQueryList */,
+				8332076D2C2307720079A8AE /* RecipeDetail */,
+			);
+			path = RecipeScene;
+			sourceTree = "<group>";
+		};
+		833207652C2304680079A8AE /* FavoriteScene */ = {
+			isa = PBXGroup;
+			children = (
+				833207702C2307D50079A8AE /* Flow */,
+				833207712C2307DD0079A8AE /* FavoriteList */,
+			);
+			path = FavoriteScene;
+			sourceTree = "<group>";
+		};
+		833207662C23047A0079A8AE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8396B9622C1DBE36002F2B3F /* ViewController.swift */,
+				8396B9642C1DBE36002F2B3F /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		833207672C2304830079A8AE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		833207682C2304930079A8AE /* RecipeList */ = {
+			isa = PBXGroup;
+			children = (
+				833207662C23047A0079A8AE /* View */,
+				833207672C2304830079A8AE /* ViewModel */,
+			);
+			path = RecipeList;
+			sourceTree = "<group>";
+		};
+		833207692C2304B30079A8AE /* RecipeQueryList */ = {
+			isa = PBXGroup;
+			children = (
+				8332076A2C23056A0079A8AE /* View */,
+				8332076B2C2305710079A8AE /* ViewModel */,
+			);
+			path = RecipeQueryList;
+			sourceTree = "<group>";
+		};
+		8332076A2C23056A0079A8AE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8332076B2C2305710079A8AE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8332076C2C2305AB0079A8AE /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		8332076D2C2307720079A8AE /* RecipeDetail */ = {
+			isa = PBXGroup;
+			children = (
+				8332076E2C23079E0079A8AE /* View */,
+				8332076F2C2307A50079A8AE /* ViewModel */,
+			);
+			path = RecipeDetail;
+			sourceTree = "<group>";
+		};
+		8332076E2C23079E0079A8AE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8332076F2C2307A50079A8AE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		833207702C2307D50079A8AE /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		833207712C2307DD0079A8AE /* FavoriteList */ = {
+			isa = PBXGroup;
+			children = (
+				833207722C2307F80079A8AE /* View */,
+				833207732C2307FD0079A8AE /* ViewModel */,
+			);
+			path = FavoriteList;
+			sourceTree = "<group>";
+		};
+		833207722C2307F80079A8AE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		833207732C2307FD0079A8AE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		833207742C23088F0079A8AE /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				833207772C2308B70079A8AE /* Repositories */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		833207752C2308940079A8AE /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		833207762C23089A0079A8AE /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		833207772C2308B70079A8AE /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		833207782C23093F0079A8AE /* PersistentStorage */ = {
+			isa = PBXGroup;
+			children = (
+				8396B9672C1DBE36002F2B3F /* foodRecipe.xcdatamodeld */,
+			);
+			path = PersistentStorage;
+			sourceTree = "<group>";
+		};
+		833207792C2309460079A8AE /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		8332077A2C2309490079A8AE /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		8396B9522C1DBE36002F2B3F = {
 			isa = PBXGroup;
 			children = (
@@ -101,14 +336,11 @@
 		8396B95D2C1DBE36002F2B3F /* foodRecipe */ = {
 			isa = PBXGroup;
 			children = (
-				8396B95E2C1DBE36002F2B3F /* AppDelegate.swift */,
-				8396B9602C1DBE36002F2B3F /* SceneDelegate.swift */,
-				8396B9622C1DBE36002F2B3F /* ViewController.swift */,
-				8396B9642C1DBE36002F2B3F /* Main.storyboard */,
-				8396B96A2C1DBE37002F2B3F /* Assets.xcassets */,
-				8396B96C2C1DBE37002F2B3F /* LaunchScreen.storyboard */,
-				8396B96F2C1DBE37002F2B3F /* Info.plist */,
-				8396B9672C1DBE36002F2B3F /* foodRecipe.xcdatamodeld */,
+				8332075D2C2302510079A8AE /* Application */,
+				8332075E2C23026A0079A8AE /* Presentation */,
+				8332075F2C23027F0079A8AE /* Domain */,
+				833207602C2302870079A8AE /* Data */,
+				833207612C2302BE0079A8AE /* Resources */,
 			);
 			path = foodRecipe;
 			sourceTree = "<group>";
