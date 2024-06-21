@@ -2,7 +2,27 @@
 //  RemoveRecentRecipeQuriesUseCase.swift
 //  foodRecipe
 //
-//  Created by h2o on 2024/06/21.
+//  Created by hwanghr on 2024/06/21.
 //
 
 import Foundation
+
+protocol RemoveRecentRecipeQuriesUseCase{
+    func excute(
+        completion: @escaping (Result<Bool, Error>) -> Void
+    )
+}
+
+class DefaultRemoveRecentRecipeQuriesUseCase:RemoveRecentRecipeQuriesUseCase{
+    
+    private let recipeQueriesRepository:RecipeQueriesRepository
+    
+    init(recipeQueriesRepository: RecipeQueriesRepository) {
+        self.recipeQueriesRepository = recipeQueriesRepository
+    }
+    
+    func excute(completion: @escaping (Result<Bool, Error>) -> Void) {
+        recipeQueriesRepository.removeRecentQuery(completion: completion)
+    }
+    
+}
