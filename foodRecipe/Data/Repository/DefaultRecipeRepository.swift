@@ -12,13 +12,10 @@ final class DefaultRecipeRepository:RecipeRepository{
                           page: Int,
                           completion: @escaping(Result<RecipePage, Error>) -> Void) -> Cancellable? {
         
-        let requestDTO = RecipeRequestDTO(recipe_name: query.recipe_name ?? "",
-                                          recipe_ingredient: query.recipe_ingredient ?? "",
-                                          recipe_type: query.recipe_type ?? "",
-                                          page: page)
         let task = RepositoryTask()
-        let endpoint = APIEndpoints.getRecipe()
         
+        let url = URL(string: "http://openapi.foodsafetykorea.go.kr/api/40302191c0db49ad91c7/COOKRCP01/json/1/5")
+        let endpoint = URLRequest(url: url!)
         task.networkTask = URLSession.shared.dataTask(with: endpoint) { data, response, error in
             if error != nil {
                 NSLog("sesssiontest error")
@@ -32,9 +29,14 @@ final class DefaultRecipeRepository:RecipeRepository{
             
             let string = String(data: data!, encoding: .utf8)
             NSLog("sessiontest \(string ?? "")")
-            let page = try? JSONDecoder().decode(RecipeResponseDTO, from: data!) as RecipeResponseDTO
-            completion(.success(page?.todomain()!))
+            
+            //Response에 api 결과를 담고, todomain함수를 사용하여 Entity형식으로 변환해야한다.
+            let temp = try! JSONDecoder().decode(RecipeResponseDTO.self, from: data!)
+            print(temp.COOKRCP01.total_count)
+            // completion(.success(page?.todomain()!))
+
         }
+        task.networkTask?.resume()
         
         return task
     }

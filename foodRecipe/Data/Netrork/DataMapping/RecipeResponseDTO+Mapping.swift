@@ -8,66 +8,79 @@
 import Foundation
 
 struct RecipeResponseDTO:Decodable{
-    let ingredients:[String]
-    let cookWay:String
-    let recipe_type:String
-    let recipe_tip:String
-    let hash_tag:String
-    let info_na:String
-    let info_pro:String
-    let info_fat:String
-    let info_cal:String
-    let info_eng:String
-    let recipe_seq:String
-    let recipe_name:String
-    let manual1:String
-    let manual1_img:String
-    let manual2:String
-    let manual2_img:String
-    let manual3:String
-    let manual3_img:String
-    let manual4:String
-    let manual4_img:String
-    let manual5:String
-    let manual5_img:String
-    let manual6:String
-    let manual6_img:String
-    let manual7:String
-    let manual7_img:String
-    let manual8:String
-    let manual8_img:String
-    let manual9:String
-    let manual9_img:String
-    let manual10:String
-    let manual10_img:String
-    let manual11:String
-    let manual11_img:String
-    let manual12:String
-    let manual12_img:String
-    let manual13:String
-    let manual13_img:String
-    let manual14:String
-    let manual14_img:String
-    let manual15:String
-    let manual15_img:String
-    let manual16:String
-    let manual16_img:String
-    let manual17:String
-    let manual17_img:String
-    let manual18:String
-    let manual18_img:String
-    let manual19:String
-    let manual19_img:String
-    let manual20:String
-    let manual20_img:String
-    
-    func todomain() -> RecipePage{
-        return RecipePage(page: 1, totalPages: 1, recpies: [])
+    let COOKRCP01:RecipeListDTO
+}
+
+extension RecipeResponseDTO{
+    struct RecipeListDTO:Decodable{
+        let total_count:String
+        let row:[RecipeDTO]
+        let RESULT:ResponseDTO
     }
 }
 
-struct RecipePageDTO{
-    let page: Int
-    let totalPages: Int
-    let recpies: [Recipe]
+extension RecipeResponseDTO{
+    struct ResponseDTO:Decodable{
+        let MSG:String
+        let CODE:String
+    }
+}
+
+extension RecipeResponseDTO{
+    struct RecipeDTO:Decodable{
+        let RCP_PARTS_DTLS:String
+        let RCP_WAY2:String
+        let MANUAL_IMG20:String
+        let MANUAL20:String
+        let RCP_SEQ:String
+        let INFO_NA:String
+        let INFO_WGT:String
+        let INFO_PRO:String
+        let INFO_FAT:String
+        let HASH_TAG:String
+        let RCP_PAT2:String
+        let ATT_FILE_NO_MK:String
+        let INFO_CAR:String
+        let RCP_NM:String
+        let INFO_ENG:String
+        let MANUAL_IMG01:String
+        let MANUAL_IMG02:String
+        let MANUAL_IMG03:String
+        let MANUAL_IMG04:String
+        let MANUAL_IMG05:String
+        let MANUAL_IMG06:String
+        let MANUAL_IMG07:String
+        let MANUAL_IMG08:String
+        let MANUAL_IMG09:String
+        let MANUAL_IMG10:String
+        let MANUAL_IMG11:String
+        let MANUAL_IMG12:String
+        let MANUAL_IMG13:String
+        let MANUAL_IMG14:String
+        let MANUAL_IMG15:String
+        let MANUAL_IMG16:String
+        let MANUAL_IMG17:String
+        let MANUAL_IMG18:String
+        let MANUAL_IMG19:String
+        let MANUAL01:String
+        let MANUAL02:String
+        let MANUAL03:String
+        let MANUAL04:String
+        let MANUAL05:String
+        let MANUAL06:String
+        let MANUAL07:String
+        let MANUAL08:String
+        let MANUAL09:String
+        let MANUAL10:String
+        let MANUAL11:String
+        let MANUAL12:String
+        let MANUAL13:String
+        let MANUAL14:String
+        let MANUAL15:String
+        let MANUAL16:String
+        let MANUAL17:String
+        let MANUAL18:String
+        let MANUAL19:String
+        
+    }
 }
