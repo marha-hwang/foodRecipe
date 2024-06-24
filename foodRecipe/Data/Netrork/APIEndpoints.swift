@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct APIEndpoints{
+    static func getRecipe() -> URLRequest{
+        
+        let url = URL(string: "")
+        return URLRequest(url: url!)
+    }
+}

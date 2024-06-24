@@ -12,7 +12,6 @@ protocol RecipeRepository {
     func fetchRecipesList(
         query: RecipeQuery,
         page: Int,
-        cached: @escaping (RecipePage) -> Void,
         completion: @escaping (Result<RecipePage, Error>) -> Void
     ) -> Cancellable?
 }

@@ -11,7 +11,6 @@ import Foundation
 protocol SearchRecipeUseCase {
     func execute(
         requestValue: SearchRecipeUseCaseRequestValue,
-        cached: @escaping (RecipePage) -> Void,
         completion: @escaping (Result<RecipePage, Error>) -> Void
     ) -> Cancellable?
 }
@@ -32,14 +31,12 @@ final class DefaultSearchRecipeUseCase: SearchRecipeUseCase {
 
     func execute(
         requestValue: SearchRecipeUseCaseRequestValue,
-        cached: @escaping (RecipePage) -> Void,
         completion: @escaping (Result<RecipePage, Error>) -> Void
     ) -> Cancellable? {
 
         return recipeRepository.fetchRecipesList(
             query: requestValue.query,
             page: requestValue.page,
-            cached: cached,
             completion: { result in
 
             if case .success = result {

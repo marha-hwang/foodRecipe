@@ -8,5 +8,5 @@
 import Foundation
 
 protocol Cancellable{
-    func cancell()
+    func cancel()
 }
