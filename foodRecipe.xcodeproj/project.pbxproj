@@ -17,6 +17,7 @@
 		8396B9792C1DBE37002F2B3F /* foodRecipeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8396B9782C1DBE37002F2B3F /* foodRecipeTests.swift */; };
 		8396B9832C1DBE37002F2B3F /* foodRecipeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8396B9822C1DBE37002F2B3F /* foodRecipeUITests.swift */; };
 		8396B9852C1DBE37002F2B3F /* foodRecipeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8396B9842C1DBE37002F2B3F /* foodRecipeUITestsLaunchTests.swift */; };
+		83C6596E2C2D7B28004227BE /* AppConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C6596D2C2D7B28004227BE /* AppConfigurations.swift */; };
 		BCD9752C2C2508400068B902 /* SearchRecipeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD9752B2C2508400068B902 /* SearchRecipeUseCase.swift */; };
 		BCD975312C2508B90068B902 /* RecipeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD975302C2508B90068B902 /* RecipeRepository.swift */; };
 		BCD975332C250E5F0068B902 /* RecipeQueriesRopository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD975322C250E5F0068B902 /* RecipeQueriesRopository.swift */; };
@@ -85,6 +86,7 @@
 		8396B97E2C1DBE37002F2B3F /* foodRecipeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = foodRecipeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8396B9822C1DBE37002F2B3F /* foodRecipeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodRecipeUITests.swift; sourceTree = "<group>"; };
 		8396B9842C1DBE37002F2B3F /* foodRecipeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodRecipeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		83C6596D2C2D7B28004227BE /* AppConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurations.swift; sourceTree = "<group>"; };
 		BCD9752B2C2508400068B902 /* SearchRecipeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeUseCase.swift; sourceTree = "<group>"; };
 		BCD975302C2508B90068B902 /* RecipeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecipeRepository.swift; path = foodRecipe/Domain/Interface/Repositories/RecipeRepository.swift; sourceTree = SOURCE_ROOT; };
 		BCD975322C250E5F0068B902 /* RecipeQueriesRopository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecipeQueriesRopository.swift; path = foodRecipe/Domain/Interface/Repositories/RecipeQueriesRopository.swift; sourceTree = SOURCE_ROOT; };
@@ -151,6 +153,7 @@
 			children = (
 				8396B95E2C1DBE36002F2B3F /* AppDelegate.swift */,
 				8396B9602C1DBE36002F2B3F /* SceneDelegate.swift */,
+				83C6596D2C2D7B28004227BE /* AppConfigurations.swift */,
 				BCD975462C251A2E0068B902 /* DIContainer */,
 			);
 			path = Application;
@@ -617,6 +620,7 @@
 				BCD975632C2523520068B902 /* RecipeQuriesListViewController.swift in Sources */,
 				BCD9753B2C2515BA0068B902 /* FetchRecentRecipeQuriesUseCase.swift in Sources */,
 				BCD975412C2518EA0068B902 /* FetchFavoriteUseCase.swift in Sources */,
+				83C6596E2C2D7B28004227BE /* AppConfigurations.swift in Sources */,
 				BCD9756F2C2554800068B902 /* RecipeQuery.swift in Sources */,
 				BCE0D4CF2C2943E100D769DC /* RecipeResponseStorage.swift in Sources */,
 				BCD9753F2C2518BD0068B902 /* AddFavoriteUseCase.swift in Sources */,
@@ -692,6 +696,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				API_BASE_URL = "https://openapi.foodsafetykorea.go.kr/api/";
+				API_KEY = 40302191c0db49ad91c7;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -755,6 +761,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				API_BASE_URL = "https://openapi.foodsafetykorea.go.kr/api/";
+				API_KEY = 40302191c0db49ad91c7;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -816,7 +824,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TV24D3P64X;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = foodRecipe/Info.plist;
+				INFOPLIST_FILE = foodRecipe/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -845,7 +853,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TV24D3P64X;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = foodRecipe/Info.plist;
+				INFOPLIST_FILE = foodRecipe/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

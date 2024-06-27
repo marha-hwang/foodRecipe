@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecipeQuery{
+struct RecipeQuery:Encodable{
     let recipe_name:String?
     let recipe_ingredient:String?
     let recipe_type:String?

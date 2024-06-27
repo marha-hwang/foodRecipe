@@ -8,7 +8,10 @@
 import Foundation
 
 struct RecipeResponseDTO:Decodable{
-    let COOKRCP01:RecipeListDTO
+    private enum CodingKeys: String, CodingKey {
+        case COOKRCP = "COOKRCP01"
+    }
+    let COOKRCP:RecipeListDTO
 }
 
 extension RecipeResponseDTO{
@@ -43,6 +46,7 @@ extension RecipeResponseDTO{
         let INFO_CAR:String
         let RCP_NM:String
         let INFO_ENG:String
+        let RCP_NA_TIP:String
         let MANUAL_IMG01:String
         let MANUAL_IMG02:String
         let MANUAL_IMG03:String
@@ -81,6 +85,54 @@ extension RecipeResponseDTO{
         let MANUAL17:String
         let MANUAL18:String
         let MANUAL19:String
+        
+    }
+}
+
+extension RecipeResponseDTO{
+    func toDomain() -> RecipePage{
+        return RecipePage(
+            total_count: Int(COOKRCP.total_count) ?? 0,
+            recpies: COOKRCP.row.map{$0.toDomain()}
+        )
+    }
+}
+
+extension RecipeResponseDTO.RecipeDTO{
+    func toDomain() -> Recipe{
+        return Recipe(
+            ingredients: [],
+            cookWay: RCP_WAY2,
+            recipe_type: RCP_PAT2,
+            recipe_tip: RCP_NA_TIP,
+            hash_tag: HASH_TAG,
+            info_na: INFO_NA,
+            info_pro: INFO_PRO,
+            info_fat: INFO_FAT,
+            info_cal: INFO_CAR,
+            info_eng: INFO_ENG,
+            recipe_seq: RCP_SEQ,
+            recipe_name: RCP_NM,
+            manual1: MANUAL01, manual1_img: MANUAL_IMG01,
+            manual2: MANUAL02, manual2_img: MANUAL_IMG02,
+            manual3: MANUAL03, manual3_img: MANUAL_IMG03,
+            manual4: MANUAL04, manual4_img: MANUAL_IMG04,
+            manual5: MANUAL05, manual5_img: MANUAL_IMG05,
+            manual6: MANUAL06, manual6_img: MANUAL_IMG06,
+            manual7: MANUAL07, manual7_img: MANUAL_IMG07,
+            manual8: MANUAL08, manual8_img: MANUAL_IMG08,
+            manual9: MANUAL09, manual9_img: MANUAL_IMG09,
+            manual10: MANUAL10, manual10_img: MANUAL_IMG10,
+            manual11: MANUAL11, manual11_img: MANUAL_IMG11,
+            manual12: MANUAL12, manual12_img: MANUAL_IMG12,
+            manual13: MANUAL13, manual13_img: MANUAL_IMG13,
+            manual14: MANUAL14, manual14_img: MANUAL_IMG14,
+            manual15: MANUAL15, manual15_img: MANUAL_IMG15,
+            manual16: MANUAL16, manual16_img: MANUAL_IMG16,
+            manual17: MANUAL17, manual17_img: MANUAL_IMG17,
+            manual18: MANUAL18, manual18_img: MANUAL_IMG18,
+            manual19: MANUAL19, manual19_img: MANUAL_IMG19,
+            manual20: MANUAL20, manual20_img: MANUAL_IMG20)
         
     }
 }

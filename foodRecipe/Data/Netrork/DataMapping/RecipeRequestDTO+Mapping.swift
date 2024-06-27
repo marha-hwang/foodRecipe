@@ -8,8 +8,7 @@
 import Foundation
 
 struct RecipeRequestDTO:Encodable{
-    let recipe_name:String
-    let recipe_ingredient:String
-    let recipe_type:String
+    let query:RecipeQuery
     let page:Int
+    let perCount:Int
 }
