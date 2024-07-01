@@ -6,3 +6,26 @@
 //
 
 import Foundation
+
+class CoreDataRecipeQueryStorage:RecipeQueryStorage{
+    
+    private let coreDataStorage: CoreDataStorage
+    
+    init(coreDataStorage: CoreDataStorage) {
+        self.coreDataStorage = coreDataStorage
+    }
+    
+    func fetchRecentsQueries(maxCount: Int, completion: @escaping (Result<[RecipeQuery], Error>) -> Void) {
+        <#code#>
+    }
+    
+    func saveRecentQuery(query: RecipeQuery, completion: @escaping (Result<RecipeQuery, Error>) -> Void) {
+        <#code#>
+    }
+    
+    func removeRecentQuery(completion: @escaping (Result<Bool, Error>) -> Void) {
+        <#code#>
+    }
+    
+    
+}

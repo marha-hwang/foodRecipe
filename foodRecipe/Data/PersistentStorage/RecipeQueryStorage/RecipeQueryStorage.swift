@@ -7,10 +7,17 @@
 
 import Foundation
 
-protocol RecipeResponseStorage {
-    func getResponse(
-        for request: RecipeRequestDTO,
-        completion: @escaping (Result<RecipeRequestDTO?, Error>) -> Void
+protocol RecipeQueryStorage {
+    func fetchRecentsQueries(
+        maxCount: Int,
+        completion: @escaping (Result<[RecipeQuery], Error>) -> Void
     )
-    func save(response: RecipeRequestDTO, for requestDto: RecipeRequestDTO)
+    func saveRecentQuery(
+        query: RecipeQuery,
+        completion: @escaping (Result<RecipeQuery, Error>) -> Void
+    )
+    
+    func removeRecentQuery(
+        completion: @escaping (Result<Bool, Error>) -> Void
+    )
 }

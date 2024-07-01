@@ -38,7 +38,7 @@ final class DefaultRecipeRepository:RecipeRepository{
                 completion(.success(_result.toDomain()))
             }
             else {
-                completion(.failure())
+                completion(.failure(DataError.ParsingError))
             }
         }
         task.networkTask?.resume()
