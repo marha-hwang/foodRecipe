@@ -8,6 +8,12 @@
 import Foundation
 import CoreData
 
+enum CoreDataStorageError: Error {
+    case readError(Error)
+    case saveError(Error)
+    case deleteError(Error)
+}
+
 final class CoreDataStorage : NSObject {
     
     private static let _shared = CoreDataStorage()
@@ -23,12 +29,10 @@ final class CoreDataStorage : NSObject {
         guard let modelURL = Bundle.main.url(forResource: "CoreDataStorage",
                                              withExtension: "momd") else {
             fatalError("Failed to find data model")
-            return nil
         }
         // model의 url을 가지고 NSManagedObjectModel인스턴스를 생성
         guard let model = NSManagedObjectModel(contentsOf: modelURL) else {
             fatalError("Failed to create model from file: \(modelURL)")
-            return nil
         }
         
         return model
@@ -39,7 +43,6 @@ final class CoreDataStorage : NSObject {
         // model의 url을 가지고 NSManagedObjectModel인스턴스를 생성
         guard let model = _model else {
             fatalError("Failed to create model from file")
-            return nil
         }
         
         // 데이터 파일이 저장될 디렉터리를 구함 
@@ -49,7 +52,6 @@ final class CoreDataStorage : NSObject {
         guard let storeURL = URL(string: "DataModel.sqlite",
                                  relativeTo: documentDirectoryURL) else {
             fatalError("Failed to create store URL")
-            return nil
         }
 
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)        
@@ -67,7 +69,6 @@ final class CoreDataStorage : NSObject {
        
         guard let coordinator = _coordinator else{
             fatalError("Failed to create NSPersistentStoreCoordinator")
-            return nil
         }
 
        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
@@ -76,7 +77,9 @@ final class CoreDataStorage : NSObject {
        
     }()
     
-    //context에 접근하여 비동기적으로 CoreData에 접근하기 위한 함수
+    ///해당 함수의 목적
+    ///1. private로 지정된 context에 접근할 수 있도록 함
+    ///2. CoreData의 사용을 비동기적으로 사용하도록 강제 함
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         guard let context = _context else{
             return

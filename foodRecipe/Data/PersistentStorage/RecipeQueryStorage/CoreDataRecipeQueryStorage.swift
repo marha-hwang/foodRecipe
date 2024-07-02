@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 class CoreDataRecipeQueryStorage:RecipeQueryStorage{
     
@@ -16,15 +17,36 @@ class CoreDataRecipeQueryStorage:RecipeQueryStorage{
     }
     
     func fetchRecentsQueries(maxCount: Int, completion: @escaping (Result<[RecipeQuery], Error>) -> Void) {
-        RecipeQueryE
+        coreDataStorage.performBackgroundTask{ context in
+            do {
+                let request: NSFetchRequest = RecipeQueryEntity.fetchRequest()
+                request.sortDescriptors = [NSSortDescriptor(key: #keyPath(RecipeQueryEntity.recipe_name),
+                                                            ascending: false)]
+                request.fetchLimit = maxCount
+                let result = try context.fetch(request).map { $0.toDomain() }
+
+                completion(.success(result))
+            } catch {
+                completion(.failure(CoreDataStorageError.readError(error)))
+            }
+        }
     }
     
     func saveRecentQuery(query: RecipeQuery, completion: @escaping (Result<RecipeQuery, Error>) -> Void) {
-        <#code#>
+        coreDataStorage.performBackgroundTask{ context in
+            do {
+                let entity = RecipeQueryEntity(recipeQuery: query, insertInto: context)
+                try context.save()
+
+                completion(.success(entity.toDomain()))
+            } catch {
+                completion(.failure(CoreDataStorageError.saveError(error)))
+            }
+        }
     }
     
     func removeRecentQuery(completion: @escaping (Result<Bool, Error>) -> Void) {
-        <#code#>
+        
     }
     
     
