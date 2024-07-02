@@ -16,7 +16,7 @@ class CoreDataRecipeQueryStorage:RecipeQueryStorage{
     }
     
     func fetchRecentsQueries(maxCount: Int, completion: @escaping (Result<[RecipeQuery], Error>) -> Void) {
-        <#code#>
+        RecipeQueryE
     }
     
     func saveRecentQuery(query: RecipeQuery, completion: @escaping (Result<RecipeQuery, Error>) -> Void) {
