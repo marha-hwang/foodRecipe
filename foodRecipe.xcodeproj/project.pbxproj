@@ -295,7 +295,7 @@
 			children = (
 				83D30F142C32DC9C00F12D6B /* FavoriteStorage.swift */,
 				83D30F162C32DCAF00F12D6B /* CoreDataStorage */,
-				83D30F172C32DCC000F12D6B /* UserDefaultsStorage */,
+				83D30F172C32DCC000F12D6B /* UserDefaultsStorage(추후구현) */,
 			);
 			path = FavoriteStorage;
 			sourceTree = "<group>";
@@ -317,13 +317,14 @@
 			path = CoreDataStorage;
 			sourceTree = "<group>";
 		};
-		83D30F172C32DCC000F12D6B /* UserDefaultsStorage */ = {
+		83D30F172C32DCC000F12D6B /* UserDefaultsStorage(추후구현) */ = {
 			isa = PBXGroup;
 			children = (
 				83D30F1A2C32DD3200F12D6B /* UserDefaultsFavoriteStorage.swift */,
 				83D30F1D2C32DD5100F12D6B /* EntityMapping */,
 			);
-			path = UserDefaultsStorage;
+			name = "UserDefaultsStorage(추후구현)";
+			path = "UserDefaultsStorage(추후구현)";
 			sourceTree = "<group>";
 		};
 		83D30F1C2C32DD3F00F12D6B /* EntityMapping */ = {

@@ -46,8 +46,21 @@ class CoreDataRecipeQueryStorage:RecipeQueryStorage{
     }
     
     func removeRecentQuery(completion: @escaping (Result<Bool, Error>) -> Void) {
-        
+        coreDataStorage.performBackgroundTask{ context in
+            do
+            {
+                let request: NSFetchRequest = RecipeQueryEntity.fetchRequest()
+                request.sortDescriptors = [NSSortDescriptor(key: #keyPath(RecipeQueryEntity.recipe_name),
+                                                            ascending: false)]
+                let result = try context.fetch(request)
+                result.forEach{ context.delete($0) }
+                try context.save()
+                
+                completion(.success(true))
+            } catch {
+                completion(.failure(CoreDataStorageError.saveError(error)))
+                completion(.success(false))
+            }
+        }
     }
-    
-    
 }
