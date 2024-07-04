@@ -6,12 +6,17 @@
 //
 
 import UIKit
-//apikey : 40302191c0db49ad91c7
-class ViewController: UIViewController {
 
+class RecipeListViewController: UIViewController, StoryboardInstantiable {
+
+    static func create() -> RecipeListViewController {
+        let view = RecipeListViewController.instantiateViewController()
+        return view
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        print("ViewDidLoad")
     }
 
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecipeRequestDTO:Encodable{
+struct RecipeRequestDTO{
     let query:RecipeQuery
     let page:Int
     let perCount:Int

@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+final class AppDIContainer{
+    func makeRecipeSceneDIContainer() -> RecipeSceneDIContainer {
+        RecipeSceneDIContainer()
+    }
+}
