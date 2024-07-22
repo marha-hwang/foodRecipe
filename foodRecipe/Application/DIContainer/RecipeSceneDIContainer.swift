@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies{
-    func makeRecipeListViewController() -> RecipeListViewController {
-        RecipeListViewController.create()
+    func makeRecipeMainViewController() -> RecipeMainViewController {
+        RecipeMainViewController.create()
     }
     
     func makeRecipeSearchFlowCoordinator(navigationController: UINavigationController) -> RecipeSearchFlowCoordinator {

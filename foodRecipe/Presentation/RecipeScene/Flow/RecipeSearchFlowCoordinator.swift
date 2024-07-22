@@ -9,15 +9,15 @@ import Foundation
 import UIKit
 
 protocol RecipeSearchFlowCoordinatorDependencies  {
-    func makeRecipeListViewController(
-    ) -> RecipeListViewController
+    func makeRecipeMainViewController(
+    ) -> RecipeMainViewController
 }
 
 final class RecipeSearchFlowCoordinator{
     private weak var navigationController: UINavigationController?
     private let dependencies: RecipeSearchFlowCoordinatorDependencies
 
-    private weak var recipeListVC: RecipeListViewController?
+    private weak var recipeListVC: RecipeMainViewController?
 
     init(navigationController: UINavigationController,
          dependencies: RecipeSearchFlowCoordinatorDependencies) {
@@ -26,7 +26,7 @@ final class RecipeSearchFlowCoordinator{
     }
     
     func start() {
-        let vc = dependencies.makeRecipeListViewController()
+        let vc = dependencies.makeRecipeMainViewController()
 
         navigationController?.pushViewController(vc, animated: false)
         recipeListVC = vc
