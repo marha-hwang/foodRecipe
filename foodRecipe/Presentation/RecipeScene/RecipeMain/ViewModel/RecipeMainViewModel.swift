@@ -54,6 +54,8 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
     
 }
 
+
+//MARK: INPUT
 extension DefaultRecipeMainViewModel{
     func showRecipeQuriesList() {
         <#code#>
@@ -77,30 +79,5 @@ extension DefaultRecipeMainViewModel{
     
     func closeCategory() {
         <#code#>
-    }
-}
-
-struct FolderViewItem{
-    enum type{
-        case normal
-        case empty
-        case open
-        case close
-    }
-    
-    let type:type
-    let name:String?
-    let image:String?
-    
-    init(type:type){
-        self.type = type
-        self.name = nil
-        self.image = nil
-    }
-    
-    init(name:String, image:String){
-        self.name = name
-        self.image = image
-        self.type = .normal
     }
 }

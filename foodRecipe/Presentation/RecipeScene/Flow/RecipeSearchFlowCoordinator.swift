@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol RecipeSearchFlowCoordinatorDependencies  {
-    func makeRecipeMainViewController(
+    func makeRecipeMainViewController(actions: RecipeMainViewModelActions
     ) -> RecipeMainViewController
 }
 
@@ -17,7 +17,7 @@ final class RecipeSearchFlowCoordinator{
     private weak var navigationController: UINavigationController?
     private let dependencies: RecipeSearchFlowCoordinatorDependencies
 
-    private weak var recipeListVC: RecipeMainViewController?
+    private weak var recipeMainVC: RecipeMainViewController?
 
     init(navigationController: UINavigationController,
          dependencies: RecipeSearchFlowCoordinatorDependencies) {
@@ -26,9 +26,26 @@ final class RecipeSearchFlowCoordinator{
     }
     
     func start() {
-        let vc = dependencies.makeRecipeMainViewController()
+        let actions = RecipeMainViewModelActions(showRecipeQuriesList: showRecipeQuriesList,
+                                                 showRecipeListByKeyword: showRecipeListByKeyword(keyword:),
+                                                 showRecipeListByCategory: showRecipeListByCategory(category:),
+                                                 showRecipeDetail: showRecipeDetail(recipe:))
+        let vc = dependencies.makeRecipeMainViewController(actions: actions)
 
         navigationController?.pushViewController(vc, animated: false)
-        recipeListVC = vc
+        recipeMainVC = vc
+    }
+    
+    func showRecipeQuriesList()->Void{
+        
+    }
+    func showRecipeListByKeyword(keyword:String)->Void{
+        
+    }
+    func showRecipeListByCategory(category:String)->Void{
+        
+    }
+    func showRecipeDetail(recipe:Recipe)->Void{
+        
     }
 }

@@ -7,24 +7,29 @@
 
 import UIKit
 
-class RecipeMainViewController: UIViewController {
+class RecipeMainViewController: UIViewController{
     private var viewModel: RecipeMainViewModel!
     
-    static func create(
-        with viewModel: RecipeMainViewModel,
-        posterImagesRepository: PosterImagesRepository?
-    ) -> RecipeMainViewController {
-        let view = RecipeMainViewController()
-        view.viewModel = viewModel
-        view.posterImagesRepository = posterImagesRepository
-        return view
+    static func create(with viewModel: RecipeMainViewModel) -> RecipeMainViewController {
+        
+        let vc = RecipeMainViewController()
+        vc.viewModel = viewModel
+        
+        return vc
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ViewDidLoad")
+        
+//        let recipeMainView = RecipeMainView(
+//        view.addSubview(recipeMainView)
+//        recipeMainView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+//        recipeMainView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+//        recipeMainView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+//        recipeMainView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+//        
+//        recipeMainView.setLayout()
     }
-
-
+        
 }
 

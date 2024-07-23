@@ -9,8 +9,33 @@ import Foundation
 import UIKit
 
 final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies{
-    func makeRecipeMainViewController() -> RecipeMainViewController {
-        RecipeMainViewController.create()
+    
+    //MARK: Persistent Storage
+    lazy var recipeQueryStorage = CoreDataRecipeQueryStorage(coreDataStorage: CoreDataStorage.shared)
+    
+    //MARK: REPOSITORY
+    func makeRecipeRepository()->RecipeRepository{
+        DefaultRecipeRepository()
+    }
+    
+    func makeRecipeQuriesRepository()->RecipeQueriesRepository{
+        DefaultRecipeQueryRepository(recipeQueryStorage: recipeQueryStorage)
+    }
+    
+    //MARK: USECASE
+    func makeSearchRecipeUseCase()->SearchRecipeUseCase{
+        DefaultSearchRecipeUseCase(recipeRepository: makeRecipeRepository(),
+                                   recipeQueryQueriesRepository: makeRecipeQuriesRepository())
+    }
+    
+    //MARK: RecipeMain
+    func makeRecipeMainViewController(actions: RecipeMainViewModelActions) -> RecipeMainViewController {
+        RecipeMainViewController.create(with: makeRecipeMainViewModel(actions: actions))
+    }
+    
+    func makeRecipeMainViewModel(actions:RecipeMainViewModelActions) -> RecipeMainViewModel{
+        DefaultRecipeMainViewModel(searchRecipeUsecase: makeSearchRecipeUseCase(),
+                                   actions: actions)
     }
     
     func makeRecipeSearchFlowCoordinator(navigationController: UINavigationController) -> RecipeSearchFlowCoordinator {
@@ -19,4 +44,5 @@ final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies{
             dependencies: self
         )
     }
+
 }
