@@ -40,12 +40,12 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
     private let actions:RecipeMainViewModelActions?
     
     // MARK: OUTPUT
-    var searchbarPlaceholder: String
-    var categoryItems: [FolderViewItem]
-    var weatherRecommandTitle: Observable<String>
-    var weatherRecommandItems: Observable<[Recipe]>
-    var timeRecommandTitle: String
-    var timeRecommandItems: Observable<[Recipe]>
+    var searchbarPlaceholder: String = ""
+    var categoryItems: [FolderViewItem] = []
+    var weatherRecommandTitle: Observable<String> = Observable("")
+    var weatherRecommandItems: Observable<[Recipe]> = Observable([])
+    var timeRecommandTitle: String = ""
+    var timeRecommandItems: Observable<[Recipe]> = Observable([])
     
     init(searchRecipeUsecase: SearchRecipeUseCase, actions: RecipeMainViewModelActions?) {
         self.searchRecipeUsecase = searchRecipeUsecase
@@ -58,26 +58,26 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
 //MARK: INPUT
 extension DefaultRecipeMainViewModel{
     func showRecipeQuriesList() {
-        <#code#>
+        
     }
     
     func showRecipeListByKeyword(keyword: String) {
-        <#code#>
+    
     }
     
     func showRecipeListByCategory(category: String) {
-        <#code#>
+        
     }
     
     func showRecipeDetail(recipe: Recipe) {
-        <#code#>
+        
     }
     
     func openCategory() {
-        <#code#>
+        
     }
     
     func closeCategory() {
-        <#code#>
+        
     }
 }

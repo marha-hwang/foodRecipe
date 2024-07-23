@@ -68,9 +68,9 @@ extension UIViewController{
     
     @objc func searchLabelEvent(sender: UITapGestureRecognizer){
 
-        guard let vc = UIStoryboard(name: "SearchView", bundle: nil).instantiateViewController(withIdentifier: "searchview") as? SearchViewController else { return }
-        navigationController?.pushViewController(vc, animated: false)
-        print("hellog")
+//        guard let vc = UIStoryboard(name: "SearchView", bundle: nil).instantiateViewController(withIdentifier: "searchview") as? SearchViewController else { return }
+//        navigationController?.pushViewController(vc, animated: false)
+//        print("hellog")
     }
     
     func addCategoryLabelToNavbar(categoryName:String){
@@ -143,18 +143,18 @@ extension UIViewController{
     }
     
     @objc func searchEvent(sender: UITapGestureRecognizer){
-        guard let vc = UIStoryboard(name: "SearchListView", bundle: nil).instantiateViewController(withIdentifier: "searchlistview") as? SearchListViewController else { return }
-        
-        ///레시피 검색 리스트화면에서 검색을 여러번 하는 경우 검색화면이 계속 중첩되지 않도록 하기 위한 코드
-        let vcCount = navigationController?.viewControllers.count
-        if vcCount! >= 2 && navigationController?.viewControllers[vcCount!-2] is SearchListViewController{
-            (navigationController?.viewControllers[vcCount!-2] as! SearchListViewController).searchKeyword = "Hamburgur"
-            navigationController?.popViewController(animated: false)
-        }
-        else {
-            navigationController?.pushViewController(vc, animated: false)   
-        }
-        print("searchEvent")
+//        guard let vc = UIStoryboard(name: "SearchListView", bundle: nil).instantiateViewController(withIdentifier: "searchlistview") as? SearchListViewController else { return }
+//        
+//        ///레시피 검색 리스트화면에서 검색을 여러번 하는 경우 검색화면이 계속 중첩되지 않도록 하기 위한 코드
+//        let vcCount = navigationController?.viewControllers.count
+//        if vcCount! >= 2 && navigationController?.viewControllers[vcCount!-2] is SearchListViewController{
+//            (navigationController?.viewControllers[vcCount!-2] as! SearchListViewController).searchKeyword = "Hamburgur"
+//            navigationController?.popViewController(animated: false)
+//        }
+//        else {
+//            navigationController?.pushViewController(vc, animated: false)   
+//        }
+//        print("searchEvent")
     }
     
     func addSearchViewButtonToNavbar(){
@@ -183,7 +183,7 @@ extension UIViewController{
     }
     
     @objc func searchViewEvent(sender: UITapGestureRecognizer){
-        guard let vc = UIStoryboard(name: "SearchView", bundle: nil).instantiateViewController(withIdentifier: "searchview") as? SearchViewController else { return }
-        navigationController?.pushViewController(vc, animated: false)
+//        guard let vc = UIStoryboard(name: "SearchView", bundle: nil).instantiateViewController(withIdentifier: "searchview") as? SearchViewController else { return }
+//        navigationController?.pushViewController(vc, animated: false)
     }
 }
