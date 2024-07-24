@@ -40,11 +40,21 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
     private let actions:RecipeMainViewModelActions?
     
     // MARK: OUTPUT
-    var searchbarPlaceholder: String = ""
-    var categoryItems: [FolderViewItem] = []
-    var weatherRecommandTitle: Observable<String> = Observable("")
+    var searchbarPlaceholder: String = "레시피를 검색해보세요"
+    var categoryItems: [FolderViewItem] = [
+        FolderViewItem(name: "한식", image: "logo"),
+        FolderViewItem(name: "중식", image: "logo"),
+        FolderViewItem(name: "양식", image: "logo"),
+        FolderViewItem(name: "일식", image: "logo"),
+        FolderViewItem(name: "찌개", image: "logo"),
+        FolderViewItem(name: "튀김", image: "logo"),
+        FolderViewItem(name: "볶음", image: "logo"),
+        FolderViewItem(name: "구이", image: "logo"),
+        FolderViewItem(name: "양념", image: "logo"),
+    ]
+    var weatherRecommandTitle: Observable<String> = Observable("비오는날 어울리는 음식을 추천합니다")
     var weatherRecommandItems: Observable<[Recipe]> = Observable([])
-    var timeRecommandTitle: String = ""
+    var timeRecommandTitle: String = "브런치에 어울리는 음식을 추천합니다."
     var timeRecommandItems: Observable<[Recipe]> = Observable([])
     
     init(searchRecipeUsecase: SearchRecipeUseCase, actions: RecipeMainViewModelActions?) {
@@ -66,7 +76,7 @@ extension DefaultRecipeMainViewModel{
     }
     
     func showRecipeListByCategory(category: String) {
-        
+        print(category)
     }
     
     func showRecipeDetail(recipe: Recipe) {

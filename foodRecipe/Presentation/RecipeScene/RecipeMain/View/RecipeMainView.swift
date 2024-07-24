@@ -105,20 +105,7 @@ class RecommandView:UIStackView{
         return imageView
     }()
     
-    lazy var recipeCollection:UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 300, height: 300)
-        
-        let recipeCollection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        recipeCollection.translatesAutoresizingMaskIntoConstraints = false
-        recipeCollection.backgroundColor = .orange
-        recipeCollection.register(RecipeMainItemCell.self, forCellWithReuseIdentifier: RecipeMainItemCell.identifier)
-        recipeCollection.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        recipeCollection.translatesAutoresizingMaskIntoConstraints = false
-        
-        return recipeCollection
-    }()
+    lazy var recipeController:UICollectionViewController = RecipeMainCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
     
     private lazy var headerView:UIStackView = {
         let headerView = UIStackView()
@@ -132,11 +119,25 @@ class RecommandView:UIStackView{
         
         titleView.widthAnchor.constraint(equalToConstant: 100).isActive = true
         titleView.heightAnchor.constraint(equalToConstant: 30).isActive = true
-         
+
         imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         return headerView
+    }()
+    
+    private lazy var recipeContainer:UIView = {
+        let recipeContainer = UIView()
+        recipeContainer.translatesAutoresizingMaskIntoConstraints = false
+        recipeContainer.backgroundColor = .darkGray
+        
+        recipeContainer.addSubview(recipeController.collectionView)
+        recipeController.collectionView.leadingAnchor.constraint(equalTo: recipeContainer.leadingAnchor).isActive = true
+        recipeController.collectionView.trailingAnchor.constraint(equalTo: recipeContainer.trailingAnchor).isActive = true
+        recipeController.collectionView.topAnchor.constraint(equalTo: recipeContainer.topAnchor).isActive = true
+        recipeController.collectionView.bottomAnchor.constraint(equalTo: recipeContainer.bottomAnchor).isActive = true
+        
+        return recipeContainer
     }()
     
     override init(frame: CGRect) {
@@ -149,9 +150,9 @@ class RecommandView:UIStackView{
         backgroundColor = .black
     
         addArrangedSubview(headerView)
-        addArrangedSubview(recipeCollection)
-        
-        recipeCollection.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        addArrangedSubview(recipeContainer)
+        recipeContainer.heightAnchor.constraint(equalToConstant: 300).isActive = true
+
     }
     
     required init(coder: NSCoder) {
