@@ -22,16 +22,12 @@ class RecipeMainCollectionViewController:UICollectionViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .orange
         collectionView.register(RecipeMainItemCell.self, forCellWithReuseIdentifier: RecipeMainItemCell.identifier)
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
-    }
-    
-    override func didMove(toParent parent: UIViewController?) {  
-        print("didMove")
     }
 }
 

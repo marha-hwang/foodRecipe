@@ -21,11 +21,11 @@ class RecipeMainViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        setupBehaviours()
     }
     
-    private func setupViews(){
-        view.backgroundColor = .blue
-        
+    private func setupViews(){   
+        view.backgroundColor = .white
         recipeMainView = RecipeMainView(frame: CGRect(x: 0, y: 0,
                                                       width: view.safeAreaLayoutGuide.layoutFrame.width,
                                                       height: 0))
@@ -36,7 +36,7 @@ class RecipeMainViewController: UIViewController{
         recipeMainView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         
         recipeMainView.categoryView.backgroundColor = .white
-        recipeMainView.categoryView.initForderView(items: viewModel.categoryItems, defaultRow: 2, col: 4){ [weak self] gesture in
+        recipeMainView.categoryView.initForderView(items: viewModel.categoryItems, defaultRow: 2, col: 5){ [weak self] gesture in
             self?.viewModel.showRecipeListByCategory(category: gesture.name ?? "")
         }
         
@@ -48,6 +48,14 @@ class RecipeMainViewController: UIViewController{
         
         addChild(recipeMainView.timeRecommandView.recipeController)
         recipeMainView.timeRecommandView.recipeController.didMove(toParent: self)
+    }
+    //공통 컴포넌트에 대한 동작을 처리하기 위해 사용
+    private func setupBehaviours() {
+        addBehaviors([DefaultNavigationBarBehavior(),
+                     DefaultTabBarBehavior(),
+                      ItemsNavigationBarBehavior(items: Items(left: .logo,
+                                                                 center: .searchAreaButton,
+                                                                 right: .blank))])
     }
         
 }

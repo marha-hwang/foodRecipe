@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies{
+final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies,FavoriteRecipeFlowCoordinatorDependencies{
     
     //MARK: Persistent Storage
     lazy var recipeQueryStorage = CoreDataRecipeQueryStorage(coreDataStorage: CoreDataStorage.shared)
@@ -38,8 +38,20 @@ final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies{
                                    actions: actions)
     }
     
+    //MARK: FavoriteRecipe
+    func makeFavoriteRecipeListViewController() -> FavoriteRecipeListViewController{
+        FavoriteRecipeListViewController.create()
+    }
+    
     func makeRecipeSearchFlowCoordinator(navigationController: UINavigationController) -> RecipeSearchFlowCoordinator {
         RecipeSearchFlowCoordinator(
+            navigationController: navigationController,
+            dependencies: self
+        )
+    }
+    
+    func makeFavoriteRecipeFlowCoordinator(navigationController: UINavigationController) -> FavoriteRecipeFlowCoordinator {
+        FavoriteRecipeFlowCoordinator(
             navigationController: navigationController,
             dependencies: self
         )

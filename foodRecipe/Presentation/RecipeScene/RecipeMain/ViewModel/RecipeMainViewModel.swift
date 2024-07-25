@@ -51,6 +51,10 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
         FolderViewItem(name: "볶음", image: "logo"),
         FolderViewItem(name: "구이", image: "logo"),
         FolderViewItem(name: "양념", image: "logo"),
+        FolderViewItem(name: "양념", image: "logo"),
+        FolderViewItem(name: "양념", image: "logo"),
+        FolderViewItem(name: "양념", image: "logo"),
+        FolderViewItem(name: "양념", image: "logo"),
     ]
     var weatherRecommandTitle: Observable<String> = Observable("비오는날 어울리는 음식을 추천합니다")
     var weatherRecommandItems: Observable<[Recipe]> = Observable([])
