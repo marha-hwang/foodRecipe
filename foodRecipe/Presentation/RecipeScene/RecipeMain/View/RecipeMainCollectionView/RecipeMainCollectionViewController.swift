@@ -10,6 +10,8 @@ import UIKit
 
 class RecipeMainCollectionViewController:UICollectionViewController{
     
+    var viewModel: RecipeMainViewModel!
+    
     init(collectionViewLayout layout: UICollectionViewFlowLayout) {
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 300, height: 300)
@@ -33,7 +35,7 @@ class RecipeMainCollectionViewController:UICollectionViewController{
 
 extension RecipeMainCollectionViewController{    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return viewModel.categoryItems.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

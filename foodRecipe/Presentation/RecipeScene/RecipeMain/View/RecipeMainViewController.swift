@@ -10,7 +10,6 @@ import UIKit
 class RecipeMainViewController: UIViewController{
     private var viewModel: RecipeMainViewModel!
     private var recipeMainView:RecipeMainView!
-    private var recipeMainCollectionViewController: RecipeMainCollectionViewController?
     
     static func create(with viewModel: RecipeMainViewModel) -> RecipeMainViewController {
         let vc = RecipeMainViewController()
@@ -43,6 +42,7 @@ class RecipeMainViewController: UIViewController{
         recipeMainView.weatherRecommandView.titleView.text = viewModel.weatherRecommandTitle.value
         recipeMainView.timeRecommandView.titleView.text = viewModel.timeRecommandTitle
         
+        
         addChild(recipeMainView.weatherRecommandView.recipeController)
         recipeMainView.weatherRecommandView.recipeController.didMove(toParent: self)
         
@@ -53,10 +53,17 @@ class RecipeMainViewController: UIViewController{
     private func setupBehaviours() {
         addBehaviors([DefaultNavigationBarBehavior(),
                      DefaultTabBarBehavior(),
-                      ItemsNavigationBarBehavior(items: Items(left: .logo,
-                                                                 center: .searchAreaButton,
-                                                                 right: .blank))])
+                      ItemsNavigationBarBehavior(type: .logo_searchAreaButton_blank)])
+    
+        //addBehaviors는 UI공통 컴포넌트만 생성하는 역활이기 때문에, 화면정보,이벤트를 커스텀하기 위해 코드를 추가해야함
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(searchLabelEvent))
+        navigationItem.titleView?.isUserInteractionEnabled = true
+        navigationItem.titleView?.addGestureRecognizer(gestureRecognizer)
     }
+    
+        @objc func searchLabelEvent(sender: UITapGestureRecognizer){
+           print("hellog")
+        }
         
 }
 
