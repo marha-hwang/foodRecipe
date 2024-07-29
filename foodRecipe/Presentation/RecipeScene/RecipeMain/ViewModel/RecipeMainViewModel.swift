@@ -72,13 +72,16 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
     private func updateRecommand(){
         let _ = searchRecipeUsecase.execute(
             requestValue: SearchRecipeUseCaseRequestValue( 
-                query: RecipeQuery(recipe_name: nil,
-                recipe_ingredient: nil,
-                recipe_type: "찌개"),
+                query: RecipeQuery(
+                    recipe_name: nil,
+                    recipe_ingredient: nil,
+                    recipe_type: "찌개"),
             page: 1)) { [weak self] result in
                 switch result {
                 case .success(let page):
-                    self?.weatherRecommandItems.value = page.recpies
+                    DispatchQueue.main.async{
+                        self?.weatherRecommandItems.value = page.recpies
+                    }
                 case .failure(let error):
                     print(error)
                 }
@@ -86,13 +89,16 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
         
         let _ = searchRecipeUsecase.execute(
             requestValue: SearchRecipeUseCaseRequestValue( 
-                query: RecipeQuery(recipe_name: nil,
-                recipe_ingredient: nil,
-                recipe_type: "튀김"),
+                query: RecipeQuery(
+                    recipe_name: nil,
+                    recipe_ingredient: nil,
+                    recipe_type: "일품"),
             page: 1)) { [weak self] result in
                 switch result {
                 case .success(let page):
-                    self?.weatherRecommandItems.value = page.recpies
+                    DispatchQueue.main.async{
+                        self?.timeRecommandItems.value = page.recpies
+                    }
                 case .failure(let error):
                     print(error)
                 }

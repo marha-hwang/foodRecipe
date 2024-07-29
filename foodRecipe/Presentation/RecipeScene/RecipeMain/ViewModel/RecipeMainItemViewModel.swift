@@ -20,31 +20,28 @@ struct RecipeMainItemViewModel{
         self.recipeCategory = recipe.recipe_type
         self.recipeType = recipe.cookWay
         self.difficulty = calculateDifficulty(recipe: recipe)
+        print(difficulty)
         
         func calculateDifficulty(recipe:Recipe)->Int{
             var star = 5
             
-            if recipe.manual20 != ""{
-                return star
-            }
-            
-            if recipe.manual15 != ""{
+            if recipe.manual16 == ""{
                 star-=1
-                return star 
             }
             
-            if recipe.manual10 != ""{
+            if recipe.manual2 == ""{
                 star-=1
-                return star 
             }
             
-            if recipe.manual5 != ""{
+            if recipe.manual8 == ""{
                 star-=1
-                return star 
             }
             
-            star-=1
-            return star 
+            if recipe.manual4 == ""{
+                star-=1
+            }
+            
+            return star
             
         }
     }

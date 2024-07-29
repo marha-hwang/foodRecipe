@@ -32,9 +32,7 @@ final class DefaultRecipeRepository:RecipeRepository{
                 NSLog("Data is Null")
                 return
             }
-            
-            print(String(data: _data, encoding: .utf8))
-            
+                        
             let result = try? JSONDecoder().decode(RecipeResponseDTO.self, from: _data)
             if let _result = result{
                 completion(.success(_result.toDomain()))

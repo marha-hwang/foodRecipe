@@ -51,7 +51,28 @@ class RecipeMainItemCell:UICollectionViewCell{
     lazy var difficultyStar:UIStackView = {
         let difficultyStar = UIStackView()
         difficultyStar.translatesAutoresizingMaskIntoConstraints = false
+        difficultyStar.axis = .horizontal
+        difficultyStar.alignment = .center
+        difficultyStar.distribution = .fillProportionally
+        
         difficultyStar.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
+        
+        
+        for i in 0..<5{
+            lazy var imageView:UIImageView = {
+                let imageView = UIImageView()
+                imageView.translatesAutoresizingMaskIntoConstraints = false
+                imageView.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
+                imageView.contentMode = .scaleToFill
+                
+                imageView.image = UIImage(systemName: "star")
+                
+                return imageView
+            }()
+            
+            difficultyStar.addArrangedSubview(imageView)
+        }
+        
         
         return difficultyStar
     }()
@@ -154,6 +175,10 @@ class RecipeMainItemCell:UICollectionViewCell{
         self.recipeType.text = viewModel.recipeType
         
         //viewModel의 난이도에 따라서 difficultyStar의 별을 그려야함
+        for i in 0..<viewModel.difficulty{
+            let imageView = difficultyStar.subviews[i] as? UIImageView
+            imageView?.image = UIImage(systemName: "star.fill")
+        }
         
         //네크워로로 이미지를 불러와서 이미지를 채워넣어야 함
         self.imageView.image =  UIImage(named: "logo")
