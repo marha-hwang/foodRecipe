@@ -9,6 +9,7 @@ import Foundation
 
 struct Recipe{
     let ingredients:[String]
+    let main_image:String
     let cookWay:String
     let recipe_type:String
     let recipe_tip:String

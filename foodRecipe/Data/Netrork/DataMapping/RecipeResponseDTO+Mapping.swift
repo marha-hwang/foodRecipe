@@ -32,6 +32,7 @@ extension RecipeResponseDTO{
 extension RecipeResponseDTO{
     struct RecipeDTO:Decodable{
         let RCP_PARTS_DTLS:String
+        let ATT_FILE_NO_MAIN:String
         let RCP_WAY2:String
         let MANUAL_IMG20:String
         let MANUAL20:String
@@ -102,6 +103,7 @@ extension RecipeResponseDTO.RecipeDTO{
     func toDomain() -> Recipe{
         return Recipe(
             ingredients: [],
+            main_image: ATT_FILE_NO_MAIN,   
             cookWay: RCP_WAY2,
             recipe_type: RCP_PAT2,
             recipe_tip: RCP_NA_TIP,

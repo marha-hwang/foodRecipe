@@ -20,7 +20,9 @@ class RecipeMainViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        prepareSubVC()
         setupBehaviours()
+        bind(to: viewModel)
     }
     
     private func setupViews(){   
@@ -41,14 +43,31 @@ class RecipeMainViewController: UIViewController{
         
         recipeMainView.weatherRecommandView.titleView.text = viewModel.weatherRecommandTitle.value
         recipeMainView.timeRecommandView.titleView.text = viewModel.timeRecommandTitle
+    }
+    
+    private func bind(to viewModel: RecipeMainViewModel) {
+        viewModel.weatherRecommandItems.observe(on: self) { [weak self] _ in
+            self?.recipeMainView.weatherRecommandView.recipeController.items = viewModel.weatherRecommandItems.value
+            self?.recipeMainView.weatherRecommandView.recipeController.reload()
+        }
         
-        
+        viewModel.timeRecommandItems.observe(on: self) { [weak self] _ in
+            self?.recipeMainView.timeRecommandView.recipeController.items = viewModel.timeRecommandItems.value
+            self?.recipeMainView.timeRecommandView.recipeController.reload()
+        }
+
+    }
+    
+    private func prepareSubVC(){
         addChild(recipeMainView.weatherRecommandView.recipeController)
         recipeMainView.weatherRecommandView.recipeController.didMove(toParent: self)
+        recipeMainView.weatherRecommandView.recipeController.viewModel = viewModel
         
         addChild(recipeMainView.timeRecommandView.recipeController)
         recipeMainView.timeRecommandView.recipeController.didMove(toParent: self)
+        recipeMainView.timeRecommandView.recipeController.viewModel = viewModel
     }
+    
     //공통 컴포넌트에 대한 동작을 처리하기 위해 사용
     private func setupBehaviours() {
         addBehaviors([DefaultNavigationBarBehavior(),
@@ -61,9 +80,9 @@ class RecipeMainViewController: UIViewController{
         navigationItem.titleView?.addGestureRecognizer(gestureRecognizer)
     }
     
-        @objc func searchLabelEvent(sender: UITapGestureRecognizer){
-           print("hellog")
-        }
+    @objc private func searchLabelEvent(sender: UITapGestureRecognizer){
+       print("hellog")
+    }
         
 }
 

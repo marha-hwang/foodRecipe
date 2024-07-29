@@ -64,6 +64,39 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
     init(searchRecipeUsecase: SearchRecipeUseCase, actions: RecipeMainViewModelActions?) {
         self.searchRecipeUsecase = searchRecipeUsecase
         self.actions = actions
+        
+        updateRecommand()
+    }
+    
+    //MARK: private
+    private func updateRecommand(){
+        let _ = searchRecipeUsecase.execute(
+            requestValue: SearchRecipeUseCaseRequestValue( 
+                query: RecipeQuery(recipe_name: nil,
+                recipe_ingredient: nil,
+                recipe_type: "찌개"),
+            page: 1)) { [weak self] result in
+                switch result {
+                case .success(let page):
+                    self?.weatherRecommandItems.value = page.recpies
+                case .failure(let error):
+                    print(error)
+                }
+        }
+        
+        let _ = searchRecipeUsecase.execute(
+            requestValue: SearchRecipeUseCaseRequestValue( 
+                query: RecipeQuery(recipe_name: nil,
+                recipe_ingredient: nil,
+                recipe_type: "튀김"),
+            page: 1)) { [weak self] result in
+                switch result {
+                case .success(let page):
+                    self?.weatherRecommandItems.value = page.recpies
+                case .failure(let error):
+                    print(error)
+                }
+        }
     }
     
 }

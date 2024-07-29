@@ -105,7 +105,7 @@ class RecommandView:UIStackView{
         return imageView
     }()
     
-    lazy var recipeController:UICollectionViewController = RecipeMainCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    lazy var recipeController:RecipeMainCollectionViewController = RecipeMainCollectionViewController()
     
     private lazy var headerView:UIStackView = {
         let headerView = UIStackView()
