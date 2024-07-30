@@ -11,6 +11,7 @@ import UIKit
 class RecipeMainCollectionViewController:UICollectionViewController{
     
     var viewModel: RecipeMainViewModel!
+    var recipeImagesRepository: RecipeImageRepository?
     var items:[Recipe]?
     
     init() {
@@ -55,8 +56,12 @@ extension RecipeMainCollectionViewController{
             assertionFailure("Cannot dequeue reusable cell \(RecipeMainItemCell.self) with reuseIdentifier: \(RecipeMainItemCell.reuseIdentifier)")
             return UICollectionViewCell()
         }
-        cell.fill(viewModel: RecipeMainItemViewModel(recipe: items![indexPath.row]))
+        cell.fill(viewModel: RecipeMainItemViewModel(recipe: items![indexPath.row]), recipeImageRepository: recipeImagesRepository)
 
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.showRecipeDetail(recipe: items![indexPath.row])
     }
 }

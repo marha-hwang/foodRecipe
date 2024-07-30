@@ -70,6 +70,8 @@ struct ItemsNavigationBarBehavior: ViewControllerLifecycleBehavior {
         ///masksToBounds의 디폴트 값은 false이고 true로 바꿔야 radius가 적용된다.
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 10
+        label.layer.borderColor = UIColor.black.cgColor
+        label.layer.borderWidth = 1
         
         viewController.navigationItem.titleView = label
     }

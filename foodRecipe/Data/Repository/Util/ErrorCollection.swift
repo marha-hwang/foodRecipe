@@ -9,4 +9,6 @@ import Foundation
 
 enum DataError:Error{
     case ParsingError
+    case NotFoundError
+    case SaveFailError
 }

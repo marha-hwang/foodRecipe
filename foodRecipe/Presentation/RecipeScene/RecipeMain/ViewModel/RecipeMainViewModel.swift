@@ -9,18 +9,14 @@ import Foundation
 
 struct RecipeMainViewModelActions{
     let showRecipeQuriesList:()->Void
-    let showRecipeListByKeyword:(String)->Void
     let showRecipeListByCategory:(String)->Void
     let showRecipeDetail:(Recipe)->Void
 }
 
 protocol RecipeMainViewModelInput{
     func showRecipeQuriesList()
-    func showRecipeListByKeyword(keyword:String)
     func showRecipeListByCategory(category:String)
     func showRecipeDetail(recipe:Recipe)
-    func openCategory()
-    func closeCategory()
 }
 
 protocol RecipeMainViewModelOutput{
@@ -111,26 +107,14 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
 //MARK: INPUT
 extension DefaultRecipeMainViewModel{
     func showRecipeQuriesList() {
-        
-    }
-    
-    func showRecipeListByKeyword(keyword: String) {
-    
+        actions?.showRecipeQuriesList()
     }
     
     func showRecipeListByCategory(category: String) {
-        print(category)
+        actions?.showRecipeListByCategory("")
     }
     
     func showRecipeDetail(recipe: Recipe) {
-        
-    }
-    
-    func openCategory() {
-        
-    }
-    
-    func closeCategory() {
-        
+        actions?.showRecipeDetail(recipe)
     }
 }

@@ -103,7 +103,7 @@ extension RecipeResponseDTO.RecipeDTO{
     func toDomain() -> Recipe{
         return Recipe(
             ingredients: [],
-            main_image: ATT_FILE_NO_MAIN,   
+            main_image: "https" + ATT_FILE_NO_MAIN.getString(4, ATT_FILE_NO_MAIN.count),   
             cookWay: RCP_WAY2,
             recipe_type: RCP_PAT2,
             recipe_tip: RCP_NA_TIP,

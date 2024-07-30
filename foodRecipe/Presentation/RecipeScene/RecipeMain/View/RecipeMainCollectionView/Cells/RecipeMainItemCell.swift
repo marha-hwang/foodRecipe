@@ -11,6 +11,7 @@ import UIKit
 class RecipeMainItemCell:UICollectionViewCell{
     static let reuseIdentifier = String(describing: RecipeMainItemCell.self)
     private var viewModel: RecipeMainItemViewModel!
+    private var recipeImageRepository: RecipeImageRepository?
     
     lazy var imageView:UIImageView = {
         let imageView = UIImageView()
@@ -167,9 +168,25 @@ class RecipeMainItemCell:UICollectionViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func fill(viewModel:RecipeMainItemViewModel){
+    public func fill(viewModel:RecipeMainItemViewModel, recipeImageRepository:RecipeImageRepository?){
         self.viewModel = viewModel
-
+        self.recipeImageRepository = recipeImageRepository
+        
+        //네크워로로 이미지를 불러와서 이미지를 채워넣어야 함
+        let _ = recipeImageRepository?.fetchImage(with: viewModel.imagePath){ [weak self] result in
+            print(viewModel.imagePath)
+            switch result{
+            case .success(let data):
+                DispatchQueue.main.async{
+                    let image = UIImage(data: data)
+                    self?.imageView.image = image
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
         self.recipeName.text = viewModel.recipeName
         self.recipeCategory.text = viewModel.recipeCategory
         self.recipeType.text = viewModel.recipeType
@@ -179,9 +196,6 @@ class RecipeMainItemCell:UICollectionViewCell{
             let imageView = difficultyStar.subviews[i] as? UIImageView
             imageView?.image = UIImage(systemName: "star.fill")
         }
-        
-        //네크워로로 이미지를 불러와서 이미지를 채워넣어야 함
-        self.imageView.image =  UIImage(named: "logo")
     }
     
     private func addViews(){

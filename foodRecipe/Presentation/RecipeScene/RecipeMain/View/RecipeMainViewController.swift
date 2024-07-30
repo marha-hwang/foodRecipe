@@ -9,11 +9,13 @@ import UIKit
 
 class RecipeMainViewController: UIViewController{
     private var viewModel: RecipeMainViewModel!
+    private var recipeImageRepository: RecipeImageRepository?
     private var recipeMainView:RecipeMainView!
     
-    static func create(with viewModel: RecipeMainViewModel) -> RecipeMainViewController {
+    static func create(with viewModel: RecipeMainViewModel, recipeImageRepository:RecipeImageRepository) -> RecipeMainViewController {
         let vc = RecipeMainViewController()
         vc.viewModel = viewModel
+        vc.recipeImageRepository = recipeImageRepository
         return vc
     }
     
@@ -42,7 +44,14 @@ class RecipeMainViewController: UIViewController{
         }
         
         recipeMainView.weatherRecommandView.titleView.text = viewModel.weatherRecommandTitle.value
+        let weatherRecommandGesture = UITapGestureRecognizer(target: self, action: #selector(showCategory))
+        recipeMainView.weatherRecommandView.imageView.isUserInteractionEnabled = true
+        recipeMainView.weatherRecommandView.imageView.addGestureRecognizer(weatherRecommandGesture)
+        
         recipeMainView.timeRecommandView.titleView.text = viewModel.timeRecommandTitle
+        let timeRecommandGesture = UITapGestureRecognizer(target: self, action: #selector(showCategory))
+        recipeMainView.timeRecommandView.imageView.isUserInteractionEnabled = true
+        recipeMainView.timeRecommandView.imageView.addGestureRecognizer(timeRecommandGesture)
     }
     
     private func bind(to viewModel: RecipeMainViewModel) {
@@ -62,10 +71,12 @@ class RecipeMainViewController: UIViewController{
         addChild(recipeMainView.weatherRecommandView.recipeController)
         recipeMainView.weatherRecommandView.recipeController.didMove(toParent: self)
         recipeMainView.weatherRecommandView.recipeController.viewModel = viewModel
+        recipeMainView.weatherRecommandView.recipeController.recipeImagesRepository = recipeImageRepository
         
         addChild(recipeMainView.timeRecommandView.recipeController)
         recipeMainView.timeRecommandView.recipeController.didMove(toParent: self)
         recipeMainView.timeRecommandView.recipeController.viewModel = viewModel
+        recipeMainView.timeRecommandView.recipeController.recipeImagesRepository = recipeImageRepository
     }
     
     //공통 컴포넌트에 대한 동작을 처리하기 위해 사용
@@ -81,7 +92,10 @@ class RecipeMainViewController: UIViewController{
     }
     
     @objc private func searchLabelEvent(sender: UITapGestureRecognizer){
-       print("hellog")
+        viewModel.showRecipeQuriesList()
+    }
+    @objc private func showCategory(sender: UITapGestureRecognizer){
+        viewModel.showRecipeListByCategory(category: "" )
     }
         
 }

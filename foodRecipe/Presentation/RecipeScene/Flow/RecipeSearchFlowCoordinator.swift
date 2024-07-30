@@ -9,8 +9,11 @@ import Foundation
 import UIKit
 
 protocol RecipeSearchFlowCoordinatorDependencies  {
-    func makeRecipeMainViewController(actions: RecipeMainViewModelActions
-    ) -> RecipeMainViewController
+    func makeRecipeMainViewController(actions: RecipeMainViewModelActions) -> RecipeMainViewController
+    func makeRecipeQuriesListViewController() -> RecipeQuriesListViewController
+    func makeRecipeListByKeywordViewController() -> RecipeListByKeywordViewController
+    func makeRecipeListByCategoryViewController() -> RecipeListByCategoryViewController
+    func makeRecipeDetailViewController() -> RecipeDetailViewController
 }
 
 final class RecipeSearchFlowCoordinator{
@@ -27,7 +30,6 @@ final class RecipeSearchFlowCoordinator{
     
     func start() {
         let actions = RecipeMainViewModelActions(showRecipeQuriesList: showRecipeQuriesList,
-                                                 showRecipeListByKeyword: showRecipeListByKeyword(keyword:),
                                                  showRecipeListByCategory: showRecipeListByCategory(category:),
                                                  showRecipeDetail: showRecipeDetail(recipe:))
         let vc = dependencies.makeRecipeMainViewController(actions: actions)
@@ -37,15 +39,22 @@ final class RecipeSearchFlowCoordinator{
     }
     
     func showRecipeQuriesList()->Void{
-        
+        let vc = dependencies.makeRecipeQuriesListViewController()
+        navigationController?.pushViewController(vc, animated: false)
     }
+    
     func showRecipeListByKeyword(keyword:String)->Void{
-        
+        let vc = dependencies.makeRecipeListByKeywordViewController()
+        navigationController?.pushViewController(vc, animated: false)
     }
+    
     func showRecipeListByCategory(category:String)->Void{
-        
+        let vc = dependencies.makeRecipeListByCategoryViewController()
+        navigationController?.pushViewController(vc, animated: false)
     }
+    
     func showRecipeDetail(recipe:Recipe)->Void{
-        
+        let vc = dependencies.makeRecipeDetailViewController()
+        navigationController?.pushViewController(vc, animated: false)
     }
 }

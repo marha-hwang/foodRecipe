@@ -7,6 +7,10 @@
         <attribute name="recipe_type" optional="YES" attributeType="String"/>
         <attribute name="recipe_way" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="RecipeImageEntity" representedClassName="RecipeImageEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="data" optional="YES" attributeType="Binary"/>
+        <attribute name="imagePath" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="RecipeQueryEntity" representedClassName="RecipeQueryEntity" syncable="YES" codeGenerationType="class">
         <attribute name="recipe_ingredient" optional="YES" attributeType="String"/>
         <attribute name="recipe_name" optional="YES" attributeType="String"/>

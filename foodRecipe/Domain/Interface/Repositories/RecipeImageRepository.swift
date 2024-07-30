@@ -8,7 +8,10 @@
 import Foundation
 
 protocol RecipeImageRepository{
-    func fetchRecipeImage(
-        //completion:@escaping (Result<[RecipeFavorite], Error>) -> Void
+    func fetchImage(
+        with imagePath: String,
+        completion: @escaping (Result<Data, Error>) -> Void
     )
 }
+
+
