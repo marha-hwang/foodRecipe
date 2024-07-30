@@ -173,8 +173,30 @@ class RecipeMainItemCell:UICollectionViewCell{
         self.recipeImageRepository = recipeImageRepository
         
         //네크워로로 이미지를 불러와서 이미지를 채워넣어야 함
-        let _ = recipeImageRepository?.fetchImage(with: viewModel.imagePath){ [weak self] result in
-            print(viewModel.imagePath)
+        updateImage()
+        
+        self.recipeName.text = viewModel.recipeName
+        self.recipeCategory.text = viewModel.recipeCategory
+        self.recipeType.text = viewModel.recipeType
+        
+        //viewModel의 난이도에 따라서 difficultyStar의 별을 그려야함
+        for i in 0..<viewModel.difficulty{
+            let imageView = difficultyStar.subviews[i] as? UIImageView
+            imageView?.image = UIImage(systemName: "star.fill")
+        }
+    }
+    
+    private func updateImage(){
+        
+        imageView.image = nil
+        
+        
+        //처음2개의 이미지만 네트워크를 통해 가져오고 나머지 이미지는 coreData를 통해 가져오고 있음
+        let imagePath:String = viewModel.imagePath
+        
+        let _ = recipeImageRepository?.fetchImage(with: imagePath){ [weak self] result in
+            print(imagePath)
+            
             switch result{
             case .success(let data):
                 DispatchQueue.main.async{
@@ -185,16 +207,6 @@ class RecipeMainItemCell:UICollectionViewCell{
             case .failure(let error):
                 print(error)
             }
-        }
-        
-        self.recipeName.text = viewModel.recipeName
-        self.recipeCategory.text = viewModel.recipeCategory
-        self.recipeType.text = viewModel.recipeType
-        
-        //viewModel의 난이도에 따라서 difficultyStar의 별을 그려야함
-        for i in 0..<viewModel.difficulty{
-            let imageView = difficultyStar.subviews[i] as? UIImageView
-            imageView?.image = UIImage(systemName: "star.fill")
         }
     }
     

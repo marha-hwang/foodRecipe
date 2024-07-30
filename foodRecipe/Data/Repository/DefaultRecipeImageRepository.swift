@@ -25,6 +25,7 @@ final class DefaultRecipeImagesRepository:RecipeImageRepository {
             //캐시에 이미지가 존재하는 경우
             if let data = recipeImageCache.getImageData(imagePath: imagePath) {
                 completion(.success(data))
+                print("cache")
                 return
             }
         
@@ -35,6 +36,7 @@ final class DefaultRecipeImagesRepository:RecipeImageRepository {
                     if let imageData = data{
                         completion(.success(imageData))
                         self?.recipeImageCache.setImageData(imagePath: imagePath, data: imageData)
+                        print("coreData")
                         return
                     }
                     
@@ -62,6 +64,7 @@ final class DefaultRecipeImagesRepository:RecipeImageRepository {
                             switch result{
                             case .success(let data):
                                 completion(.success(data))
+                                print("network")
                                 // cache에 저장
                                 self?.recipeImageCache.setImageData(imagePath: imagePath, data: data)
                             case .failure(let error):
