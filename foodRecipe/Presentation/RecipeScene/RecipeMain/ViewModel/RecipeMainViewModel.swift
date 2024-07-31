@@ -61,40 +61,37 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
         self.searchRecipeUsecase = searchRecipeUsecase
         self.actions = actions
         
-        updateRecommand()
+        setRecommand()
+    }
+    
+    private func setRecommand(){
+        ///동일한 인증키로 api를 동시에 호출하는 경우 인증키 에러가 발생하였음, 따라서 순차적으로 api를 호출하기 위해 아래와 같이 작성
+        updateRecommand(recipe_type: "찌개"){ [weak self] page in
+            DispatchQueue.main.async{
+                self?.weatherRecommandItems.value = page.recpies
+            }
+            
+            self?.updateRecommand(recipe_type: "일품"){ [weak self] page in 
+                DispatchQueue.main.async{
+                    self?.timeRecommandItems.value = page.recpies
+                }
+            }
+        }
     }
     
     //MARK: private
-    private func updateRecommand(){
+    private func updateRecommand(recipe_type:String, completion:@escaping(RecipePage)->Void){
         let _ = searchRecipeUsecase.execute(
             requestValue: SearchRecipeUseCaseRequestValue( 
                 query: RecipeQuery(
                     recipe_name: nil,
                     recipe_ingredient: nil,
-                    recipe_type: "찌개"),
-            page: 1)) { [weak self] result in
+                    recipe_type: recipe_type),
+            page: 1)
+        ) { result in
                 switch result {
                 case .success(let page):
-                    DispatchQueue.main.async{
-                        self?.weatherRecommandItems.value = page.recpies
-                    }
-                case .failure(let error):
-                    print(error)
-                }
-        }
-        
-        let _ = searchRecipeUsecase.execute(
-            requestValue: SearchRecipeUseCaseRequestValue( 
-                query: RecipeQuery(
-                    recipe_name: nil,
-                    recipe_ingredient: nil,
-                    recipe_type: "일품"),
-            page: 1)) { [weak self] result in
-                switch result {
-                case .success(let page):
-                    DispatchQueue.main.async{
-                        self?.timeRecommandItems.value = page.recpies
-                    }
+                    completion(page)
                 case .failure(let error):
                     print(error)
                 }

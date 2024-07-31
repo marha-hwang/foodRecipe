@@ -16,7 +16,6 @@ class RecipeMainItemCell:UICollectionViewCell{
     lazy var imageView:UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
         imageView.contentMode = .scaleToFill
         
         return imageView
@@ -25,10 +24,7 @@ class RecipeMainItemCell:UICollectionViewCell{
     lazy var recipeName:UITextView = {
         let recipeName = UITextView()
         recipeName.translatesAutoresizingMaskIntoConstraints = false
-        recipeName.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
-
         recipeName.textAlignment = .center
-        
         
         return recipeName
     }()
@@ -36,7 +32,6 @@ class RecipeMainItemCell:UICollectionViewCell{
     lazy var recipeType:UITextView = {
         let recipeType = UITextView()
         recipeType.translatesAutoresizingMaskIntoConstraints = false
-        recipeType.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
         
         return recipeType
     }()
@@ -44,7 +39,6 @@ class RecipeMainItemCell:UICollectionViewCell{
     lazy var recipeCategory:UITextView = {
         let recipeCategory = UITextView()
         recipeCategory.translatesAutoresizingMaskIntoConstraints = false
-        recipeCategory.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
  
         return recipeCategory
     }()
@@ -56,17 +50,14 @@ class RecipeMainItemCell:UICollectionViewCell{
         difficultyStar.alignment = .center
         difficultyStar.distribution = .fillProportionally
         
-        difficultyStar.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
-        
         
         for i in 0..<5{
             lazy var imageView:UIImageView = {
                 let imageView = UIImageView()
                 imageView.translatesAutoresizingMaskIntoConstraints = false
-                imageView.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
                 imageView.contentMode = .scaleToFill
-                
                 imageView.image = UIImage(systemName: "star")
+                imageView.tintColor = .yellow
                 
                 return imageView
             }()
@@ -85,7 +76,6 @@ class RecipeMainItemCell:UICollectionViewCell{
         outerView.distribution = .fillProportionally
         
         outerView.translatesAutoresizingMaskIntoConstraints = false
-        outerView.backgroundColor = .yellow
         
         lazy var infoStack:UIStackView = {
             let infoStack = UIStackView()
@@ -115,12 +105,10 @@ class RecipeMainItemCell:UICollectionViewCell{
             difficultyStack.distribution = .fillProportionally
             
             recipeCategory.translatesAutoresizingMaskIntoConstraints = false
-            recipeCategory.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
             
             lazy var difficultyLabel:UITextView = {
                 let difficultyLabel = UITextView()
                 difficultyLabel.translatesAutoresizingMaskIntoConstraints = false
-                difficultyLabel.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
                 difficultyLabel.text = "조리 난이도"
                 difficultyLabel.sizeToFit()
                 
@@ -144,15 +132,15 @@ class RecipeMainItemCell:UICollectionViewCell{
         outerView.addArrangedSubview(infoStack)
         outerView.addArrangedSubview(difficultyStack)
         
-        imageView.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.5).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.7).isActive = true
         
-        recipeName.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.2).isActive = true
+        recipeName.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.1).isActive = true
         recipeName.widthAnchor.constraint(equalToConstant: contentView.frame.width).isActive = true
         
         infoStack.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.1).isActive = true
         infoStack.widthAnchor.constraint(equalToConstant: contentView.frame.width).isActive = true
         
-        difficultyStack.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.2).isActive = true
+        difficultyStack.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.1).isActive = true
         difficultyStack.widthAnchor.constraint(equalToConstant: contentView.frame.width).isActive = true
         
         return outerView
@@ -190,12 +178,7 @@ class RecipeMainItemCell:UICollectionViewCell{
         
         imageView.image = nil
         
-        
-        //처음2개의 이미지만 네트워크를 통해 가져오고 나머지 이미지는 coreData를 통해 가져오고 있음
-        let imagePath:String = viewModel.imagePath
-        
-        let _ = recipeImageRepository?.fetchImage(with: imagePath){ [weak self] result in
-            print(imagePath)
+        let _ = recipeImageRepository?.fetchImage(with: viewModel.imagePath){ [weak self] result in
             
             switch result{
             case .success(let data):

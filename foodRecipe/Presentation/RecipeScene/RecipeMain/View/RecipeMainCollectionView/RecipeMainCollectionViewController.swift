@@ -36,7 +36,6 @@ class RecipeMainCollectionViewController:UICollectionViewController{
     
     private func setupViews(){
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .orange
         collectionView.register(RecipeMainItemCell.self, forCellWithReuseIdentifier: RecipeMainItemCell.reuseIdentifier)
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)        
     }

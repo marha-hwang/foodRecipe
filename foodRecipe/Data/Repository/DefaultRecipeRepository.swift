@@ -32,6 +32,8 @@ final class DefaultRecipeRepository:RecipeRepository{
                 NSLog("Data is Null")
                 return
             }
+            
+            //print(String(decoding: _data, as: UTF8.self))
                         
             let result = try? JSONDecoder().decode(RecipeResponseDTO.self, from: _data)
             if let _result = result{

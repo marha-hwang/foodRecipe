@@ -18,6 +18,12 @@ class RecipeMainView:UIView{
         categoryView.distribution = .fillProportionally
         categoryView.spacing = 10
         
+        categoryView.layer.borderWidth = 1
+        categoryView.layer.masksToBounds = true
+        categoryView.layer.cornerRadius = 10
+        categoryView.layer.borderColor = UIColor.black.cgColor
+        categoryView.layer.borderWidth = 1
+        
         return categoryView
     }()
     
@@ -32,7 +38,6 @@ class RecipeMainView:UIView{
         var mainView:UIView = {
             let mainView = UIView()
             mainView.translatesAutoresizingMaskIntoConstraints = false
-            mainView.backgroundColor = .yellow
             
             mainView.addSubview(categoryView)
             categoryView.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 30).isActive = true
@@ -68,7 +73,6 @@ class RecipeMainView:UIView{
         super.init(frame: frame)
         
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .yellow
         
         addSubview(scrollView)
         scrollView.topAnchor.constraint(equalTo: topAnchor).isActive = true
@@ -89,7 +93,7 @@ class RecommandView:UIStackView{
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.textAlignment = .center
-        textView.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
+        textView.backgroundColor = .white
         
         return textView
         
@@ -100,7 +104,8 @@ class RecommandView:UIStackView{
         let image = UIImage(systemName: "arrowshape.forward.fill")
         imageView.image = image
         imageView.contentMode = .scaleToFill
-        imageView.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
+        imageView.backgroundColor = .white
+        imageView.tintColor = .black
         
         return imageView
     }()
@@ -129,7 +134,6 @@ class RecommandView:UIStackView{
     private lazy var recipeContainer:UIView = {
         let recipeContainer = UIView()
         recipeContainer.translatesAutoresizingMaskIntoConstraints = false
-        recipeContainer.backgroundColor = .darkGray
         
         recipeContainer.addSubview(recipeController.collectionView)
         recipeController.collectionView.leadingAnchor.constraint(equalTo: recipeContainer.leadingAnchor).isActive = true
@@ -147,7 +151,13 @@ class RecommandView:UIStackView{
         axis = .vertical
         alignment = .fill
         distribution = .fillProportionally
-        backgroundColor = .black
+        backgroundColor = .white
+        
+        layer.borderWidth = 1
+        layer.masksToBounds = true
+        layer.cornerRadius = 10
+        layer.borderColor = UIColor.black.cgColor
+        layer.borderWidth = 1
     
         addArrangedSubview(headerView)
         addArrangedSubview(recipeContainer)

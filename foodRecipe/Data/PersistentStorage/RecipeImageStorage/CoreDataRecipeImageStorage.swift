@@ -20,8 +20,14 @@ class CoreDataRecipeImageStorage:RecipeImageStorage{
         coreDataStorage.performBackgroundTask{ context in
             do {
                 let request: NSFetchRequest = RecipeImageEntity.fetchRequest()
+                
+                //order by
                 request.sortDescriptors = [NSSortDescriptor(key: #keyPath(RecipeImageEntity.imagePath),
                                                             ascending: false)]
+                //where : %k를 통해 컬럼이름을 동적으로 지정하여 코드오류를 줄일수 있다.
+                let predicate = NSPredicate(format: "%K == %@", #keyPath(RecipeImageEntity.imagePath), imagePath)
+                request.predicate = predicate
+                
                 request.fetchLimit = 1
                 let result = try context.fetch(request)
                 
