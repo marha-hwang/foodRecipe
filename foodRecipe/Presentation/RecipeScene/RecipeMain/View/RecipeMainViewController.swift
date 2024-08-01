@@ -82,8 +82,8 @@ class RecipeMainViewController: UIViewController{
     //공통 컴포넌트에 대한 동작을 처리하기 위해 사용
     private func setupBehaviours() {
         addBehaviors([DefaultNavigationBarBehavior(),
-                     DefaultTabBarBehavior(),
-                      ItemsNavigationBarBehavior(type: .logo_searchAreaButton_blank)])
+                     ShowTabBarBehavior(),
+                     ItemsNavigationBarBehavior(type: .logo_searchAreaButton_blank)])
     
         //addBehaviors는 UI공통 컴포넌트만 생성하는 역활이기 때문에, 화면정보,이벤트를 커스텀하기 위해 코드를 추가해야함
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(searchLabelEvent))

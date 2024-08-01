@@ -87,7 +87,8 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
                     recipe_name: nil,
                     recipe_ingredient: nil,
                     recipe_type: recipe_type),
-            page: 1)
+            page: 1,
+            isSave: false)
         ) { result in
                 switch result {
                 case .success(let page):

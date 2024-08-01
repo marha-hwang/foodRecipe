@@ -40,7 +40,9 @@ final class DefaultSearchRecipeUseCase: SearchRecipeUseCase {
             completion: { result in
 
             if case .success = result {
-                self.recipeQueryQueriesRepository.saveRecentQuery(query: requestValue.query) { _ in }
+                if requestValue.isSave{
+                    self.recipeQueryQueriesRepository.saveRecentQuery(query: requestValue.query) { _ in }
+                }
             }
 
             completion(result)
@@ -51,4 +53,5 @@ final class DefaultSearchRecipeUseCase: SearchRecipeUseCase {
 struct SearchRecipeUseCaseRequestValue {
     let query: RecipeQuery
     let page: Int
+    let isSave: Bool
 }

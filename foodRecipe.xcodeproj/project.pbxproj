@@ -37,8 +37,9 @@
 		BC900CE62C58B9E400DDE22D /* CoreDataRecipeImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC900CE52C58B9E400DDE22D /* CoreDataRecipeImageStorage.swift */; };
 		BC900CEC2C58D8BE00DDE22D /* RecipeImageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC900CEB2C58D8BE00DDE22D /* RecipeImageEntity.swift */; };
 		BC900CEE2C58E14A00DDE22D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC900CED2C58E14A00DDE22D /* String+Extension.swift */; };
+		BC900CF02C5B122800DDE22D /* HideTabBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC900CEF2C5B122800DDE22D /* HideTabBarBehavior.swift */; };
+		BC900CF22C5B12E100DDE22D /* ShowTabBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC900CF12C5B12E100DDE22D /* ShowTabBarBehavior.swift */; };
 		BCCF6DA42C520FF6008DC47A /* DefaultNavigationBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6DA32C520FF6008DC47A /* DefaultNavigationBarBehavior.swift */; };
-		BCCF6DA62C521076008DC47A /* DefaultTabBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6DA52C521076008DC47A /* DefaultTabBarBehavior.swift */; };
 		BCCF6DA82C5218B3008DC47A /* ItemsNavigationBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6DA72C5218B3008DC47A /* ItemsNavigationBarBehavior.swift */; };
 		BCCF6DAA2C533750008DC47A /* CGSize+scaledSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6DA92C533750008DC47A /* CGSize+scaledSize.swift */; };
 		BCD9752C2C2508400068B902 /* SearchRecipeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD9752B2C2508400068B902 /* SearchRecipeUseCase.swift */; };
@@ -139,8 +140,9 @@
 		BC900CE52C58B9E400DDE22D /* CoreDataRecipeImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRecipeImageStorage.swift; sourceTree = "<group>"; };
 		BC900CEB2C58D8BE00DDE22D /* RecipeImageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeImageEntity.swift; sourceTree = "<group>"; };
 		BC900CED2C58E14A00DDE22D /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		BC900CEF2C5B122800DDE22D /* HideTabBarBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTabBarBehavior.swift; sourceTree = "<group>"; };
+		BC900CF12C5B12E100DDE22D /* ShowTabBarBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTabBarBehavior.swift; sourceTree = "<group>"; };
 		BCCF6DA32C520FF6008DC47A /* DefaultNavigationBarBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNavigationBarBehavior.swift; sourceTree = "<group>"; };
-		BCCF6DA52C521076008DC47A /* DefaultTabBarBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabBarBehavior.swift; sourceTree = "<group>"; };
 		BCCF6DA72C5218B3008DC47A /* ItemsNavigationBarBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsNavigationBarBehavior.swift; sourceTree = "<group>"; };
 		BCCF6DA92C533750008DC47A /* CGSize+scaledSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+scaledSize.swift"; sourceTree = "<group>"; };
 		BCD9752B2C2508400068B902 /* SearchRecipeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeUseCase.swift; sourceTree = "<group>"; };
@@ -737,8 +739,9 @@
 			isa = PBXGroup;
 			children = (
 				BCCF6DA32C520FF6008DC47A /* DefaultNavigationBarBehavior.swift */,
-				BCCF6DA52C521076008DC47A /* DefaultTabBarBehavior.swift */,
 				BCCF6DA72C5218B3008DC47A /* ItemsNavigationBarBehavior.swift */,
+				BC900CEF2C5B122800DDE22D /* HideTabBarBehavior.swift */,
+				BC900CF12C5B12E100DDE22D /* ShowTabBarBehavior.swift */,
 			);
 			path = Behaviors;
 			sourceTree = "<group>";
@@ -900,6 +903,7 @@
 				BCD975742C25683F0068B902 /* Cancellable.swift in Sources */,
 				83D30F212C32DE9A00F12D6B /* FavoriteEntity+mapping.swift in Sources */,
 				BCD9756D2C2523C90068B902 /* RecipeDetailViewModel.swift in Sources */,
+				BC900CF22C5B12E100DDE22D /* ShowTabBarBehavior.swift in Sources */,
 				83D30F152C32DC9C00F12D6B /* FavoriteStorage.swift in Sources */,
 				8396B9632C1DBE36002F2B3F /* RecipeMainViewController.swift in Sources */,
 				83D30F1B2C32DD3200F12D6B /* UserDefaultsFavoriteStorage.swift in Sources */,
@@ -916,6 +920,7 @@
 				BCF6BEA62C4F47AD00F0B61A /* RecipeMainItemCell.swift in Sources */,
 				BCE0D4D42C294F1900D769DC /* RecipeRequestDTO+Mapping.swift in Sources */,
 				BC900CE42C58B9CD00DDE22D /* RecipeImageStorage.swift in Sources */,
+				BC900CF02C5B122800DDE22D /* HideTabBarBehavior.swift in Sources */,
 				BCF6BEB22C51E81900F0B61A /* FavoriteRecipeListViewController.swift in Sources */,
 				BC858A542C368FD9009B87CF /* RecipeSceneDIContainer.swift in Sources */,
 				BCD9753D2C2515D50068B902 /* RemoveRecentRecipeQuriesUseCase.swift in Sources */,
@@ -929,7 +934,6 @@
 				BCD975432C2519020068B902 /* RemoveFavoriteUseCase.swift in Sources */,
 				BCD975632C2523520068B902 /* RecipeQuriesListViewController.swift in Sources */,
 				BC3A78A32C4E4606005CF727 /* RecipeListByKeywordViewController.swift in Sources */,
-				BCCF6DA62C521076008DC47A /* DefaultTabBarBehavior.swift in Sources */,
 				BCD9753B2C2515BA0068B902 /* FetchRecentRecipeQuriesUseCase.swift in Sources */,
 				BCD975412C2518EA0068B902 /* FetchFavoriteUseCase.swift in Sources */,
 				83C6596E2C2D7B28004227BE /* AppConfigurations.swift in Sources */,
