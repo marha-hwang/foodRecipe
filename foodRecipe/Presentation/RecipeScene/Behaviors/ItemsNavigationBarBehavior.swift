@@ -22,17 +22,44 @@ struct ItemsNavigationBarBehavior: ViewControllerLifecycleBehavior {
     }
     
     func viewDidLoad(viewController: UIViewController) {
-
+        
+        //back버튼을 커스텀하는 경우 부모view에서 커스텀해야 적용되므로 메인 화면에서 커스텀해야 함
+        customBackButton(viewController: viewController)
+        
         switch type{
         case BarType.logo_searchAreaButton_blank:
             addLogoItem(viewController: viewController)
             addsearchAreaButton(viewController: viewController)
             
         case BarType.back_searchBar_serchButton:
-            print()
+            addSearchBar(viewController: viewController)
+            addSearchButton(viewController: viewController)
+            
         case .back_searchTitle_searchBtn:
             print()
         }
+        
+    }
+    
+    func customBackButton(viewController:UIViewController){
+
+        guard let navigationBar = viewController.navigationController?.navigationBar else {
+            return
+        }
+
+        let image = UIImage(systemName: "arrowshape.backward.fill")
+        image?.withTintColor(.black)
+        
+        //navigationItem과 navigationBar의 차이점은? navigationBar는 모든vc의 공통객체이고, navigationItem은 각vc의 객체이다.
+        //navigationbar의 기본이미지를 사라지게하고, navigationItem을 통해 backButton을 커스텀하는 코드
+        navigationBar.backIndicatorImage = UIImage()
+        navigationBar.backIndicatorTransitionMaskImage = UIImage()
+        
+        let backButton = UIBarButtonItem()
+        backButton.image = image
+        backButton.tintColor = .black
+        viewController.navigationItem.backBarButtonItem = backButton
+        
         
     }
     
@@ -75,22 +102,40 @@ struct ItemsNavigationBarBehavior: ViewControllerLifecycleBehavior {
         
         viewController.navigationItem.titleView = label
     }
-//    
-//    func addSearchBarToNavBar(){
-//
-//        let searchBar = UISearchBar()
-//        searchBar.placeholder = "레시피를 검색해보세요"
-//        ///디폴트로 생성되는 왼쪽 돋보기 이미지 제거
-//        searchBar.setImage(UIImage(), for: .search, state: .normal)
-//        navigationItem.titleView = searchBar
-//    }
-//    
-//    @objc func searchLabelEvent(sender: UITapGestureRecognizer){
-//
-////        guard let vc = UIStoryboard(name: "SearchView", bundle: nil).instantiateViewController(withIdentifier: "searchview") as? SearchViewController else { return }
-////        navigationController?.pushViewController(vc, animated: false)
-////        print("hellog")
-//    }
+    
+    func addSearchBar(viewController:UIViewController){
+        
+        let searchBar = UISearchBar()
+        searchBar.placeholder = "레시피를 검색해보세요"
+        ///디폴트로 생성되는 왼쪽 돋보기 이미지 제거
+        searchBar.setImage(UIImage(), for: .search, state: .normal)
+        viewController.navigationItem.titleView = searchBar
+    }
+
+    func addSearchButton(viewController:UIViewController){
+
+        guard let navigationBar = viewController.navigationController?.navigationBar else {
+            return
+        }
+        
+        let height = navigationBar.frame.height
+        let width = navigationBar.frame.width
+
+        let image = UIImage(systemName: "magnifyingglass")
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width * 0.3, height: height * 0.3))
+        imageView.image = image
+        imageView.tintColor = .black
+        imageView.contentMode = .scaleAspectFill
+
+        let widthConstraint = imageView.widthAnchor.constraint(equalToConstant: height*0.7)
+        let heightConstraint = imageView.heightAnchor.constraint(equalToConstant: height * 0.7)
+        heightConstraint.isActive = true
+        widthConstraint.isActive = true
+
+        viewController.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: imageView)
+
+    }
+
 //    
 //    func addCategoryLabelToNavbar(categoryName:String){
 //        let width = navigationController?.navigationBar.frame.width ?? 0
@@ -105,61 +150,7 @@ struct ItemsNavigationBarBehavior: ViewControllerLifecycleBehavior {
 //        navigationItem.titleView = label
 //        
 //    }
-//    
-//    func addBackButtonToNavbar(){
 //
-//        let navbar = navigationController?.navigationBar
-//        let height = navbar?.frame.height ?? 0
-//        let width = navbar?.frame.width ?? 0
-//        
-//        let image = UIImage(systemName: "arrowshape.backward.fill")
-//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width * 0.3, height: height * 0.3))
-//        imageView.image = image
-//        imageView.tintColor = .black
-//        imageView.contentMode = .scaleAspectFill
-//
-//        let widthConstraint = imageView.widthAnchor.constraint(equalToConstant: height*0.7)
-//        let heightConstraint = imageView.heightAnchor.constraint(equalToConstant: height * 0.7)
-//        heightConstraint.isActive = true
-//        widthConstraint.isActive = true
-//        
-//        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backEvent))
-//        imageView.isUserInteractionEnabled = true
-//        imageView.addGestureRecognizer(gestureRecognizer)
-//
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: imageView)
-//        
-//    }
-//    
-//    @objc func backEvent(sender: UITapGestureRecognizer){
-//        navigationController?.popViewController(animated: false)
-//    }
-//    
-//    
-//    func addSearchButtonToNavbar(){
-//
-//        let navbar = navigationController?.navigationBar
-//        let height = navbar?.frame.height ?? 0
-//        let width = navbar?.frame.width ?? 0
-//        
-//        let image = UIImage(named: "search")
-//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width * 0.3, height: height * 0.3))
-//        imageView.image = image
-//        imageView.tintColor = .black
-//        imageView.contentMode = .scaleAspectFill
-//
-//        let widthConstraint = imageView.widthAnchor.constraint(equalToConstant: height*0.7)
-//        let heightConstraint = imageView.heightAnchor.constraint(equalToConstant: height * 0.7)
-//        heightConstraint.isActive = true
-//        widthConstraint.isActive = true
-//        
-//        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(searchEvent))
-//        imageView.isUserInteractionEnabled = true
-//        imageView.addGestureRecognizer(gestureRecognizer)
-//        
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: imageView)
-//        
-//    }
 //    
 //    @objc func searchEvent(sender: UITapGestureRecognizer){
 ////        guard let vc = UIStoryboard(name: "SearchListView", bundle: nil).instantiateViewController(withIdentifier: "searchlistview") as? SearchListViewController else { return }
@@ -175,34 +166,5 @@ struct ItemsNavigationBarBehavior: ViewControllerLifecycleBehavior {
 ////        }
 ////        print("searchEvent")
 //    }
-//    
-//    func addSearchViewButtonToNavbar(){
-//
-//        let navbar = navigationController?.navigationBar
-//        let height = navbar?.frame.height ?? 0
-//        let width = navbar?.frame.width ?? 0
-//        
-//        let image = UIImage(named: "search")
-//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width * 0.3, height: height * 0.3))
-//        imageView.image = image
-//        imageView.tintColor = .black
-//        imageView.contentMode = .scaleAspectFill
-//
-//        let widthConstraint = imageView.widthAnchor.constraint(equalToConstant: height*0.7)
-//        let heightConstraint = imageView.heightAnchor.constraint(equalToConstant: height * 0.7)
-//        heightConstraint.isActive = true
-//        widthConstraint.isActive = true
-//        
-//        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(searchViewEvent))
-//        imageView.isUserInteractionEnabled = true
-//        imageView.addGestureRecognizer(gestureRecognizer)
-//        
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: imageView)
-//        
-//    }
-//    
-//    @objc func searchViewEvent(sender: UITapGestureRecognizer){
-////        guard let vc = UIStoryboard(name: "SearchView", bundle: nil).instantiateViewController(withIdentifier: "searchview") as? SearchViewController else { return }
-////        navigationController?.pushViewController(vc, animated: false)
-//    }
+
 }
