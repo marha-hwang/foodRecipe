@@ -16,11 +16,11 @@ class CoreDataRecipeQueryStorage:RecipeQueryStorage{
         self.coreDataStorage = coreDataStorage
     }
     
-    func fetchRecentsQueries(maxCount: Int, completion: @escaping (Result<[RecipeQuery], Error>) -> Void) {
+    func fetchRecentsQueries(maxCount: Int, completion: @escaping (Result<[RecipeQueryHistory], Error>) -> Void) {
         coreDataStorage.performBackgroundTask{ context in
             do {
                 let request: NSFetchRequest = RecipeQueryEntity.fetchRequest()
-                request.sortDescriptors = [NSSortDescriptor(key: #keyPath(RecipeQueryEntity.recipe_name),
+                request.sortDescriptors = [NSSortDescriptor(key: #keyPath(RecipeQueryEntity.reg_date),
                                                             ascending: false)]
                 request.fetchLimit = maxCount
                 let result = try context.fetch(request).map { $0.toDomain() }
@@ -32,7 +32,7 @@ class CoreDataRecipeQueryStorage:RecipeQueryStorage{
         }
     }
     
-    func saveRecentQuery(query: RecipeQuery, completion: @escaping (Result<RecipeQuery, Error>) -> Void) {
+    func saveRecentQuery(query: RecipeQueryHistory, completion: @escaping (Result<RecipeQueryHistory, Error>) -> Void) {
         coreDataStorage.performBackgroundTask{ context in
             do {
                 let entity = RecipeQueryEntity(recipeQuery: query, insertInto: context)
@@ -45,13 +45,17 @@ class CoreDataRecipeQueryStorage:RecipeQueryStorage{
         }
     }
     
-    func removeRecentQuery(completion: @escaping (Result<Bool, Error>) -> Void) {
+    func removeRecentQuery(queryId:String?, completion: @escaping (Result<Bool, Error>) -> Void) {
         coreDataStorage.performBackgroundTask{ context in
             do
             {
                 let request: NSFetchRequest = RecipeQueryEntity.fetchRequest()
-                request.sortDescriptors = [NSSortDescriptor(key: #keyPath(RecipeQueryEntity.recipe_name),
-                                                            ascending: false)]
+                
+                if let _queryId = queryId{
+                    let predicate = NSPredicate(format: "%K == %@", #keyPath(RecipeQueryEntity.queryId), _queryId)
+                    request.predicate = predicate
+                }
+                
                 let result = try context.fetch(request)
                 result.forEach{ context.delete($0) }
                 try context.save()

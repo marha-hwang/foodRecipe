@@ -36,6 +36,14 @@ final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies,Favor
                                    recipeQueryQueriesRepository: makeRecipeQuriesRepository())
     }
     
+    func makeFetchRecentRecipeQuriesUseCase()->FetchRecentRecipeQuriesUseCase{
+        DefaultFetchRecentRecipeQueriesUseCase(recipeQueriesRepository: makeRecipeQuriesRepository())
+    }
+    
+    func makeRemoveRecentRecipeQuriesUseCase()->RemoveRecentRecipeQuriesUseCase{
+        DefaultRemoveRecentRecipeQuriesUseCase(recipeQueriesRepository: makeRecipeQuriesRepository())
+    }
+    
     //MARK: RecipeMain
     func makeRecipeMainViewController(actions: RecipeMainViewModelActions) -> RecipeMainViewController {
         RecipeMainViewController.create(with: makeRecipeMainViewModel(actions: actions), recipeImageRepository: makeRecipeImageRepository())
@@ -47,13 +55,19 @@ final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies,Favor
     }
     
     //MARK: RecipeQuriesList
-    func makeRecipeQuriesListViewController() -> RecipeQuriesListViewController {
-        RecipeQuriesListViewController.create()
+    func makeRecipeQuriesListViewController(actions: RecipeQuriesListViewModelActions) -> RecipeQuriesListViewController {
+        RecipeQuriesListViewController.create(with: makeRecipeQuriesListViewModel(actions: actions))
+    }
+    
+    func makeRecipeQuriesListViewModel(actions:RecipeQuriesListViewModelActions) -> RecipeQuriesListViewModel{
+        DefaultRecipeQuriesListViewModel(fetchQuriesUseCase: makeFetchRecentRecipeQuriesUseCase(),
+                                         removeQuriesUseCase: makeRemoveRecentRecipeQuriesUseCase(),
+                                         actions: actions)
     }
     
     //MARK: RecipeListByKeyword
-    func makeRecipeListByKeywordViewController() -> RecipeListByKeywordViewController {
-        RecipeListByKeywordViewController.create()
+    func makeRecipeListByKeywordViewController(keyword:String) -> RecipeListByKeywordViewController {
+        RecipeListByKeywordViewController.create(keyword: keyword)
     }
     //MARK: RecipeListByCategory
     func makeRecipeListByCategoryViewController() -> RecipeListByCategoryViewController {

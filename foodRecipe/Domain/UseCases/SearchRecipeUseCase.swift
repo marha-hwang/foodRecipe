@@ -41,7 +41,14 @@ final class DefaultSearchRecipeUseCase: SearchRecipeUseCase {
 
             if case .success = result {
                 if requestValue.isSave{
-                    self.recipeQueryQueriesRepository.saveRecentQuery(query: requestValue.query) { _ in }
+                    
+                    let str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                    let size = 5
+                    let iv = str.createRandomStr(length: size)
+                    
+                    let queryHistory = RecipeQueryHistory(query_id: iv, recipe_name: requestValue.query.recipe_name ?? "", reg_date: Date())
+                    
+                    self.recipeQueryQueriesRepository.saveRecentQuery(query: queryHistory) { _ in }
                 }
             }
 

@@ -15,16 +15,16 @@ class DefaultRecipeQueryRepository:RecipeQueriesRepository{
         self.recipeQueryStorage = recipeQueryStorage
     }
     
-    func fetchRecentsQueries(maxCount: Int, completion: @escaping (Result<[RecipeQuery], Error>) -> Void) {
+    func fetchRecentsQueries(maxCount: Int, completion: @escaping (Result<[RecipeQueryHistory], Error>) -> Void) {
         recipeQueryStorage.fetchRecentsQueries(maxCount: maxCount, completion: completion)
     }
     
-    func saveRecentQuery(query: RecipeQuery, completion: @escaping (Result<RecipeQuery, Error>) -> Void) {
+    func saveRecentQuery(query: RecipeQueryHistory, completion: @escaping (Result<RecipeQueryHistory, Error>) -> Void) {
         recipeQueryStorage.saveRecentQuery(query: query, completion: completion)
     }
     
-    func removeRecentQuery(completion: @escaping (Result<Bool, Error>) -> Void) {
-        recipeQueryStorage.removeRecentQuery(completion: completion)
+    func removeRecentQuery(queryId:String?, completion: @escaping (Result<Bool, Error>) -> Void) {
+        recipeQueryStorage.removeRecentQuery(queryId:queryId, completion: completion)
     }
     
     

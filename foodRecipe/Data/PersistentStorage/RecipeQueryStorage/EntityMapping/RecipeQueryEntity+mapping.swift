@@ -9,18 +9,18 @@ import Foundation
 import CoreData
 
 extension RecipeQueryEntity {
-    convenience init(recipeQuery: RecipeQuery, insertInto context: NSManagedObjectContext) {
+    convenience init(recipeQuery: RecipeQueryHistory, insertInto context: NSManagedObjectContext) {
         self.init(context: context)
+        queryId = recipeQuery.query_id
         recipe_name = recipeQuery.recipe_name
-        recipe_type = recipeQuery.recipe_type
-        recipe_ingredient = recipeQuery.recipe_ingredient
+        reg_date = recipeQuery.reg_date
     }
 }
 
 extension RecipeQueryEntity {
-    func toDomain() -> RecipeQuery {
-        return .init(recipe_name: recipe_name,
-                     recipe_ingredient: recipe_ingredient,
-                     recipe_type: recipe_type)
+    func toDomain() -> RecipeQueryHistory {
+        return .init(query_id: queryId ?? "default",
+                     recipe_name: recipe_name ?? "default",
+                     reg_date: reg_date)
     }
 }

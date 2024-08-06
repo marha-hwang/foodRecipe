@@ -10,8 +10,9 @@ import UIKit
 class RecipeQuriesListViewController: UIViewController{
     private var viewModel: RecipeQuriesListViewModel!
     
-    static func create() -> RecipeQuriesListViewController {
+    static func create(with viewModel:RecipeQuriesListViewModel) -> RecipeQuriesListViewController {
         let vc = RecipeQuriesListViewController()
+        vc.viewModel = viewModel
         return vc
     }
     
@@ -29,14 +30,16 @@ class RecipeQuriesListViewController: UIViewController{
                       ItemsNavigationBarBehavior(type: .back_searchBar_serchButton)])
     
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(searchButtonEvent))
-        navigationItem.titleView?.isUserInteractionEnabled = true
-        navigationItem.titleView?.addGestureRecognizer(gestureRecognizer)
+        
+        let rightItem = navigationItem.rightBarButtonItem
+        rightItem?.isEnabled = true
+        rightItem?.customView?.addGestureRecognizer(gestureRecognizer)
     }
     
     @objc private func searchButtonEvent(sender: UITapGestureRecognizer){
-       ///레시피 검색을 여러번 하는 경우 검색화면이 계속 중첩되지 않도록 해야 함
-        ///검색기록테이블과 검색결과 테이블이 교체되는 식으로 구현해야 함
-        viewModel.showRecipeQuriesList()
+        let searchBar = navigationItem.titleView as? UISearchBar
+        let query = searchBar?.text ?? "전체"
+        viewModel.didSearchByButton(query: query == "" ? "전체":query)
     }
     
     

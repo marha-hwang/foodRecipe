@@ -21,6 +21,7 @@ class RecipeMainViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.viewDidLoad()
         setupViews()
         prepareSubVC()
         setupBehaviours()

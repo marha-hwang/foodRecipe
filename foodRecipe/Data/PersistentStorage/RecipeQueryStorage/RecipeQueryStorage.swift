@@ -10,14 +10,15 @@ import Foundation
 protocol RecipeQueryStorage {
     func fetchRecentsQueries(
         maxCount: Int,
-        completion: @escaping (Result<[RecipeQuery], Error>) -> Void
+        completion: @escaping (Result<[RecipeQueryHistory], Error>) -> Void
     )
     func saveRecentQuery(
-        query: RecipeQuery,
-        completion: @escaping (Result<RecipeQuery, Error>) -> Void
+        query: RecipeQueryHistory,
+        completion: @escaping (Result<RecipeQueryHistory, Error>) -> Void
     )
     
     func removeRecentQuery(
+        queryId:String?,
         completion: @escaping (Result<Bool, Error>) -> Void
     )
 }

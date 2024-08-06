@@ -9,6 +9,7 @@ import Foundation
 
 protocol RemoveRecentRecipeQuriesUseCase{
     func excute(
+        queryId:String?,
         completion: @escaping (Result<Bool, Error>) -> Void
     )
 }
@@ -21,8 +22,8 @@ class DefaultRemoveRecentRecipeQuriesUseCase:RemoveRecentRecipeQuriesUseCase{
         self.recipeQueriesRepository = recipeQueriesRepository
     }
     
-    func excute(completion: @escaping (Result<Bool, Error>) -> Void) {
-        recipeQueriesRepository.removeRecentQuery(completion: completion)
+    func excute(queryId:String?,completion: @escaping (Result<Bool, Error>) -> Void) {
+        recipeQueriesRepository.removeRecentQuery(queryId:queryId, completion: completion)
     }
     
 }

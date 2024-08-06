@@ -14,6 +14,7 @@ struct RecipeMainViewModelActions{
 }
 
 protocol RecipeMainViewModelInput{
+    func viewDidLoad()
     func showRecipeQuriesList()
     func showRecipeListByCategory(category:String)
     func showRecipeDetail(recipe:Recipe)
@@ -60,8 +61,6 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
     init(searchRecipeUsecase: SearchRecipeUseCase, actions: RecipeMainViewModelActions?) {
         self.searchRecipeUsecase = searchRecipeUsecase
         self.actions = actions
-        
-        setRecommand()
     }
     
     private func setRecommand(){
@@ -104,6 +103,10 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
 
 //MARK: INPUT
 extension DefaultRecipeMainViewModel{
+    func viewDidLoad() {
+        setRecommand()
+    }
+    
     func showRecipeQuriesList() {
         actions?.showRecipeQuriesList()
     }

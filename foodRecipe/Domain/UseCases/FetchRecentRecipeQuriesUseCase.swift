@@ -10,7 +10,7 @@ import Foundation
 protocol FetchRecentRecipeQuriesUseCase{
     func excute(
         maxCount:Int,
-        completion: @escaping (Result<[RecipeQuery], Error>) -> Void
+        completion: @escaping (Result<[RecipeQueryHistory], Error>) -> Void
     )
 }
 
@@ -22,7 +22,7 @@ final class DefaultFetchRecentRecipeQueriesUseCase:FetchRecentRecipeQuriesUseCas
         self.recipeQueriesRepository = recipeQueriesRepository
     }
     
-    func excute(maxCount: Int, completion: @escaping (Result<[RecipeQuery], Error>) -> Void) {
+    func excute(maxCount: Int, completion: @escaping (Result<[RecipeQueryHistory], Error>) -> Void) {
         recipeQueriesRepository.fetchRecentsQueries(maxCount: maxCount,
                                                     completion: completion
         )

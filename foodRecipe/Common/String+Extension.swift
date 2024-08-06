@@ -23,3 +23,13 @@ extension String{
         return String(self[start..<end])
     }
 }
+
+extension String{
+
+    func createRandomStr(length: Int) -> String {
+        let str = (0 ..< length).map{ _ in self.randomElement()! }
+        return String(str)
+    }
+        
+    
+}

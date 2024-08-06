@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="22G720" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="RecipeFavoriteEntity" representedClassName="RecipeFavoriteEntity" syncable="YES" codeGenerationType="class">
         <attribute name="img_url" optional="YES" attributeType="String"/>
         <attribute name="recipe_id" optional="YES" attributeType="String"/>
@@ -12,8 +12,8 @@
         <attribute name="imagePath" optional="YES" attributeType="String"/>
     </entity>
     <entity name="RecipeQueryEntity" representedClassName="RecipeQueryEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="recipe_ingredient" optional="YES" attributeType="String"/>
+        <attribute name="queryId" optional="YES" attributeType="String"/>
         <attribute name="recipe_name" optional="YES" attributeType="String"/>
-        <attribute name="recipe_type" optional="YES" attributeType="String"/>
+        <attribute name="reg_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
 </model>
