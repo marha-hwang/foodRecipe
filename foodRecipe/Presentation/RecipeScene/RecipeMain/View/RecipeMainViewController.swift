@@ -23,7 +23,7 @@ class RecipeMainViewController: UIViewController{
         super.viewDidLoad()
         viewModel.viewDidLoad()
         setupViews()
-        prepareSubVC()
+        prepareSubViewController()
         setupBehaviours()
         bind(to: viewModel)
     }
@@ -68,7 +68,7 @@ class RecipeMainViewController: UIViewController{
 
     }
     
-    private func prepareSubVC(){
+    private func prepareSubViewController(){
         addChild(recipeMainView.weatherRecommandView.recipeController)
         recipeMainView.weatherRecommandView.recipeController.didMove(toParent: self)
         recipeMainView.weatherRecommandView.recipeController.viewModel = viewModel
