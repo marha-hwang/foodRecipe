@@ -31,7 +31,42 @@ class RecipeQuriesListViewController: UIViewController{
     private func setupViews(){
         view.backgroundColor = .white
         
-        lazy var quriesContainer:UIView = {
+        let headerView:UIStackView = {
+           let headerView = UIStackView()
+            headerView.translatesAutoresizingMaskIntoConstraints = false
+            headerView.axis = .horizontal
+            headerView.alignment = .center
+            headerView.distribution = .fillProportionally
+            
+            let headerTitle:UILabel = {
+                let headerTitle = UILabel()
+                headerTitle.translatesAutoresizingMaskIntoConstraints = false
+                headerTitle.text = viewModel.queryTableTitle
+                
+                return headerTitle
+            }()
+            
+            let allRemoveButton:UILabel = {
+                let allRemoveButton = UILabel()
+                allRemoveButton.translatesAutoresizingMaskIntoConstraints = false
+                allRemoveButton.text = viewModel.allRemoveButtonText
+                allRemoveButton.textAlignment = .right
+                allRemoveButton.font = UIFont.systemFont(ofSize: 13)
+                
+                let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(removeAllQuries))
+                allRemoveButton.isUserInteractionEnabled = true
+                allRemoveButton.addGestureRecognizer(gestureRecognizer)
+                
+                return allRemoveButton
+            }()
+            
+            headerView.addArrangedSubview(headerTitle)
+            headerView.addArrangedSubview(allRemoveButton)
+            
+            return headerView
+        }()
+        
+        let quriesContainer:UIView = {
             let quriesContainer = UIView()
             quriesContainer.translatesAutoresizingMaskIntoConstraints = false
             
@@ -45,10 +80,17 @@ class RecipeQuriesListViewController: UIViewController{
             return quriesContainer
         }()
         
+        view.addSubview(headerView)
         view.addSubview(quriesContainer)
         
-        quriesContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
-        quriesContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
+        headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        headerView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
+        
+        headerView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
+        headerView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        quriesContainer.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
+        quriesContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10).isActive = true
         quriesContainer.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
         quriesContainer.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
 
@@ -76,6 +118,10 @@ class RecipeQuriesListViewController: UIViewController{
         let rightItem = navigationItem.rightBarButtonItem
         rightItem?.isEnabled = true
         rightItem?.customView?.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc private func removeAllQuries(sender: UITapGestureRecognizer){
+        viewModel.didDeleteAllQuery()
     }
     
     @objc private func searchButtonEvent(sender: UITapGestureRecognizer){

@@ -29,6 +29,8 @@ protocol RecipeQuriesListViewModelInput{
 
 protocol RecipeQuriesListViewModelOutput{
     var quriesItems:Observable<[RecipeQueryHistory]> {get}
+    var allRemoveButtonText:String {get}
+    var queryTableTitle:String {get}
 }
 
 typealias RecipeQuriesListViewModel = RecipeQuriesListViewModelInput&RecipeQuriesListViewModelOutput
@@ -40,6 +42,8 @@ final class DefaultRecipeQuriesListViewModel:RecipeQuriesListViewModel{
     private let actions:RecipeQuriesListViewModelActions?
     
     var quriesItems: Observable<[RecipeQueryHistory]> = Observable([])
+    var allRemoveButtonText: String = "전체삭제"
+    var queryTableTitle:String = "최근 검색어"
     
     init(fetchQuriesUseCase: FetchRecentRecipeQuriesUseCase,
          removeQuriesUseCase: RemoveRecentRecipeQuriesUseCase,
@@ -55,6 +59,36 @@ final class DefaultRecipeQuriesListViewModel:RecipeQuriesListViewModel{
             switch result {
             case .success(let items):
                 self.quriesItems.value = items
+                
+                //임시 데이터 추가 코드
+                var temp:[RecipeQueryHistory] = []
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
+
+                
+                self.quriesItems.value = temp
+                
+                
+                
             case .failure(let error):
                 print(error)
             }
@@ -92,6 +126,7 @@ extension DefaultRecipeQuriesListViewModel{
     }
     
     func didDeleteAllQuery() {
+        print("didDeleteAllQuery")
         removeQueryItems(queryId: nil)
     }
 }
