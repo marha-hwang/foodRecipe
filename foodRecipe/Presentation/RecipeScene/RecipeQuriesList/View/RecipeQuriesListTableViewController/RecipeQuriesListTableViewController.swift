@@ -45,9 +45,9 @@ extension RecipeQuriesListTableViewController{
         cell.fill(viewModel: RecipeQuriesListItemViewModel(recipeQuery: viewModel.quriesItems.value[indexPath.row]))
         
         //셀 개별삭제 이벤트 구현해야 함
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(removeAllQuries))
-        allRemoveButton.isUserInteractionEnabled = true
-        allRemoveButton.addGestureRecognizer(gestureRecognizer)
+//        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(removeAllQuries))
+//        allRemoveButton.isUserInteractionEnabled = true
+//        allRemoveButton.addGestureRecognizer(gestureRecognizer)
 
         return cell
     }

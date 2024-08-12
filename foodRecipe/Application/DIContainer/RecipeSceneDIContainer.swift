@@ -67,7 +67,7 @@ final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies,Favor
     
     //MARK: RecipeListByKeyword
     func makeRecipeListByKeywordViewController(keyword:String) -> RecipeListByKeywordViewController {
-        RecipeListByKeywordViewController.create(keyword: keyword)
+        RecipeListByKeywordViewController.create()
     }
     //MARK: RecipeListByCategory
     func makeRecipeListByCategoryViewController() -> RecipeListByCategoryViewController {
