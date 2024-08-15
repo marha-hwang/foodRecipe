@@ -25,6 +25,7 @@ class RecipeListTableViewController:UITableViewController{
     private func setupViews(){
         view.translatesAutoresizingMaskIntoConstraints = false
         tableView.contentInset = .init(top: 0, left: 0, bottom: 100, right: 0)
+        view.backgroundColor = .yellow
         
         tableView.register(RecipeListItemCell.self, forCellReuseIdentifier: RecipeListItemCell.reuseIdentifier)
     
@@ -32,6 +33,10 @@ class RecipeListTableViewController:UITableViewController{
 }
 
 extension RecipeListTableViewController{
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.recipeItems.value.count
     }

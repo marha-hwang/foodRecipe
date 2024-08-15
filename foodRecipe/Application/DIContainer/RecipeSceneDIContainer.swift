@@ -65,14 +65,20 @@ final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies,Favor
                                          actions: actions)
     }
     
-    //MARK: RecipeListByKeyword
-    func makeRecipeListByKeywordViewController(keyword:String) -> RecipeListByKeywordViewController {
-        RecipeListByKeywordViewController.create()
+    //MARK: RecipeList
+    func makeRecipeListViewController(listType:RecipeListViewType, title:String, actions:RecipeListViewModelActions) -> RecipeListViewController {
+        let viewModel = makeRecipeListViewModel(actions: actions, listType: listType, title: title)
+        return RecipeListViewController.create(with: viewModel,
+                                        recipeImageRepository: makeRecipeImageRepository())
     }
-    //MARK: RecipeListByCategory
-    func makeRecipeListByCategoryViewController() -> RecipeListByCategoryViewController {
-        RecipeListByCategoryViewController.create()
+    
+    func makeRecipeListViewModel(actions:RecipeListViewModelActions, listType:RecipeListViewType, title:String)->RecipeListViewModel{
+        DefaultRecipeListViewModel(listType: listType,
+                                   title: title,
+                                   searchRecipeUseCase: makeSearchRecipeUseCase(),
+                                   actions: actions)
     }
+    
     //MARK: RecipeDetail
     func makeRecipeDetailViewController() -> RecipeDetailViewController {
         RecipeDetailViewController.create()

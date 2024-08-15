@@ -9,7 +9,7 @@ import Foundation
 
 struct RecipeMainViewModelActions{
     let showRecipeQuriesList:()->Void
-    let showRecipeListByCategory:(String)->Void
+    let showRecipeList:(RecipeListViewType, String)->Void
     let showRecipeDetail:(Recipe)->Void
 }
 
@@ -65,17 +65,17 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
     
     private func setRecommand(){
         ///동일한 인증키로 api를 동시에 호출하는 경우 인증키 에러가 발생하였음, 따라서 순차적으로 api를 호출하기 위해 아래와 같이 작성
-        updateRecommand(recipe_type: "찌개"){ [weak self] page in
-            DispatchQueue.main.async{
-                self?.weatherRecommandItems.value = page.recpies
-            }
-            
-            self?.updateRecommand(recipe_type: "일품"){ [weak self] page in 
-                DispatchQueue.main.async{
-                    self?.timeRecommandItems.value = page.recpies
-                }
-            }
-        }
+//        updateRecommand(recipe_type: "찌개"){ [weak self] page in
+//            DispatchQueue.main.async{
+//                self?.weatherRecommandItems.value = page.recpies
+//            }
+//            
+//            self?.updateRecommand(recipe_type: "일품"){ [weak self] page in 
+//                DispatchQueue.main.async{
+//                    self?.timeRecommandItems.value = page.recpies
+//                }
+//            }
+//        }
     }
     
     //MARK: private
@@ -112,7 +112,7 @@ extension DefaultRecipeMainViewModel{
     }
     
     func showRecipeListByCategory(category: String) {
-        actions?.showRecipeListByCategory("")
+        actions?.showRecipeList(.byCategory, category)
     }
     
     func showRecipeDetail(recipe: Recipe) {

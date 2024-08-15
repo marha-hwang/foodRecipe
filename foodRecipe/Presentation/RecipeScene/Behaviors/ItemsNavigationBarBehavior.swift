@@ -36,7 +36,8 @@ struct ItemsNavigationBarBehavior: ViewControllerLifecycleBehavior {
             addSearchButton(viewController: viewController)
             
         case .back_searchTitle_searchBtn:
-            print()
+            addTitleLabel(viewController: viewController)
+            addSearchButton(viewController: viewController)
         }
         
     }
@@ -135,36 +136,22 @@ struct ItemsNavigationBarBehavior: ViewControllerLifecycleBehavior {
         viewController.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: imageView)
 
     }
+    
+    func addTitleLabel(viewController:UIViewController){
+        guard let navigationBar = viewController.navigationController?.navigationBar else {
+            return
+        }
+        
+        let height = navigationBar.frame.height
+        let width = navigationBar.frame.width
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width * 0.7, height: height * 0.8))
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 15)
+        
+        viewController.navigationItem.titleView = label
 
-//    
-//    func addCategoryLabelToNavbar(categoryName:String){
-//        let width = navigationController?.navigationBar.frame.width ?? 0
-//        let height = navigationController?.navigationBar.frame.height ?? 0
-//        
-//        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width * 0.7, height: height * 0.8))
-//        label.text = categoryName
-//        label.textColor = .black
-//        label.textAlignment = .center
-//        label.font = UIFont.systemFont(ofSize: 15)
-//        
-//        navigationItem.titleView = label
-//        
-//    }
-//
-//    
-//    @objc func searchEvent(sender: UITapGestureRecognizer){
-////        guard let vc = UIStoryboard(name: "SearchListView", bundle: nil).instantiateViewController(withIdentifier: "searchlistview") as? SearchListViewController else { return }
-////        
-////        ///레시피 검색 리스트화면에서 검색을 여러번 하는 경우 검색화면이 계속 중첩되지 않도록 하기 위한 코드
-////        let vcCount = navigationController?.viewControllers.count
-////        if vcCount! >= 2 && navigationController?.viewControllers[vcCount!-2] is SearchListViewController{
-////            (navigationController?.viewControllers[vcCount!-2] as! SearchListViewController).searchKeyword = "Hamburgur"
-////            navigationController?.popViewController(animated: false)
-////        }
-////        else {
-////            navigationController?.pushViewController(vc, animated: false)   
-////        }
-////        print("searchEvent")
-//    }
+    }
 
 }

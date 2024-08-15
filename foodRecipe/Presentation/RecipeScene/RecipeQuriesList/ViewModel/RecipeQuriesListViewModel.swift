@@ -8,7 +8,7 @@
 import Foundation
 
 struct RecipeQuriesListViewModelActions{
-    let showRecipeListByKeyword:(String)->Void
+    let showRecipeList:(RecipeListViewType, String)->Void
 }
 
 protocol RecipeQuriesListViewModelInput{
@@ -114,11 +114,11 @@ extension DefaultRecipeQuriesListViewModel{
     }
     
     func didSearchByButton(query: String) {
-        actions?.showRecipeListByKeyword(query)
+        actions?.showRecipeList(.byKeyword, query)
     }
     
     func didSearchByQuery(index: Int) {
-        actions?.showRecipeListByKeyword(quriesItems.value[index].recipe_name)
+        actions?.showRecipeList(.byKeyword, quriesItems.value[index].recipe_name)
     }
     
     func didDeleteQuery(index: Int) {

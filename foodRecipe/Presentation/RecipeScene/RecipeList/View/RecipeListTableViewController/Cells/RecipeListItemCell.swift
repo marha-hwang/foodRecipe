@@ -73,85 +73,88 @@ class RecipeListItemCell:UITableViewCell{
     
     private lazy var outerView:UIStackView = {
         let outerView = UIStackView()
-        outerView.axis = .vertical
+        outerView.axis = .horizontal
         outerView.alignment = .center
         outerView.distribution = .fillProportionally
-        
         outerView.translatesAutoresizingMaskIntoConstraints = false
         
         lazy var infoStack:UIStackView = {
             let infoStack = UIStackView()
-            infoStack.axis = .horizontal
+            infoStack.axis = .vertical
             infoStack.alignment = .center
             infoStack.distribution = .fillProportionally
             
             infoStack.translatesAutoresizingMaskIntoConstraints = false
             infoStack.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
             
-            infoStack.addArrangedSubview(recipeType)
-            infoStack.addArrangedSubview(recipeCategory)
+            var categoryTypeStack:UIStackView = {
+                let categoryTypeStack = UIStackView()
+                categoryTypeStack.axis = .horizontal
+                categoryTypeStack.alignment = .center
+                categoryTypeStack.distribution = .fillProportionally
+                
+                categoryTypeStack.translatesAutoresizingMaskIntoConstraints = false
+                categoryTypeStack.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
+                
+                categoryTypeStack.addArrangedSubview(recipeType)
+                categoryTypeStack.addArrangedSubview(recipeCategory)
+                
+
+                return categoryTypeStack
+            }()
             
-            recipeCategory.widthAnchor.constraint(equalToConstant: contentView.frame.width*0.5).isActive = true
-            recipeCategory.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.1).isActive = true
+            var difficultyStack:UIStackView = {
+                let difficultyStack = UIStackView()
+                difficultyStack.axis = .horizontal
+                difficultyStack.alignment = .center
+                difficultyStack.distribution = .fillProportionally
+                
+                difficultyStack.translatesAutoresizingMaskIntoConstraints = false
+                
+                lazy var difficultyLabel:UITextView = {
+                    let difficultyLabel = UITextView()
+                    difficultyLabel.translatesAutoresizingMaskIntoConstraints = false
+                    difficultyLabel.text = "조리 난이도"
+                    difficultyLabel.sizeToFit()
+                    
+                    return difficultyLabel
+                }()
+                
+                difficultyStack.addArrangedSubview(difficultyLabel)
+                difficultyStack.addArrangedSubview(difficultyStar)
+                
+                return difficultyStack
+            }()
             
-            recipeType.widthAnchor.constraint(equalToConstant: contentView.frame.width*0.5).isActive = true
-            recipeType.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.1).isActive = true
+            infoStack.addArrangedSubview(recipeName)
+            infoStack.addArrangedSubview(categoryTypeStack)
+            infoStack.addArrangedSubview(difficultyStack)
+            
+            recipeName.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.3).isActive = true
+            recipeName.widthAnchor.constraint(equalTo: infoStack.widthAnchor).isActive = true
+            
+            categoryTypeStack.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.3).isActive = true
+            categoryTypeStack.widthAnchor.constraint(equalTo: infoStack.widthAnchor).isActive = true
+            
+            difficultyStack.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.3).isActive = true
+            difficultyStack.widthAnchor.constraint(equalTo: infoStack.widthAnchor).isActive = true
             
             return infoStack
         }()
         
-        lazy var difficultyStack:UIStackView = {
-            let difficultyStack = UIStackView()
-            difficultyStack.axis = .horizontal
-            difficultyStack.alignment = .center
-            difficultyStack.distribution = .fillProportionally
-            
-            recipeCategory.translatesAutoresizingMaskIntoConstraints = false
-            
-            lazy var difficultyLabel:UITextView = {
-                let difficultyLabel = UITextView()
-                difficultyLabel.translatesAutoresizingMaskIntoConstraints = false
-                difficultyLabel.text = "조리 난이도"
-                difficultyLabel.sizeToFit()
-                
-                return difficultyLabel
-            }()
-            
-            difficultyStack.addArrangedSubview(difficultyLabel)
-            difficultyStack.addArrangedSubview(difficultyStar)
-            
-            difficultyLabel.widthAnchor.constraint(equalToConstant: contentView.frame.width*0.5).isActive = true
-            difficultyLabel.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.2).isActive = true
-            
-            difficultyStar.widthAnchor.constraint(equalToConstant: contentView.frame.width*0.5).isActive = true
-            difficultyStar.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.2).isActive = true
-            
-            return difficultyStack
-        }()
-        
         outerView.addArrangedSubview(recipeImage)
-        outerView.addArrangedSubview(recipeName)
         outerView.addArrangedSubview(infoStack)
-        outerView.addArrangedSubview(difficultyStack)
         
-        recipeImage.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.7).isActive = true
-        
-        recipeName.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.1).isActive = true
-        recipeName.widthAnchor.constraint(equalToConstant: contentView.frame.width).isActive = true
-        
-        infoStack.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.1).isActive = true
-        infoStack.widthAnchor.constraint(equalToConstant: contentView.frame.width).isActive = true
-        
-        difficultyStack.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.1).isActive = true
-        difficultyStack.widthAnchor.constraint(equalToConstant: contentView.frame.width).isActive = true
-        
+        recipeImage.widthAnchor.constraint(equalToConstant: contentView.frame.width*0.5).isActive = true
+        infoStack.widthAnchor.constraint(equalToConstant: contentView.frame.width*0.5).isActive = true
+        infoStack.heightAnchor.constraint(equalTo: outerView.heightAnchor).isActive = true
+
         return outerView
     }()
         
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addViews()
-        addLayout()
+        setupViews()
     }
     
     required init?(coder: NSCoder) {
@@ -176,8 +179,16 @@ class RecipeListItemCell:UITableViewCell{
         }
     }
     
+    private func setupViews(){
+        contentView.addSubview(outerView)
+        print(contentView.frame)
+        outerView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        outerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        outerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        outerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+    }
+    
     private func updateImage(){
-        
         recipeImage.image = nil
         
         let _ = recipeImageRepository?.fetchImage(with: viewModel.imagePath){ [weak self] result in
@@ -193,21 +204,6 @@ class RecipeListItemCell:UITableViewCell{
                 print(error)
             }
         }
-    }
-    
-    private func addViews(){
-        contentView.addSubview(outerView)
-    }
-    
-    private func addLayout(){
-        outerView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        outerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        outerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        outerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        
-        ///outerView는 크기가 정해지지 않았는데 contentView는 이미 정해져 있는 이유는? collectionView를 생성할 때 셀의 크기를 미리 선언하고 생성해서임
-        //print(outerView.frame)
-        //print(contentView.frame)
     }
 }
 

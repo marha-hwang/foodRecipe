@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RecipeListByKeywordViewController: UIViewController{
+class RecipeListViewController: UIViewController{
         
     private var viewModel: RecipeListViewModel!
     private var recipeImageRepository: RecipeImageRepository?
@@ -17,8 +17,8 @@ class RecipeListByKeywordViewController: UIViewController{
     
     static func create(with viewModel:RecipeListViewModel,
                        recipeImageRepository:RecipeImageRepository
-    ) -> RecipeListByKeywordViewController {
-        let vc = RecipeListByKeywordViewController()
+    ) -> RecipeListViewController {
+        let vc = RecipeListViewController()
         vc.viewModel = viewModel
         vc.recipeImageRepository = recipeImageRepository
         return vc
@@ -64,27 +64,30 @@ class RecipeListByKeywordViewController: UIViewController{
         addChild(recipeTableController)
         recipeTableController.didMove(toParent: self)
         recipeTableController.viewModel = viewModel
+        recipeTableController.recipeImagesRepository = recipeImageRepository
     }
     
     private func bind(to : RecipeListViewModel){
-        //viewModel.quriesItems.observe(on: self) { [weak self] _ in self?.quriesController.reload() }
+        viewModel.recipeItems.observe(on: self) { [weak self] _ in self?.recipeTableController.reload() }
     }
     
     //공통 컴포넌트에 대한 동작을 처리하기 위해 사용
     private func setupBehaviours() {
         addBehaviors([DefaultNavigationBarBehavior(),
                      HideTabBarBehavior(),
-                      ItemsNavigationBarBehavior(type: .back_searchBar_serchButton)])
-    
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(searchButtonEvent))
+                      ItemsNavigationBarBehavior(type: .back_searchTitle_searchBtn)])
+            
+        let titleView = navigationItem.titleView as? UILabel
+        titleView?.text = viewModel.title
         
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(searchButtonEvent))
         let rightItem = navigationItem.rightBarButtonItem
         rightItem?.isEnabled = true
         rightItem?.customView?.addGestureRecognizer(gestureRecognizer)
     }
     
     @objc private func searchButtonEvent(sender: UITapGestureRecognizer){
-        //viewModel.didSearchByButton(query: query == "" ? "전체":query)
+        viewModel.didTouchSearchButton()
     }
     
     

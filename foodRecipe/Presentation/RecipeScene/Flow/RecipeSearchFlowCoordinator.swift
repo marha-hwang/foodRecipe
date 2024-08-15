@@ -11,8 +11,7 @@ import UIKit
 protocol RecipeSearchFlowCoordinatorDependencies  {
     func makeRecipeMainViewController(actions: RecipeMainViewModelActions) -> RecipeMainViewController
     func makeRecipeQuriesListViewController(actions:RecipeQuriesListViewModelActions) -> RecipeQuriesListViewController
-    func makeRecipeListByKeywordViewController(keyword:String) -> RecipeListByKeywordViewController
-    func makeRecipeListByCategoryViewController() -> RecipeListByCategoryViewController
+    func makeRecipeListViewController(listType:RecipeListViewType, title:String, actions:RecipeListViewModelActions) -> RecipeListViewController
     func makeRecipeDetailViewController() -> RecipeDetailViewController
 }
 
@@ -30,7 +29,7 @@ final class RecipeSearchFlowCoordinator{
     
     func start() {
         let actions = RecipeMainViewModelActions(showRecipeQuriesList: showRecipeQuriesList,
-                                                 showRecipeListByCategory: showRecipeListByCategory(category:),
+                                                 showRecipeList: showRecipeList(listType:title:),
                                                  showRecipeDetail: showRecipeDetail(recipe:))
         let vc = dependencies.makeRecipeMainViewController(actions: actions)
 
@@ -39,21 +38,31 @@ final class RecipeSearchFlowCoordinator{
     }
     
     func showRecipeQuriesList()->Void{
-        let actions = RecipeQuriesListViewModelActions(showRecipeListByKeyword: showRecipeListByKeyword(keyword:))
+        let actions = RecipeQuriesListViewModelActions(showRecipeList: showRecipeList(listType:title:))
         
         let vc = dependencies.makeRecipeQuriesListViewController(actions: actions)
         
-        //검색화면이 계속 쌓이지 않도록 이전화면이 키워드검색화면이라면 키워드검색화면과 쿼리리스트 화면 제거해야함
         navigationController?.pushViewController(vc, animated: false)
     }
     
-    func showRecipeListByKeyword(keyword:String)->Void{
-        let vc = dependencies.makeRecipeListByKeywordViewController(keyword: keyword)
-        navigationController?.pushViewController(vc, animated: false)
-    }
-    
-    func showRecipeListByCategory(category:String)->Void{
-        let vc = dependencies.makeRecipeListByCategoryViewController()
+    func showRecipeList(listType:RecipeListViewType, title:String)->Void{
+        let actions = RecipeListViewModelActions(showRecipeDetail: showRecipeDetail(recipe:), showRecipeQuriesList: showRecipeQuriesList)
+        
+        //검색화면이 계속 쌓이지 않도록 이전화면이 레시피 리스트 화면과 쿼리리스트 화면인 경우 제거하기 위한 로직
+        let vcCount = navigationController!.viewControllers.count
+        if vcCount >= 3 {
+            let vc1 = navigationController!.viewControllers[vcCount-1] as? RecipeQuriesListViewController
+            let vc2 = navigationController!.viewControllers[vcCount-2] as? RecipeListViewController
+            let vc3 = navigationController!.viewControllers[vcCount-3] as? RecipeQuriesListViewController
+            
+            if let _vc1 = vc1, let _ = vc2, let _ = vc3{
+                navigationController?.popToViewController(navigationController!.viewControllers[vcCount-4], animated: false)
+                navigationController?.pushViewController(_vc1, animated: false)
+            }
+            
+        }
+        
+        let vc = dependencies.makeRecipeListViewController(listType:listType, title:title, actions:actions)
         navigationController?.pushViewController(vc, animated: false)
     }
     

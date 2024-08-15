@@ -19,6 +19,7 @@
 		83C066D82C6A3636007C3A5F /* RecipeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C066D72C6A3636007C3A5F /* RecipeListTableViewController.swift */; };
 		83C066DC2C6A3819007C3A5F /* RecipeListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C066DB2C6A3819007C3A5F /* RecipeListItemCell.swift */; };
 		83C066DE2C6A3864007C3A5F /* RecipeListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C066DD2C6A3864007C3A5F /* RecipeListItemViewModel.swift */; };
+		83C066E02C6E39EE007C3A5F /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C066DF2C6E39EE007C3A5F /* Storyboard.storyboard */; };
 		83C6596E2C2D7B28004227BE /* AppConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C6596D2C2D7B28004227BE /* AppConfigurations.swift */; };
 		83D30F102C32D7EC00F12D6B /* ErrorCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D30F0F2C32D7EC00F12D6B /* ErrorCollection.swift */; };
 		83D30F152C32DC9C00F12D6B /* FavoriteStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D30F142C32DC9C00F12D6B /* FavoriteStorage.swift */; };
@@ -28,9 +29,8 @@
 		83D30F212C32DE9A00F12D6B /* FavoriteEntity+mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D30F202C32DE9A00F12D6B /* FavoriteEntity+mapping.swift */; };
 		83D30F232C32DEBB00F12D6B /* FavoriteUDS+mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D30F222C32DEBB00F12D6B /* FavoriteUDS+mapping.swift */; };
 		BC3A789D2C4E2A83005CF727 /* RecipeMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3A789C2C4E2A83005CF727 /* RecipeMainViewModel.swift */; };
-		BC3A78A32C4E4606005CF727 /* RecipeListByKeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3A78A22C4E4606005CF727 /* RecipeListByKeywordViewController.swift */; };
+		BC3A78A32C4E4606005CF727 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3A78A22C4E4606005CF727 /* RecipeListViewController.swift */; };
 		BC3A78A52C4E4636005CF727 /* RecipeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3A78A42C4E4636005CF727 /* RecipeListViewModel.swift */; };
-		BC3A78A92C4E466D005CF727 /* RecipeListByCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3A78A82C4E466D005CF727 /* RecipeListByCategoryViewController.swift */; };
 		BC3A78AD2C4E4E3A005CF727 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3A78AC2C4E4E3A005CF727 /* Observable.swift */; };
 		BC5911232C62F78100D656C3 /* RecipeQuriesListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5911222C62F78100D656C3 /* RecipeQuriesListTableViewController.swift */; };
 		BC5911252C62F7B200D656C3 /* RecipeQuriesListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5911242C62F7B200D656C3 /* RecipeQuriesListItemCell.swift */; };
@@ -128,6 +128,7 @@
 		83C066D72C6A3636007C3A5F /* RecipeListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListTableViewController.swift; sourceTree = "<group>"; };
 		83C066DB2C6A3819007C3A5F /* RecipeListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListItemCell.swift; sourceTree = "<group>"; };
 		83C066DD2C6A3864007C3A5F /* RecipeListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListItemViewModel.swift; sourceTree = "<group>"; };
+		83C066DF2C6E39EE007C3A5F /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		83C6596D2C2D7B28004227BE /* AppConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurations.swift; sourceTree = "<group>"; };
 		83D30F0F2C32D7EC00F12D6B /* ErrorCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCollection.swift; sourceTree = "<group>"; };
 		83D30F142C32DC9C00F12D6B /* FavoriteStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteStorage.swift; sourceTree = "<group>"; };
@@ -137,9 +138,8 @@
 		83D30F202C32DE9A00F12D6B /* FavoriteEntity+mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteEntity+mapping.swift"; sourceTree = "<group>"; };
 		83D30F222C32DEBB00F12D6B /* FavoriteUDS+mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteUDS+mapping.swift"; sourceTree = "<group>"; };
 		BC3A789C2C4E2A83005CF727 /* RecipeMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeMainViewModel.swift; sourceTree = "<group>"; };
-		BC3A78A22C4E4606005CF727 /* RecipeListByKeywordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListByKeywordViewController.swift; sourceTree = "<group>"; };
+		BC3A78A22C4E4606005CF727 /* RecipeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
 		BC3A78A42C4E4636005CF727 /* RecipeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModel.swift; sourceTree = "<group>"; };
-		BC3A78A82C4E466D005CF727 /* RecipeListByCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListByCategoryViewController.swift; sourceTree = "<group>"; };
 		BC3A78AC2C4E4E3A005CF727 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		BC5911222C62F78100D656C3 /* RecipeQuriesListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeQuriesListTableViewController.swift; sourceTree = "<group>"; };
 		BC5911242C62F7B200D656C3 /* RecipeQuriesListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeQuriesListItemCell.swift; sourceTree = "<group>"; };
@@ -376,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				83C066DB2C6A3819007C3A5F /* RecipeListItemCell.swift */,
+				83C066DF2C6E39EE007C3A5F /* Storyboard.storyboard */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -445,8 +446,7 @@
 		BC3A78A02C4E4592005CF727 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BC3A78A22C4E4606005CF727 /* RecipeListByKeywordViewController.swift */,
-				BC3A78A82C4E466D005CF727 /* RecipeListByCategoryViewController.swift */,
+				BC3A78A22C4E4606005CF727 /* RecipeListViewController.swift */,
 				83C066D62C6A35EA007C3A5F /* RecipeListTableViewController */,
 			);
 			path = View;
@@ -893,6 +893,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCD9756B2C2523B40068B902 /* RecipeDetailViewController.storyboard in Resources */,
+				83C066E02C6E39EE007C3A5F /* Storyboard.storyboard in Resources */,
 				8396B96E2C1DBE37002F2B3F /* LaunchScreen.storyboard in Resources */,
 				8396B96B2C1DBE37002F2B3F /* Assets.xcassets in Resources */,
 			);
@@ -960,11 +961,10 @@
 				83D30F192C32DD1A00F12D6B /* CoreDataFavoriteStorage.swift in Sources */,
 				BCD975352C250E7A0068B902 /* FavoriteRepository.swift in Sources */,
 				BCF6BEB42C51F03F00F0B61A /* CustomTabBarController.swift in Sources */,
-				BC3A78A92C4E466D005CF727 /* RecipeListByCategoryViewController.swift in Sources */,
 				BCD975432C2519020068B902 /* RemoveFavoriteUseCase.swift in Sources */,
 				BCD975632C2523520068B902 /* RecipeQuriesListViewController.swift in Sources */,
 				83C066D82C6A3636007C3A5F /* RecipeListTableViewController.swift in Sources */,
-				BC3A78A32C4E4606005CF727 /* RecipeListByKeywordViewController.swift in Sources */,
+				BC3A78A32C4E4606005CF727 /* RecipeListViewController.swift in Sources */,
 				BCD9753B2C2515BA0068B902 /* FetchRecentRecipeQuriesUseCase.swift in Sources */,
 				BCD975412C2518EA0068B902 /* FetchFavoriteUseCase.swift in Sources */,
 				83C6596E2C2D7B28004227BE /* AppConfigurations.swift in Sources */,

@@ -128,6 +128,7 @@ class RecipeQuriesListViewController: UIViewController{
         let searchBar = navigationItem.titleView as? UISearchBar
         let query = searchBar?.text ?? "전체"
         viewModel.didSearchByButton(query: query == "" ? "전체":query)
+        
     }
     
     
