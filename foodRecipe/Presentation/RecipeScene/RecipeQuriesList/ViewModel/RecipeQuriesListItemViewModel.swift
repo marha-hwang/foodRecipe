@@ -7,11 +7,21 @@
 
 import Foundation
 
+//셀을 모듈화시키기 위해 셀의 이벤트는 해당 셀 내부에서 처리하기 위해 구현함
+struct RecipeQuriesListItemViewModelActions{
+    let didDeleteQuery:(String)->Void
+}
+
 struct RecipeQuriesListItemViewModel{
+    let actions:RecipeQuriesListItemViewModelActions?
+    let queryId:String
     let keyword:String
     let reg_date:String
     
-    init(recipeQuery:RecipeQueryHistory) {
+    init(recipeQuery:RecipeQueryHistory, actions:RecipeQuriesListItemViewModelActions) {
+        
+        self.actions = actions
+        self.queryId = recipeQuery.query_id
         self.keyword = recipeQuery.recipe_name
         self.reg_date = dateFormat(date: recipeQuery.reg_date ?? Date())
         
@@ -22,6 +32,10 @@ struct RecipeQuriesListItemViewModel{
             let dateStr = dateFormatter.string(from: Date())
             return dateStr
         }
+    }
+    
+    func deleteItem(){
+        actions?.didDeleteQuery(queryId)
     }
     
 }

@@ -35,10 +35,20 @@ class CoreDataRecipeQueryStorage:RecipeQueryStorage{
     func saveRecentQuery(query: RecipeQueryHistory, completion: @escaping (Result<RecipeQueryHistory, Error>) -> Void) {
         coreDataStorage.performBackgroundTask{ context in
             do {
-                let entity = RecipeQueryEntity(recipeQuery: query, insertInto: context)
-                try context.save()
-
-                completion(.success(entity.toDomain()))
+                
+                let request: NSFetchRequest = RecipeQueryEntity.fetchRequest()
+                let predicate = NSPredicate(format: "%K == %@", #keyPath(RecipeQueryEntity.recipe_name), query.recipe_name)
+                request.predicate = predicate
+                request.fetchLimit = 1
+                let result = try context.fetch(request)
+                
+                //중복된 쿼리를 저장하지 않기 위한 코드
+                if result.isEmpty{
+                    let entity = RecipeQueryEntity(recipeQuery: query, insertInto: context)
+                    try context.save()
+                    completion(.success(entity.toDomain()))
+                    print("saveQuery")
+                }
             } catch {
                 completion(.failure(CoreDataStorageError.saveError(error)))
             }

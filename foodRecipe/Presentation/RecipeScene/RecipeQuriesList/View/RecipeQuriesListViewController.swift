@@ -28,6 +28,10 @@ class RecipeQuriesListViewController: UIViewController{
         bind(to: viewModel)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.viewWillAppear()
+    }
+    
     private func setupViews(){
         view.backgroundColor = .white
         
@@ -104,7 +108,8 @@ class RecipeQuriesListViewController: UIViewController{
     }
     
     private func bind(to : RecipeQuriesListViewModel){
-        viewModel.quriesItems.observe(on: self) { [weak self] _ in self?.quriesController.reload() }
+        viewModel.quriesItems.observe(on: self) { [weak self] _ in DispatchQueue.main.async{ self?.quriesController.reload() }
+        }
     }
     
     //공통 컴포넌트에 대한 동작을 처리하기 위해 사용

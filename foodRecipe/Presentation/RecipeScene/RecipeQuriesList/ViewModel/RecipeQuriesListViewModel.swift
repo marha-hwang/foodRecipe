@@ -13,7 +13,7 @@ struct RecipeQuriesListViewModelActions{
 
 protocol RecipeQuriesListViewModelInput{
     func viewDidLoad()
-    
+    func viewWillAppear()
     //검색버튼 클릭
     func didSearchByButton(query:String)
     
@@ -21,7 +21,7 @@ protocol RecipeQuriesListViewModelInput{
     func didSearchByQuery(index:Int)
     
     //검색어 삭제
-    func didDeleteQuery(index:Int)
+    func didDeleteQuery(queryId:String)
     
     //검색어 전체삭제
     func didDeleteAllQuery()
@@ -60,35 +60,6 @@ final class DefaultRecipeQuriesListViewModel:RecipeQuriesListViewModel{
             case .success(let items):
                 self.quriesItems.value = items
                 
-                //임시 데이터 추가 코드
-                var temp:[RecipeQueryHistory] = []
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-                temp.append(RecipeQueryHistory(query_id: "12345", recipe_name: "짜장", reg_date: Date()))
-
-                
-                self.quriesItems.value = temp
-                
-                
-                
             case .failure(let error):
                 print(error)
             }
@@ -100,6 +71,7 @@ final class DefaultRecipeQuriesListViewModel:RecipeQuriesListViewModel{
             switch result {
             case .success(_):
                 print("query Deleted")
+                self.updateQueryItems()
             case .failure(let error):
                 print(error)
             }
@@ -109,7 +81,12 @@ final class DefaultRecipeQuriesListViewModel:RecipeQuriesListViewModel{
 }
 
 extension DefaultRecipeQuriesListViewModel{
+    
     func viewDidLoad() {
+        updateQueryItems()
+    }
+    
+    func viewWillAppear() {
         updateQueryItems()
     }
     
@@ -121,12 +98,11 @@ extension DefaultRecipeQuriesListViewModel{
         actions?.showRecipeList(.byKeyword, quriesItems.value[index].recipe_name)
     }
     
-    func didDeleteQuery(index: Int) {
-        removeQueryItems(queryId: quriesItems.value[index].query_id)
+    func didDeleteQuery(queryId: String) {
+        removeQueryItems(queryId: queryId)
     }
     
     func didDeleteAllQuery() {
-        print("didDeleteAllQuery")
         removeQueryItems(queryId: nil)
     }
 }

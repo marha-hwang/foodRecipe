@@ -34,26 +34,24 @@ final class DefaultSearchRecipeUseCase: SearchRecipeUseCase {
         completion: @escaping (Result<RecipePage, Error>) -> Void
     ) -> Cancellable? {
 
+        //검색한 내용을 저장하기 위한 코드
+        if requestValue.isSave{
+            
+            let str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            let size = 5
+            let iv = str.createRandomStr(length: size)
+            
+            let queryHistory = RecipeQueryHistory(query_id: iv, recipe_name: requestValue.query.recipe_name ?? "", reg_date: Date())
+            
+            self.recipeQueryQueriesRepository.saveRecentQuery(query: queryHistory) { _ in }
+        }
+        
+
         return recipeRepository.fetchRecipesList(
             query: requestValue.query,
             page: requestValue.page,
-            completion: { result in
-
-            if case .success = result {
-                if requestValue.isSave{
-                    
-                    let str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-                    let size = 5
-                    let iv = str.createRandomStr(length: size)
-                    
-                    let queryHistory = RecipeQueryHistory(query_id: iv, recipe_name: requestValue.query.recipe_name ?? "", reg_date: Date())
-                    
-                    self.recipeQueryQueriesRepository.saveRecentQuery(query: queryHistory) { _ in }
-                }
-            }
-
-            completion(result)
-        })
+            completion: { result in completion(result) }
+        )
     }
 }
 

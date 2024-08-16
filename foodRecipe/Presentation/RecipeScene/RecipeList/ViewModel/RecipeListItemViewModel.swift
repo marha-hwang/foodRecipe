@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct RecipeListItemViewModel{
     let imagePath:String
     let recipeName:String

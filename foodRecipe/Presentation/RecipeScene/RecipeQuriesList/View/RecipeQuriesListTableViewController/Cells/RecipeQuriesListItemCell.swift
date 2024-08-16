@@ -79,6 +79,12 @@ class RecipeQuriesListItemCell:UITableViewCell{
             deleteImage.contentMode = .center
             deleteImage.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             deleteImage.tintColor = .lightGray
+            
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(removeQuery))
+            deleteImage.isUserInteractionEnabled = true
+            deleteImage.addGestureRecognizer(gestureRecognizer)
+        
+        
             return deleteImage
         }()
         
@@ -97,4 +103,8 @@ class RecipeQuriesListItemCell:UITableViewCell{
         
         return outerView
     }()
+    
+    @objc private func removeQuery(sender: UITapGestureRecognizer){
+        viewModel.deleteItem()
+    }
 }
