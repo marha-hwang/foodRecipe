@@ -154,10 +154,10 @@ class RecommandView:UIStackView{
         backgroundColor = .white
         
         layer.borderWidth = 1
-        layer.masksToBounds = true
-        layer.cornerRadius = 10
         layer.borderColor = UIColor.black.cgColor
-        layer.borderWidth = 1
+
+        layer.masksToBounds = true        
+        layer.cornerRadius = 10
     
         addArrangedSubview(headerView)
         addArrangedSubview(recipeContainer)

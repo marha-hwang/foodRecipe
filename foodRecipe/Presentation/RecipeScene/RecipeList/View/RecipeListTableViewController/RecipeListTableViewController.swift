@@ -34,7 +34,8 @@ class RecipeListTableViewController:UITableViewController{
 
 extension RecipeListTableViewController{
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+
+        return view.frame.width*0.5
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

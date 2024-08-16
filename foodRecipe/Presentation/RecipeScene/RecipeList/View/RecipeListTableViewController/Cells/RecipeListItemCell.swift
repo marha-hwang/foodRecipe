@@ -27,12 +27,13 @@ class RecipeListItemCell:UITableViewCell{
         let recipeName = UITextView()
         recipeName.translatesAutoresizingMaskIntoConstraints = false
         recipeName.textAlignment = .center
-        
+        recipeName.font = UIFont.systemFont(ofSize: 15)
         return recipeName
     }()
     
     lazy var recipeType:UITextView = {
         let recipeType = UITextView()
+        recipeType.textAlignment = .center
         recipeType.translatesAutoresizingMaskIntoConstraints = false
         
         return recipeType
@@ -40,6 +41,7 @@ class RecipeListItemCell:UITableViewCell{
     
     lazy var recipeCategory:UITextView = {
         let recipeCategory = UITextView()
+        recipeCategory.textAlignment = .center
         recipeCategory.translatesAutoresizingMaskIntoConstraints = false
  
         return recipeCategory
@@ -78,10 +80,15 @@ class RecipeListItemCell:UITableViewCell{
         outerView.distribution = .fillProportionally
         outerView.translatesAutoresizingMaskIntoConstraints = false
         
+        outerView.layer.masksToBounds = true        
+        outerView.layer.cornerRadius = 10
+        outerView.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
+
+        
         lazy var infoStack:UIStackView = {
             let infoStack = UIStackView()
             infoStack.axis = .vertical
-            infoStack.alignment = .center
+            infoStack.alignment = .fill
             infoStack.distribution = .fillProportionally
             
             infoStack.translatesAutoresizingMaskIntoConstraints = false
@@ -90,15 +97,18 @@ class RecipeListItemCell:UITableViewCell{
             var categoryTypeStack:UIStackView = {
                 let categoryTypeStack = UIStackView()
                 categoryTypeStack.axis = .horizontal
-                categoryTypeStack.alignment = .center
+                categoryTypeStack.alignment = .fill
                 categoryTypeStack.distribution = .fillProportionally
-                
+                categoryTypeStack.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
+
                 categoryTypeStack.translatesAutoresizingMaskIntoConstraints = false
                 categoryTypeStack.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
                 
                 categoryTypeStack.addArrangedSubview(recipeType)
                 categoryTypeStack.addArrangedSubview(recipeCategory)
                 
+                recipeType.widthAnchor.constraint(equalTo: categoryTypeStack.widthAnchor, multiplier: 0.5).isActive = true
+                recipeCategory.widthAnchor.constraint(equalTo: categoryTypeStack.widthAnchor, multiplier: 0.5).isActive = true
 
                 return categoryTypeStack
             }()
@@ -106,9 +116,10 @@ class RecipeListItemCell:UITableViewCell{
             var difficultyStack:UIStackView = {
                 let difficultyStack = UIStackView()
                 difficultyStack.axis = .horizontal
-                difficultyStack.alignment = .center
+                difficultyStack.alignment = .fill
                 difficultyStack.distribution = .fillProportionally
-                
+                difficultyStack.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
+
                 difficultyStack.translatesAutoresizingMaskIntoConstraints = false
                 
                 lazy var difficultyLabel:UITextView = {
@@ -123,21 +134,35 @@ class RecipeListItemCell:UITableViewCell{
                 difficultyStack.addArrangedSubview(difficultyLabel)
                 difficultyStack.addArrangedSubview(difficultyStar)
                 
+                difficultyLabel.widthAnchor.constraint(equalTo: difficultyStack.widthAnchor, multiplier: 0.4).isActive = true
+                difficultyStar.widthAnchor.constraint(equalTo: difficultyStack.widthAnchor, multiplier: 0.6).isActive = true
+                
                 return difficultyStack
+            }()
+            
+            //추후 요소가 추가될것을 대비하여 생성한 view
+            var emptyView:UIView = {
+                let emptyView = UIView()
+                emptyView.translatesAutoresizingMaskIntoConstraints = false
+                return emptyView
             }()
             
             infoStack.addArrangedSubview(recipeName)
             infoStack.addArrangedSubview(categoryTypeStack)
             infoStack.addArrangedSubview(difficultyStack)
+            infoStack.addArrangedSubview(emptyView)
             
-            recipeName.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.3).isActive = true
-            recipeName.widthAnchor.constraint(equalTo: infoStack.widthAnchor).isActive = true
+            recipeName.heightAnchor.constraint(equalTo: infoStack.heightAnchor, multiplier: 0.3).isActive = true
+            recipeName.widthAnchor.constraint(equalTo: infoStack.widthAnchor, multiplier: 1).isActive = true
+
+            categoryTypeStack.heightAnchor.constraint(equalTo: infoStack.heightAnchor, multiplier: 0.2).isActive = true
+            categoryTypeStack.widthAnchor.constraint(equalTo: infoStack.widthAnchor, multiplier: 1).isActive = true
+
+            difficultyStack.heightAnchor.constraint(equalTo: infoStack.heightAnchor, multiplier: 0.2).isActive = true
+            difficultyStack.widthAnchor.constraint(equalTo: infoStack.widthAnchor, multiplier: 1).isActive = true
             
-            categoryTypeStack.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.3).isActive = true
-            categoryTypeStack.widthAnchor.constraint(equalTo: infoStack.widthAnchor).isActive = true
-            
-            difficultyStack.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.3).isActive = true
-            difficultyStack.widthAnchor.constraint(equalTo: infoStack.widthAnchor).isActive = true
+            emptyView.heightAnchor.constraint(equalTo: infoStack.heightAnchor, multiplier: 0.3).isActive = true
+            emptyView.widthAnchor.constraint(equalTo: infoStack.widthAnchor, multiplier: 1).isActive = true
             
             return infoStack
         }()
@@ -145,9 +170,13 @@ class RecipeListItemCell:UITableViewCell{
         outerView.addArrangedSubview(recipeImage)
         outerView.addArrangedSubview(infoStack)
         
-        recipeImage.widthAnchor.constraint(equalToConstant: contentView.frame.width*0.5).isActive = true
-        infoStack.widthAnchor.constraint(equalToConstant: contentView.frame.width*0.5).isActive = true
-        infoStack.heightAnchor.constraint(equalTo: outerView.heightAnchor).isActive = true
+        recipeImage.widthAnchor.constraint(equalTo: outerView.widthAnchor, multiplier: 0.5).isActive = true
+        //alignment = fill을 쓰지 않는 경우 높이 제약조건도 추가해야 함
+        //multiplier을 통하여 크기 제약조건을 통하여 비율 계산가능
+        infoStack.widthAnchor.constraint(equalTo: outerView.widthAnchor, multiplier: 0.5).isActive = true
+        infoStack.heightAnchor.constraint(equalTo: outerView.heightAnchor, multiplier: 1).isActive = true
+        
+        
 
         return outerView
     }()
@@ -181,11 +210,10 @@ class RecipeListItemCell:UITableViewCell{
     
     private func setupViews(){
         contentView.addSubview(outerView)
-        print(contentView.frame)
-        outerView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        outerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        outerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        outerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        outerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 10).isActive = true
+        outerView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        outerView.heightAnchor.constraint(equalTo: contentView.heightAnchor, constant: -10).isActive = true
+        outerView.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
     }
     
     private func updateImage(){
