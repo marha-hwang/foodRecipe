@@ -64,6 +64,7 @@ struct Recipe{
 }
 
 struct RecipePage{
+    let perPage:Int
     let total_count: Int
     let recpies: [Recipe]
 }

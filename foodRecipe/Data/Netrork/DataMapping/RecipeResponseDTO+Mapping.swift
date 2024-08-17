@@ -91,8 +91,9 @@ extension RecipeResponseDTO{
 }
 
 extension RecipeResponseDTO{
-    func toDomain() -> RecipePage{
+    func toDomain(perPage:Int) -> RecipePage{
         return RecipePage(
+            perPage:perPage,
             total_count: Int(COOKRCP.total_count) ?? 0,
             recpies: COOKRCP.row.map{$0.toDomain()}
         )

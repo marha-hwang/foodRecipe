@@ -49,6 +49,11 @@ extension RecipeListTableViewController{
             return UITableViewCell()
         }
         cell.fill(viewModel: RecipeListItemViewModel(recipe: viewModel.recipeItems.value[indexPath.row]), recipeImageRepository: recipeImagesRepository)
+        
+        //모든 페이지를 한번에 로드하지 않고 페이지가 끝나는 시점에 로드하기 위한코드
+        if indexPath.row == viewModel.recipeItems.value.count - 1 {
+            viewModel.didLoadNextPage()
+        }
 
         return cell
     }

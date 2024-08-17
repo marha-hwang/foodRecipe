@@ -12,8 +12,8 @@ final class DefaultRecipeRepository:RecipeRepository{
                           page: Int,
                           completion: @escaping(Result<RecipePage, Error>) -> Void) -> Cancellable? {
         
-        
-        let requestDTO = RecipeRequestDTO(query: query, page: page, perCount: 10)
+        let perPage = 20
+        let requestDTO = RecipeRequestDTO(query: query, page: page, perCount: perPage)
         let endpoint:URLRequest = APIEndpoints.getRecipe(with: requestDTO)
         
         let task = RepositoryTask()
@@ -38,7 +38,7 @@ final class DefaultRecipeRepository:RecipeRepository{
                         
             let result = try? JSONDecoder().decode(RecipeResponseDTO.self, from: _data)
             if let _result = result{
-                completion(.success(_result.toDomain()))
+                completion(.success(_result.toDomain(perPage:perPage)))
             }
             else {
                 completion(.failure(DataError.ParsingError))

@@ -22,13 +22,15 @@ protocol RecipeListViewModelInput{
     func didTouchSearchButton()
     func didTouchCategory(category:String)
     func didTouchRecipe(index:Int)
+    func didLoadNextPage()
 }
 
 protocol RecipeListViewModelOutput{
     var listType:RecipeListViewType {get}
-    var title:String {get}
+    var title:Observable<String> {get}
     var recipeItems:Observable<[Recipe]> {get}
     var categoryItems:[String] {get}
+    var loading: Observable<Bool> { get }
 }
 
 typealias RecipeListViewModel = RecipeListViewModelInput&RecipeListViewModelOutput
@@ -37,11 +39,15 @@ final class DefaultRecipeListViewModel:RecipeListViewModel{
     
     private let searchRecipeUseCase:SearchRecipeUseCase
     private let actions:RecipeListViewModelActions?
+    var currentPage: Int = 0
+    var totalPage: Int = 0
     
+    //MARK: OUTPUT
     var listType: RecipeListViewType
     var recipeItems: Observable<[Recipe]> = Observable([])
-    var title: String = ""
-    var categoryItems: [String] = []
+    var title: Observable<String> = Observable("")
+    var categoryItems: [String] = ["한식", "중식", "일식", "양식", "찜", "구이", "찌개", "탕"]
+    var loading: Observable<Bool> = Observable(false)
     
     init(listType : RecipeListViewType,
          title:String,
@@ -49,29 +55,48 @@ final class DefaultRecipeListViewModel:RecipeListViewModel{
          actions:RecipeListViewModelActions
     ) {
         self.listType = listType
-        self.title = title
+        self.title.value = title
         self.searchRecipeUseCase = searchRecipeUseCase
         self.actions = actions
     }
     
-    private func updateRecipeItems(page:Int, category:String?, keyword:String?){
+    private func resetPage(){
+        currentPage = 0
+        totalPage = 0
+        recipeItems.value.removeAll()
+    }
+    
+    private func loadPage(nextPage:Int, category:String?, keyword:String?){
+        loading.value = true
         let _ = searchRecipeUseCase.execute(
             requestValue: SearchRecipeUseCaseRequestValue(
                 query: RecipeQuery(
                     recipe_name: keyword,
                     recipe_ingredient: nil,
                     recipe_type: category),
-            page: page,
+            page: nextPage,
             isSave: category != nil ? false:true)
         ) { result in
                 switch result {
                 case .success(let page):
+                    self.currentPage = nextPage
+                    self.totalPage = page.total_count/page.perPage + (page.total_count%page.perPage == 0 ? 0:1)
                     DispatchQueue.main.async{
-                        self.recipeItems.value = page.recpies
+                        page.recpies.forEach{ self.recipeItems.value.append($0) }
                     }
                 case .failure(let error):
                     print(error)
                 }
+            self.loading.value = false
+        }
+    }
+    
+    private func updatePage(){
+        if listType == .byKeyword{
+            loadPage(nextPage: currentPage+1, category: nil, keyword: title.value)
+        }
+        else if listType == .byCategory{
+            loadPage(nextPage: currentPage+1, category: title.value, keyword: nil)
         }
     }
     
@@ -79,12 +104,8 @@ final class DefaultRecipeListViewModel:RecipeListViewModel{
 
 extension DefaultRecipeListViewModel{
     func viewDidLoad() {
-        if listType == .byKeyword{
-            updateRecipeItems(page: 1, category: nil, keyword: title)
-        }
-        else if listType == .byCategory{
-            updateRecipeItems(page: 1, category: title, keyword: nil)
-        }
+        resetPage()
+        updatePage()
     }
     
     func didTouchRecipe(index: Int) {
@@ -96,6 +117,17 @@ extension DefaultRecipeListViewModel{
     }
     
     func didTouchCategory(category: String) {
-        updateRecipeItems(page: 1, category: category, keyword: nil)
+        title.value = category
+        
+        resetPage()
+        updatePage()
+    }
+    
+    func didLoadNextPage(){
+        //totalCount를 이용하여 다음페이지 존재여부 확인필요
+        guard currentPage < totalPage else{
+            return
+        }
+        updatePage()
     }
 }
