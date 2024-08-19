@@ -38,21 +38,11 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
     
     // MARK: OUTPUT
     var searchbarPlaceholder: String = "레시피를 검색해보세요"
-    var categoryItems: [FolderViewItem] = [
-        FolderViewItem(name: "한식", image: "logo"),
-        FolderViewItem(name: "중식", image: "logo"),
-        FolderViewItem(name: "양식", image: "logo"),
-        FolderViewItem(name: "일식", image: "logo"),
-        FolderViewItem(name: "찌개", image: "logo"),
-        FolderViewItem(name: "튀김", image: "logo"),
-        FolderViewItem(name: "볶음", image: "logo"),
-        FolderViewItem(name: "구이", image: "logo"),
-        FolderViewItem(name: "양념", image: "logo"),
-        FolderViewItem(name: "양념", image: "logo"),
-        FolderViewItem(name: "양념", image: "logo"),
-        FolderViewItem(name: "양념", image: "logo"),
-        FolderViewItem(name: "양념", image: "logo"),
-    ]
+    var categoryItems: [FolderViewItem] {
+        var categoryItems:[FolderViewItem] = []
+        Ingredients.data.forEach{ categoryItems.append(FolderViewItem(name: $0.key, image: $0.value)) }
+        return categoryItems
+    }
     var weatherRecommandTitle: Observable<String> = Observable("비오는날 어울리는 음식을 추천합니다")
     var weatherRecommandItems: Observable<[Recipe]> = Observable([])
     var timeRecommandTitle: String = "브런치에 어울리는 음식을 추천합니다."

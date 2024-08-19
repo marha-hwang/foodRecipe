@@ -46,7 +46,7 @@ final class DefaultRecipeListViewModel:RecipeListViewModel{
     var listType: RecipeListViewType
     var recipeItems: Observable<[Recipe]> = Observable([])
     var title: Observable<String> = Observable("")
-    var categoryItems: [String] = ["한식", "중식", "일식", "양식", "찜", "구이", "찌개", "탕"]
+    var categoryItems: [String] = Ingredients.getKeys()
     var loading: Observable<Bool> = Observable(false)
     
     init(listType : RecipeListViewType,
@@ -72,10 +72,10 @@ final class DefaultRecipeListViewModel:RecipeListViewModel{
             requestValue: SearchRecipeUseCaseRequestValue(
                 query: RecipeQuery(
                     recipe_name: keyword,
-                    recipe_ingredient: nil,
-                    recipe_type: category),
+                    recipe_ingredient: category,
+                    recipe_type: nil),
             page: nextPage,
-            isSave: category != nil ? false:true)
+            isSave: listType == .byKeyword ? true:false)
         ) { result in
                 switch result {
                 case .success(let page):
