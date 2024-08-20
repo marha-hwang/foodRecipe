@@ -54,28 +54,31 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
     }
     
     private func setRecommand(){
+        var weatherFood = ""
+        var timeFood = ""
+        
         ///동일한 인증키로 api를 동시에 호출하는 경우 인증키 에러가 발생하였음, 따라서 순차적으로 api를 호출하기 위해 아래와 같이 작성
-//        updateRecommand(recipe_type: "찌개"){ [weak self] page in
-//            DispatchQueue.main.async{
-//                self?.weatherRecommandItems.value = page.recpies
-//            }
-//            
-//            self?.updateRecommand(recipe_type: "일품"){ [weak self] page in 
-//                DispatchQueue.main.async{
-//                    self?.timeRecommandItems.value = page.recpies
-//                }
-//            }
-//        }
+        updateRecommand(recipe_name: weatherFood){ [weak self] page in
+            DispatchQueue.main.async{
+                self?.weatherRecommandItems.value = page.recpies
+            }
+            
+            self?.updateRecommand(recipe_name: timeFood){ [weak self] page in
+                DispatchQueue.main.async{
+                    self?.timeRecommandItems.value = page.recpies
+                }
+            }
+        }
     }
     
     //MARK: private
-    private func updateRecommand(recipe_type:String, completion:@escaping(RecipePage)->Void){
+    private func updateRecommand(recipe_name:String, completion:@escaping(RecipePage)->Void){
         let _ = searchRecipeUsecase.execute(
             requestValue: SearchRecipeUseCaseRequestValue( 
                 query: RecipeQuery(
-                    recipe_name: nil,
+                    recipe_name: recipe_name,
                     recipe_ingredient: nil,
-                    recipe_type: recipe_type),
+                    recipe_type: nil),
             page: 1,
             isSave: false)
         ) { result in
@@ -86,6 +89,10 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
                     print(error)
                 }
         }
+    }
+    
+    private func getWeather()->String{
+        return ""
     }
     
 }
