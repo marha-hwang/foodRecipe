@@ -33,17 +33,21 @@ class Ingredients{
 }
 
 class RecommandItems{
-    static let data:[ [String:[String]] ] = [
-        ["집에서 혼자 시간을 보낼 때":],
-        ["친구들과의 모임":],
-        ["특별한 날의 기념일":],
-        ["아침에 활기차게 시작하고 싶을 때"],
-        ["건강한 식사를 원할 때":],
+    
+    static let RecommandItems:[RecommandItem] = [
+        RecommandItem(title: "집에서 혼자 시간을 보낼 때", foods: ["볶음밥", "스프"]),
+        RecommandItem(title: "친구들과의 모임", foods: ["피자"]),
+        RecommandItem(title: "특별한 날의 기념일", foods: ["스테이크", "케이크"]),
+        RecommandItem(title: "아침에 활기차게 시작하고 싶을 때", foods: ["샌드위치"]),
+        RecommandItem(title: "건강한 식사를 원할 때", foods: ["샐러드"]),
     ]
     
-    static func getFood()->{
-        //음식분류 랜덤하게 하나 선택, 음식종류 랜덤하게 하나 선택하여 리턴
+    static func getRecommandItem()->RecommandItem{
+        return RecommandItems.randomElement()!
     }
-    
-    
+}
+
+struct RecommandItem{
+    let title:String
+    let foods:[String]
 }

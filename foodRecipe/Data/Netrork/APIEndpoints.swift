@@ -10,9 +10,22 @@ import Foundation
 struct APIEndpoints{
     static func getRecipe(with:RecipeRequestDTO) -> URLRequest{
         let startIdx = (with.page-1)*with.perCount + 1
-        let baseurl = "\(AppConfiguration().apiBaseURL)\(AppConfiguration().apiKey)/COOKRCP01/json/\(startIdx)/\(startIdx+with.perCount-1)"
+        var baseurl = "\(AppConfiguration().apiBaseURL)\(AppConfiguration().apiKey)/COOKRCP01/json/\(startIdx)/\(startIdx+with.perCount-1)"
         
-        let url = URL(string: "\(baseurl)/RCP_NM=\(with.query.recipe_name ?? " ")&RCP_PAT2=\(with.query.recipe_type ?? " ")&RCP_PARTS_DTLS=\(with.query.recipe_ingredient ?? " ")")
+        if let recipeName = with.query.recipe_name{
+            baseurl = "\(baseurl)/RCP_NM=\(recipeName)"
+        }
+        
+        if let recipeType = with.query.recipe_type{
+            baseurl = "\(baseurl)&RCP_PAT2=\(recipeType)"
+        }
+        
+        if let recipeIngredient = with.query.recipe_ingredient{
+            baseurl = "\(baseurl)&RCP_PARTS_DTLS=\(recipeIngredient)"
+        }
+        
+        
+        let url = URL(string: baseurl)
         
         print(url)
         return URLRequest(url: url!)

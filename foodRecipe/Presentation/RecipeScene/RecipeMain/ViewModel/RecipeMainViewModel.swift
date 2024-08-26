@@ -23,10 +23,10 @@ protocol RecipeMainViewModelInput{
 protocol RecipeMainViewModelOutput{
     var searchbarPlaceholder:String {get}
     var categoryItems:[FolderViewItem] {get}
-    var weatherRecommandTitle:Observable<String> {get}
-    var weatherRecommandItems:Observable<[Recipe]> {get}
-    var timeRecommandTitle:String {get}
-    var timeRecommandItems:Observable<[Recipe]> {get}
+    var firsteRcommandTitle:String {get}
+    var firstRecommandItems:Observable<[Recipe]> {get}
+    var secondRecommandTitle:String {get}
+    var secondRecommandItems:Observable<[Recipe]> {get}
 }
 
 typealias RecipeMainViewModel = RecipeMainViewModelInput&RecipeMainViewModelOutput
@@ -43,10 +43,10 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
         Ingredients.data.forEach{ categoryItems.append(FolderViewItem(name: $0.key, image: $0.value)) }
         return categoryItems
     }
-    var weatherRecommandTitle: Observable<String> = Observable("비오는날 어울리는 음식을 추천합니다")
-    var weatherRecommandItems: Observable<[Recipe]> = Observable([])
-    var timeRecommandTitle: String = "브런치에 어울리는 음식을 추천합니다."
-    var timeRecommandItems: Observable<[Recipe]> = Observable([])
+    var firsteRcommandTitle: String = ""
+    var firstRecommandItems: Observable<[Recipe]> = Observable([])
+    var secondRecommandTitle:String = ""
+    var secondRecommandItems: Observable<[Recipe]> = Observable([])
     
     init(searchRecipeUsecase: SearchRecipeUseCase, actions: RecipeMainViewModelActions?) {
         self.searchRecipeUsecase = searchRecipeUsecase
@@ -54,18 +54,20 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
     }
     
     private func setRecommand(){
-        var weatherFood = ""
-        var timeFood = ""
+        let firsteRcommandItem = RecommandItems.getRecommandItem()
+        let secondRecommandItem = RecommandItems.getRecommandItem()
+        firsteRcommandTitle = firsteRcommandItem.title
+        secondRecommandTitle = secondRecommandItem.title
         
         ///동일한 인증키로 api를 동시에 호출하는 경우 인증키 에러가 발생하였음, 따라서 순차적으로 api를 호출하기 위해 아래와 같이 작성
-        updateRecommand(recipe_name: weatherFood){ [weak self] page in
+        updateRecommand(recipe_name: firsteRcommandItem.foods.randomElement()!){ [weak self] page in
             DispatchQueue.main.async{
-                self?.weatherRecommandItems.value = page.recpies
+                self?.firstRecommandItems.value = page.recpies
             }
             
-            self?.updateRecommand(recipe_name: timeFood){ [weak self] page in
+            self?.updateRecommand(recipe_name: secondRecommandItem.foods.randomElement()!){ [weak self] page in
                 DispatchQueue.main.async{
-                    self?.timeRecommandItems.value = page.recpies
+                    self?.secondRecommandItems.value = page.recpies
                 }
             }
         }
@@ -89,10 +91,6 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
                     print(error)
                 }
         }
-    }
-    
-    private func getWeather()->String{
-        return ""
     }
     
 }

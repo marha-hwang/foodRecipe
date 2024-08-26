@@ -27,8 +27,8 @@ class RecipeMainView:UIView{
         return categoryView
     }()
     
-    lazy var weatherRecommandView = RecommandView()
-    lazy var timeRecommandView = RecommandView()
+    lazy var firstRecommandView = RecommandView()
+    lazy var secondRecommandView = RecommandView()
     
     
     private lazy var scrollView:UIScrollView = {
@@ -44,16 +44,16 @@ class RecipeMainView:UIView{
             categoryView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 10).isActive = true
             categoryView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -10).isActive = true
             
-            mainView.addSubview(weatherRecommandView)
-            weatherRecommandView.topAnchor.constraint(equalTo: categoryView.bottomAnchor, constant: 30).isActive = true
-            weatherRecommandView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 10).isActive = true
-            weatherRecommandView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -10).isActive = true
+            mainView.addSubview(firstRecommandView)
+            firstRecommandView.topAnchor.constraint(equalTo: categoryView.bottomAnchor, constant: 30).isActive = true
+            firstRecommandView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 10).isActive = true
+            firstRecommandView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -10).isActive = true
             
-            mainView.addSubview(timeRecommandView)
-            timeRecommandView.topAnchor.constraint(equalTo: weatherRecommandView.bottomAnchor, constant: 30).isActive = true
-            timeRecommandView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 10).isActive = true
-            timeRecommandView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -10).isActive = true
-            timeRecommandView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -10).isActive = true
+            mainView.addSubview(secondRecommandView)
+            secondRecommandView.topAnchor.constraint(equalTo: firstRecommandView.bottomAnchor, constant: 30).isActive = true
+            secondRecommandView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 10).isActive = true
+            secondRecommandView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -10).isActive = true
+            secondRecommandView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -10).isActive = true
             
             return mainView
         }()

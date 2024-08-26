@@ -44,40 +44,40 @@ class RecipeMainViewController: UIViewController{
             self?.viewModel.showRecipeListByCategory(category: gesture.name ?? "")
         }
         
-        recipeMainView.weatherRecommandView.titleView.text = viewModel.weatherRecommandTitle.value
+        recipeMainView.firstRecommandView.titleView.text = viewModel.firsteRcommandTitle
         let weatherRecommandGesture = UITapGestureRecognizer(target: self, action: #selector(showCategory))
-        recipeMainView.weatherRecommandView.imageView.isUserInteractionEnabled = true
-        recipeMainView.weatherRecommandView.imageView.addGestureRecognizer(weatherRecommandGesture)
+        recipeMainView.firstRecommandView.imageView.isUserInteractionEnabled = true
+        recipeMainView.firstRecommandView.imageView.addGestureRecognizer(weatherRecommandGesture)
         
-        recipeMainView.timeRecommandView.titleView.text = viewModel.timeRecommandTitle
+        recipeMainView.secondRecommandView.titleView.text = viewModel.secondRecommandTitle
         let timeRecommandGesture = UITapGestureRecognizer(target: self, action: #selector(showCategory))
-        recipeMainView.timeRecommandView.imageView.isUserInteractionEnabled = true
-        recipeMainView.timeRecommandView.imageView.addGestureRecognizer(timeRecommandGesture)
+        recipeMainView.secondRecommandView.imageView.isUserInteractionEnabled = true
+        recipeMainView.secondRecommandView.imageView.addGestureRecognizer(timeRecommandGesture)
     }
     
     private func bind(to viewModel: RecipeMainViewModel) {
-        viewModel.weatherRecommandItems.observe(on: self) { [weak self] _ in
-            self?.recipeMainView.weatherRecommandView.recipeController.items = viewModel.weatherRecommandItems.value
-            self?.recipeMainView.weatherRecommandView.recipeController.reload()
+        viewModel.firstRecommandItems.observe(on: self) { [weak self] _ in
+            self?.recipeMainView.firstRecommandView.recipeController.items = viewModel.firstRecommandItems.value
+            self?.recipeMainView.firstRecommandView.recipeController.reload()
         }
         
-        viewModel.timeRecommandItems.observe(on: self) { [weak self] _ in
-            self?.recipeMainView.timeRecommandView.recipeController.items = viewModel.timeRecommandItems.value
-            self?.recipeMainView.timeRecommandView.recipeController.reload()
+        viewModel.secondRecommandItems.observe(on: self) { [weak self] _ in
+            self?.recipeMainView.secondRecommandView.recipeController.items = viewModel.secondRecommandItems.value
+            self?.recipeMainView.secondRecommandView.recipeController.reload()
         }
 
     }
     
     private func prepareSubViewController(){
-        addChild(recipeMainView.weatherRecommandView.recipeController)
-        recipeMainView.weatherRecommandView.recipeController.didMove(toParent: self)
-        recipeMainView.weatherRecommandView.recipeController.viewModel = viewModel
-        recipeMainView.weatherRecommandView.recipeController.recipeImagesRepository = recipeImageRepository
+        addChild(recipeMainView.firstRecommandView.recipeController)
+        recipeMainView.firstRecommandView.recipeController.didMove(toParent: self)
+        recipeMainView.firstRecommandView.recipeController.viewModel = viewModel
+        recipeMainView.firstRecommandView.recipeController.recipeImagesRepository = recipeImageRepository
         
-        addChild(recipeMainView.timeRecommandView.recipeController)
-        recipeMainView.timeRecommandView.recipeController.didMove(toParent: self)
-        recipeMainView.timeRecommandView.recipeController.viewModel = viewModel
-        recipeMainView.timeRecommandView.recipeController.recipeImagesRepository = recipeImageRepository
+        addChild(recipeMainView.secondRecommandView.recipeController)
+        recipeMainView.secondRecommandView.recipeController.didMove(toParent: self)
+        recipeMainView.secondRecommandView.recipeController.viewModel = viewModel
+        recipeMainView.secondRecommandView.recipeController.recipeImagesRepository = recipeImageRepository
     }
     
     //공통 컴포넌트에 대한 동작을 처리하기 위해 사용
