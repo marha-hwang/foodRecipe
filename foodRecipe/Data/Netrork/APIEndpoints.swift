@@ -17,11 +17,22 @@ struct APIEndpoints{
         }
         
         if let recipeType = with.query.recipe_type{
-            baseurl = "\(baseurl)&RCP_PAT2=\(recipeType)"
+            if with.query.recipe_name != nil{
+                baseurl = "\(baseurl)&RCP_PAT2=\(recipeType)"
+            }
+            else{
+                baseurl = "\(baseurl)/RCP_PAT2=\(recipeType)"   
+            }
         }
         
         if let recipeIngredient = with.query.recipe_ingredient{
-            baseurl = "\(baseurl)&RCP_PARTS_DTLS=\(recipeIngredient)"
+            if with.query.recipe_name != nil && with.query.recipe_type != nil {
+                baseurl = "\(baseurl)&RCP_PARTS_DTLS=\(recipeIngredient)"
+                
+            }
+            else{
+                baseurl = "\(baseurl)/RCP_PARTS_DTLS=\(recipeIngredient)"
+            }
         }
         
         

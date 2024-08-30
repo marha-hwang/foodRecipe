@@ -98,17 +98,6 @@ class RecommandView:UIStackView{
         return textView
         
     }()
-    lazy var imageView:UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        let image = UIImage(systemName: "arrowshape.forward.fill")
-        imageView.image = image
-        imageView.contentMode = .scaleToFill
-        imageView.backgroundColor = .white
-        imageView.tintColor = .black
-        
-        return imageView
-    }()
     
     lazy var recipeController:RecipeMainCollectionViewController = RecipeMainCollectionViewController()
     
@@ -120,14 +109,10 @@ class RecommandView:UIStackView{
         headerView.distribution = .fillProportionally
         
         headerView.addArrangedSubview(titleView)
-        headerView.addArrangedSubview(imageView)
         
         titleView.widthAnchor.constraint(equalToConstant: 100).isActive = true
         titleView.heightAnchor.constraint(equalToConstant: 30).isActive = true
 
-        imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        
         return headerView
     }()
     

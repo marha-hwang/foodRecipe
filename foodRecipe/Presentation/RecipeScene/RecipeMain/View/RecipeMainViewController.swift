@@ -44,16 +44,9 @@ class RecipeMainViewController: UIViewController{
             self?.viewModel.showRecipeListByCategory(category: gesture.name ?? "")
         }
         
-        recipeMainView.firstRecommandView.titleView.text = viewModel.firsteRcommandTitle
-        let weatherRecommandGesture = UITapGestureRecognizer(target: self, action: #selector(showCategory))
-        recipeMainView.firstRecommandView.imageView.isUserInteractionEnabled = true
-        recipeMainView.firstRecommandView.imageView.addGestureRecognizer(weatherRecommandGesture)
-        
+        recipeMainView.firstRecommandView.titleView.text = viewModel.firsteRcommandTitle        
         recipeMainView.secondRecommandView.titleView.text = viewModel.secondRecommandTitle
-        let timeRecommandGesture = UITapGestureRecognizer(target: self, action: #selector(showCategory))
-        recipeMainView.secondRecommandView.imageView.isUserInteractionEnabled = true
-        recipeMainView.secondRecommandView.imageView.addGestureRecognizer(timeRecommandGesture)
-    }
+    } 
     
     private func bind(to viewModel: RecipeMainViewModel) {
         viewModel.firstRecommandItems.observe(on: self) { [weak self] _ in
@@ -95,9 +88,5 @@ class RecipeMainViewController: UIViewController{
     @objc private func searchLabelEvent(sender: UITapGestureRecognizer){
         viewModel.showRecipeQuriesList()
     }
-    @objc private func showCategory(sender: UITapGestureRecognizer){
-        viewModel.showRecipeListByCategory(category: "" )
-    }
-        
 }
 
