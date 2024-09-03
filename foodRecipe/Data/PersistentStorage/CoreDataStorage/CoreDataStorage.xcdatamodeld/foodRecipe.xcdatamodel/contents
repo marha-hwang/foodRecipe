@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="RecipeFavoriteEntity" representedClassName="RecipeFavoriteEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="img_url" optional="YES" attributeType="String"/>
-        <attribute name="recipe_id" optional="YES" attributeType="String"/>
-        <attribute name="recipe_name" optional="YES" attributeType="String"/>
-        <attribute name="recipe_type" optional="YES" attributeType="String"/>
-        <attribute name="recipe_way" optional="YES" attributeType="String"/>
+        <attribute name="recipe_data" optional="YES" attributeType="Binary"/>
+        <attribute name="recipe_seq" optional="YES" attributeType="String"/>
     </entity>
     <entity name="RecipeImageEntity" representedClassName="RecipeImageEntity" syncable="YES" codeGenerationType="class">
         <attribute name="data" optional="YES" attributeType="Binary"/>

@@ -9,15 +9,15 @@ import Foundation
 
 protocol FavoriteStorage{
     func fetchFavoriteRecipe(
-        completion: @escaping (Result<[RecipeFavorite], Error>) -> Void
+        completion: @escaping (Result<[Recipe], Error>) -> Void
     )
     func saveFavoriteRecipe(
-        favorite:RecipeFavorite,
+        recipe:Recipe,
         completion: @escaping (Result<Bool, Error>) -> Void
     )
     
     func removeFavoriteRecipe(
-        favorite:RecipeFavorite,
+        recipe:Recipe,
         completion: @escaping (Result<Bool, Error>) -> Void
     )
 }

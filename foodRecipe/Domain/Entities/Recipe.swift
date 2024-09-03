@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Recipe{
+struct Recipe:Codable{
     let ingredients:[String]
     let main_image:String
     let cookWay:String

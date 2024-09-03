@@ -16,11 +16,11 @@ class CoreDataFavoriteStorage:FavoriteStorage{
         self.coreDataStorage = coreDataStorage
     }
     
-    func fetchFavoriteRecipe(completion: @escaping (Result<[RecipeFavorite], Error>) -> Void) {
+    func fetchFavoriteRecipe(completion: @escaping (Result<[Recipe], Error>) -> Void) {
         coreDataStorage.performBackgroundTask{ context in
             do {
                 let request: NSFetchRequest = RecipeFavoriteEntity.fetchRequest()
-                request.sortDescriptors = [NSSortDescriptor(key: #keyPath(RecipeFavoriteEntity.recipe_id),
+                request.sortDescriptors = [NSSortDescriptor(key: #keyPath(RecipeFavoriteEntity.recipe_seq),
                                                             ascending: false)]
                 
                 let result = try context.fetch(request).map { $0.toDomain() }
@@ -32,10 +32,10 @@ class CoreDataFavoriteStorage:FavoriteStorage{
         }
     }
     
-    func saveFavoriteRecipe(favorite: RecipeFavorite, completion: @escaping (Result<Bool, Error>) -> Void) {
+    func saveFavoriteRecipe(recipe: Recipe, completion: @escaping (Result<Bool, Error>) -> Void) {
         coreDataStorage.performBackgroundTask{ context in
             do {
-                let entity = RecipeFavoriteEntity(favorite: favorite, insertInto: context)
+                let entity = RecipeFavoriteEntity(recipe: recipe, insertInto: context)
                 try context.save()
 
                 completion(.success(true))
@@ -45,12 +45,12 @@ class CoreDataFavoriteStorage:FavoriteStorage{
         }
     }
     
-    func removeFavoriteRecipe(favorite: RecipeFavorite, completion: @escaping (Result<Bool, Error>) -> Void) {
+    func removeFavoriteRecipe(recipe: Recipe, completion: @escaping (Result<Bool, Error>) -> Void) {
         coreDataStorage.performBackgroundTask{ context in
             do
             {
                 let request: NSFetchRequest = RecipeFavoriteEntity.fetchRequest()
-                request.sortDescriptors = [NSSortDescriptor(key: #keyPath(RecipeFavoriteEntity.recipe_id),
+                request.sortDescriptors = [NSSortDescriptor(key: #keyPath(RecipeFavoriteEntity.recipe_seq),
                                                             ascending: false)]
                 let result = try context.fetch(request)
                 
