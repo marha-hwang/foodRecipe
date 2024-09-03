@@ -8,16 +8,21 @@
 import UIKit
 
 class RecipeDetailViewController: UIViewController{
-    private var viewModel: RecipeMainViewModel!
-    private var recipeMainView:RecipeMainView!
+    private var viewModel: RecipeDetailViewModel!
+    private var recipeImageRepository:RecipeImageRepository?
     
-    static func create() -> RecipeDetailViewController {
+    static func create(with viewModel:RecipeDetailViewModel,
+                       recipeImageRepository:RecipeImageRepository
+    ) -> RecipeDetailViewController {
         let vc = RecipeDetailViewController()
+        vc.viewModel = viewModel
+        vc.recipeImageRepository = recipeImageRepository
         return vc
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .brown
+        print(viewModel.recipe.recipe_name)
     }
 }

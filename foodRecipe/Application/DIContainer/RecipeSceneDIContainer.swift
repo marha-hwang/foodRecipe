@@ -16,6 +16,7 @@ final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies,Favor
     //MARK: Persistent Storage
     lazy var recipeQueryStorage = CoreDataRecipeQueryStorage(coreDataStorage: CoreDataStorage.shared)
     lazy var recipeImageStorage = CoreDataRecipeImageStorage(coreDataStorage: CoreDataStorage.shared)
+    lazy var favoriteStorage = CoreDataFavoriteStorage(coreDataStorage: CoreDataStorage.shared)
     
     //MARK: REPOSITORY
     func makeRecipeRepository()->RecipeRepository{
@@ -24,6 +25,10 @@ final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies,Favor
     
     func makeRecipeQuriesRepository()->RecipeQueriesRepository{
         DefaultRecipeQueryRepository(recipeQueryStorage: recipeQueryStorage)
+    }
+    
+    func makeFavoriteRepository()->FavoriteRepository{
+        DefaultFavoriteRepository(favoriteStorage: favoriteStorage)
     }
     
     func makeRecipeImageRepository()->RecipeImageRepository{
@@ -42,6 +47,10 @@ final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies,Favor
     
     func makeRemoveRecentRecipeQuriesUseCase()->RemoveRecentRecipeQuriesUseCase{
         DefaultRemoveRecentRecipeQuriesUseCase(recipeQueriesRepository: makeRecipeQuriesRepository())
+    }
+    
+    func makeAddFavoriteUseCase()->AddFavoriteUseCase{
+        DefaultAddFavoriteUseCase(favoriteRepository: makeFavoriteRepository())
     }
     
     //MARK: RecipeMain
@@ -80,8 +89,13 @@ final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies,Favor
     }
     
     //MARK: RecipeDetail
-    func makeRecipeDetailViewController() -> RecipeDetailViewController {
-        RecipeDetailViewController.create()
+    func makeRecipeDetailViewController(recipe:Recipe) -> RecipeDetailViewController {
+        let viewModel = makeRecipeDetailViewModel(recipe: recipe)
+        return RecipeDetailViewController.create(with: viewModel, recipeImageRepository: makeRecipeImageRepository())
+    }
+    
+    func makeRecipeDetailViewModel(recipe:Recipe)->RecipeDetailViewModel{
+        DefaultRecipeDetailViewModel(addFavoriteUesCase: makeAddFavoriteUseCase(), recipe: recipe)
     }
     
     //MARK: FavoriteRecipe

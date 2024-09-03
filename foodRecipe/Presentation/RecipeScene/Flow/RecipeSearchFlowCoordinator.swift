@@ -12,7 +12,7 @@ protocol RecipeSearchFlowCoordinatorDependencies  {
     func makeRecipeMainViewController(actions: RecipeMainViewModelActions) -> RecipeMainViewController
     func makeRecipeQuriesListViewController(actions:RecipeQuriesListViewModelActions) -> RecipeQuriesListViewController
     func makeRecipeListViewController(listType:RecipeListViewType, title:String, actions:RecipeListViewModelActions) -> RecipeListViewController
-    func makeRecipeDetailViewController() -> RecipeDetailViewController
+    func makeRecipeDetailViewController(recipe:Recipe) -> RecipeDetailViewController
 }
 
 final class RecipeSearchFlowCoordinator{
@@ -67,7 +67,7 @@ final class RecipeSearchFlowCoordinator{
     }
     
     func showRecipeDetail(recipe:Recipe)->Void{
-        let vc = dependencies.makeRecipeDetailViewController()
+        let vc = dependencies.makeRecipeDetailViewController(recipe: recipe)
         navigationController?.pushViewController(vc, animated: false)
     }
 }
