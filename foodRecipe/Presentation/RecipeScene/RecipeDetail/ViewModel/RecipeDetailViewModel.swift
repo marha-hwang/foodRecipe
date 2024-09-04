@@ -21,15 +21,40 @@ typealias RecipeDetailViewModel = RecipeDetailViewModelInput&RecipeDetailViewMod
 
 final class DefaultRecipeDetailViewModel:RecipeDetailViewModel{
     
-    private let addFavoriteUesCase:AddFavoriteUseCase
+    private let checkFavoriteUesCase:CheckFavoriteUseCase
+    private let changeFavoriteStatusUseCase:ChangeFavoriteStatusUseCase
     
     //MARK: OUTPUT
     var favoriteStatus: Observable<Bool> = Observable(false)
     var recipe: Recipe
     
-    init(addFavoriteUesCase: AddFavoriteUseCase, recipe: Recipe) {
-        self.addFavoriteUesCase = addFavoriteUesCase
+    init(checkFavoriteUesCase: CheckFavoriteUseCase, changeFavoriteStatusUseCase:ChangeFavoriteStatusUseCase, recipe: Recipe) {
+        self.checkFavoriteUesCase = checkFavoriteUesCase
+        self.changeFavoriteStatusUseCase = changeFavoriteStatusUseCase
         self.recipe = recipe
+    }
+    
+    //MARK: PRIVATE
+    private func getFavoriteStatus(){
+        checkFavoriteUesCase.excute(seq: recipe.recipe_seq){ [weak self] result in
+            switch result{
+            case .success(let result):
+                self?.favoriteStatus.value = result  
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func updateFavoriteStatus(){
+        changeFavoriteStatusUseCase.excute(recipe: recipe){ [weak self] result in
+            switch result{
+            case .success(let result):
+                self?.favoriteStatus.value = result  
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
 }
@@ -37,10 +62,10 @@ final class DefaultRecipeDetailViewModel:RecipeDetailViewModel{
 //MARK: INPUT
 extension DefaultRecipeDetailViewModel{
     func viewDidLoad() {
-        
+        getFavoriteStatus()
     }
     
     func didTouchFavorite() {
-        
+        updateFavoriteStatus()
     }
 }

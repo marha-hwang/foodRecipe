@@ -49,8 +49,12 @@ final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies,Favor
         DefaultRemoveRecentRecipeQuriesUseCase(recipeQueriesRepository: makeRecipeQuriesRepository())
     }
     
-    func makeAddFavoriteUseCase()->AddFavoriteUseCase{
-        DefaultAddFavoriteUseCase(favoriteRepository: makeFavoriteRepository())
+    func makeCheckFavoriteUseCase()->CheckFavoriteUseCase{
+        DefaultCheckFavoriteUseCase(favoriteRepository: makeFavoriteRepository())
+    }
+
+    func makeChangeFavoriteStatusUseCase()->ChangeFavoriteStatusUseCase{
+        DefaultChangeFavoriteStatusUseCase(favoriteRepository: makeFavoriteRepository())
     }
     
     //MARK: RecipeMain
@@ -95,7 +99,7 @@ final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies,Favor
     }
     
     func makeRecipeDetailViewModel(recipe:Recipe)->RecipeDetailViewModel{
-        DefaultRecipeDetailViewModel(addFavoriteUesCase: makeAddFavoriteUseCase(), recipe: recipe)
+        DefaultRecipeDetailViewModel(checkFavoriteUesCase: makeCheckFavoriteUseCase(), changeFavoriteStatusUseCase:makeChangeFavoriteStatusUseCase(), recipe: recipe)
     }
     
     //MARK: FavoriteRecipe

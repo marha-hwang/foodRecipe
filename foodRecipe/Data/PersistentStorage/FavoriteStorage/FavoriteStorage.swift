@@ -9,6 +9,7 @@ import Foundation
 
 protocol FavoriteStorage{
     func fetchFavoriteRecipe(
+        seq:String?,
         completion: @escaping (Result<[Recipe], Error>) -> Void
     )
     func saveFavoriteRecipe(
@@ -17,7 +18,7 @@ protocol FavoriteStorage{
     )
     
     func removeFavoriteRecipe(
-        recipe:Recipe,
+        seq:String,
         completion: @escaping (Result<Bool, Error>) -> Void
     )
 }

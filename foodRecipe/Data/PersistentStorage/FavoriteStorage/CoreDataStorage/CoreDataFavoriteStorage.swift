@@ -16,12 +16,15 @@ class CoreDataFavoriteStorage:FavoriteStorage{
         self.coreDataStorage = coreDataStorage
     }
     
-    func fetchFavoriteRecipe(completion: @escaping (Result<[Recipe], Error>) -> Void) {
+    func fetchFavoriteRecipe(seq:String?, completion: @escaping (Result<[Recipe], Error>) -> Void) {
         coreDataStorage.performBackgroundTask{ context in
             do {
                 let request: NSFetchRequest = RecipeFavoriteEntity.fetchRequest()
-                request.sortDescriptors = [NSSortDescriptor(key: #keyPath(RecipeFavoriteEntity.recipe_seq),
-                                                            ascending: false)]
+      
+                if let _seq = seq{
+                    let predicate = NSPredicate(format: "%K == %@", #keyPath(RecipeFavoriteEntity.recipe_seq), _seq)
+                    request.predicate = predicate
+                }
                 
                 let result = try context.fetch(request).map { $0.toDomain() }
 
@@ -43,24 +46,25 @@ class CoreDataFavoriteStorage:FavoriteStorage{
                 completion(.failure(CoreDataStorageError.saveError(error)))
             }
         }
-    }
+    } 
     
-    func removeFavoriteRecipe(recipe: Recipe, completion: @escaping (Result<Bool, Error>) -> Void) {
+    func removeFavoriteRecipe(seq:String, completion: @escaping (Result<Bool, Error>) -> Void) {
         coreDataStorage.performBackgroundTask{ context in
             do
             {
                 let request: NSFetchRequest = RecipeFavoriteEntity.fetchRequest()
                 request.sortDescriptors = [NSSortDescriptor(key: #keyPath(RecipeFavoriteEntity.recipe_seq),
                                                             ascending: false)]
+                
+                let predicate = NSPredicate(format: "%K == %@", #keyPath(RecipeFavoriteEntity.recipe_seq), seq)
+                request.predicate = predicate
+                
                 let result = try context.fetch(request)
                 
-                context.delete(
-                    result.filter{ $0.recipe_id == favorite.recipe_id || $0.recipe_name == favorite.recipe_name }[0]
-                )
-                
+                context.delete(result[0])
                 try context.save()
-                
                 completion(.success(true))
+                
             } catch {
                 completion(.failure(CoreDataStorageError.saveError(error)))
                 completion(.success(false))

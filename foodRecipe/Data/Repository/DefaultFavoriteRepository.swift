@@ -15,17 +15,20 @@ class DefaultFavoriteRepository:FavoriteRepository{
         self.favoriteStorage = favoriteStorage
     }
     
-    func fetchFavoriteList(completion: @escaping (Result<[RecipeFavorite], Error>) -> Void) {
-        favoriteStorage.fetchFavoriteRecipe(completion: completion)
+    func fetchFavoriteList(completion: @escaping (Result<[Recipe], Error>) -> Void) {
+        favoriteStorage.fetchFavoriteRecipe(seq:nil, completion: completion)
     }
     
-    func saveFavorite(favorite: RecipeFavorite, completion: @escaping (Result<Bool, Error>) -> Void) {
-        favoriteStorage.saveFavoriteRecipe(favorite: favorite, completion: completion)
+    func fetchFavoriteBySeq(seq: String, completion: @escaping (Result<[Recipe], Error>) -> Void) {
+        favoriteStorage.fetchFavoriteRecipe(seq:seq, completion: completion)
     }
     
-    func removeFavorite(favorite: RecipeFavorite, completion: @escaping (Result<Bool, Error>) -> Void) {
-        favoriteStorage.removeFavoriteRecipe(favorite: favorite, completion: completion)
+    func saveFavorite(recipe: Recipe, completion: @escaping (Result<Bool, Error>) -> Void) {
+        favoriteStorage.saveFavoriteRecipe(recipe: recipe, completion: completion)
     }
     
+    func removeFavorite(seq:String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        favoriteStorage.removeFavoriteRecipe(seq: seq, completion: completion)
+    }
     
 }

@@ -47,6 +47,8 @@
 		BC900CEE2C58E14A00DDE22D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC900CED2C58E14A00DDE22D /* String+Extension.swift */; };
 		BC900CF02C5B122800DDE22D /* HideTabBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC900CEF2C5B122800DDE22D /* HideTabBarBehavior.swift */; };
 		BC900CF22C5B12E100DDE22D /* ShowTabBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC900CF12C5B12E100DDE22D /* ShowTabBarBehavior.swift */; };
+		BC9C657E2C88324800B44D75 /* CheckFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C657D2C88324800B44D75 /* CheckFavoriteUseCase.swift */; };
+		BC9C65802C88475B00B44D75 /* ChangeFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C657F2C88475B00B44D75 /* ChangeFavoriteUseCase.swift */; };
 		BCCF6DA42C520FF6008DC47A /* DefaultNavigationBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6DA32C520FF6008DC47A /* DefaultNavigationBarBehavior.swift */; };
 		BCCF6DA82C5218B3008DC47A /* ItemsNavigationBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6DA72C5218B3008DC47A /* ItemsNavigationBarBehavior.swift */; };
 		BCCF6DAA2C533750008DC47A /* CGSize+scaledSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6DA92C533750008DC47A /* CGSize+scaledSize.swift */; };
@@ -57,9 +59,6 @@
 		BCD975372C2514C90068B902 /* RecipeImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD975362C2514C90068B902 /* RecipeImageRepository.swift */; };
 		BCD9753B2C2515BA0068B902 /* FetchRecentRecipeQuriesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD9753A2C2515BA0068B902 /* FetchRecentRecipeQuriesUseCase.swift */; };
 		BCD9753D2C2515D50068B902 /* RemoveRecentRecipeQuriesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD9753C2C2515D50068B902 /* RemoveRecentRecipeQuriesUseCase.swift */; };
-		BCD9753F2C2518BD0068B902 /* AddFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD9753E2C2518BD0068B902 /* AddFavoriteUseCase.swift */; };
-		BCD975412C2518EA0068B902 /* FetchFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD975402C2518EA0068B902 /* FetchFavoriteUseCase.swift */; };
-		BCD975432C2519020068B902 /* RemoveFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD975422C2519020068B902 /* RemoveFavoriteUseCase.swift */; };
 		BCD975452C251A1B0068B902 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD975442C251A1B0068B902 /* Recipe.swift */; };
 		BCD975482C251A5E0068B902 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD975472C251A5E0068B902 /* AppDIContainer.swift */; };
 		BCD9754A2C251A9D0068B902 /* DefaultRecipeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD975492C251A9D0068B902 /* DefaultRecipeRepository.swift */; };
@@ -157,6 +156,8 @@
 		BC900CED2C58E14A00DDE22D /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		BC900CEF2C5B122800DDE22D /* HideTabBarBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTabBarBehavior.swift; sourceTree = "<group>"; };
 		BC900CF12C5B12E100DDE22D /* ShowTabBarBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTabBarBehavior.swift; sourceTree = "<group>"; };
+		BC9C657D2C88324800B44D75 /* CheckFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckFavoriteUseCase.swift; sourceTree = "<group>"; };
+		BC9C657F2C88475B00B44D75 /* ChangeFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeFavoriteUseCase.swift; sourceTree = "<group>"; };
 		BCCF6DA32C520FF6008DC47A /* DefaultNavigationBarBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNavigationBarBehavior.swift; sourceTree = "<group>"; };
 		BCCF6DA72C5218B3008DC47A /* ItemsNavigationBarBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsNavigationBarBehavior.swift; sourceTree = "<group>"; };
 		BCCF6DA92C533750008DC47A /* CGSize+scaledSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+scaledSize.swift"; sourceTree = "<group>"; };
@@ -167,9 +168,6 @@
 		BCD975362C2514C90068B902 /* RecipeImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecipeImageRepository.swift; path = foodRecipe/Domain/Interface/Repositories/RecipeImageRepository.swift; sourceTree = SOURCE_ROOT; };
 		BCD9753A2C2515BA0068B902 /* FetchRecentRecipeQuriesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecentRecipeQuriesUseCase.swift; sourceTree = "<group>"; };
 		BCD9753C2C2515D50068B902 /* RemoveRecentRecipeQuriesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveRecentRecipeQuriesUseCase.swift; sourceTree = "<group>"; };
-		BCD9753E2C2518BD0068B902 /* AddFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavoriteUseCase.swift; sourceTree = "<group>"; };
-		BCD975402C2518EA0068B902 /* FetchFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFavoriteUseCase.swift; sourceTree = "<group>"; };
-		BCD975422C2519020068B902 /* RemoveFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveFavoriteUseCase.swift; sourceTree = "<group>"; };
 		BCD975442C251A1B0068B902 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Recipe.swift; path = foodRecipe/Domain/Entities/Recipe.swift; sourceTree = SOURCE_ROOT; };
 		BCD975472C251A5E0068B902 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		BCD975492C251A9D0068B902 /* DefaultRecipeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DefaultRecipeRepository.swift; path = foodRecipe/Data/Repository/DefaultRecipeRepository.swift; sourceTree = SOURCE_ROOT; };
@@ -552,9 +550,8 @@
 				BCD9752B2C2508400068B902 /* SearchRecipeUseCase.swift */,
 				BCD9753A2C2515BA0068B902 /* FetchRecentRecipeQuriesUseCase.swift */,
 				BCD9753C2C2515D50068B902 /* RemoveRecentRecipeQuriesUseCase.swift */,
-				BCD9753E2C2518BD0068B902 /* AddFavoriteUseCase.swift */,
-				BCD975402C2518EA0068B902 /* FetchFavoriteUseCase.swift */,
-				BCD975422C2519020068B902 /* RemoveFavoriteUseCase.swift */,
+				BC9C657D2C88324800B44D75 /* CheckFavoriteUseCase.swift */,
+				BC9C657F2C88475B00B44D75 /* ChangeFavoriteUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -950,6 +947,7 @@
 				BCF6BE992C4F451F00F0B61A /* UIViewController+navBarSettings.swift in Sources */,
 				BCF6BEA62C4F47AD00F0B61A /* RecipeMainItemCell.swift in Sources */,
 				83C066D52C625272007C3A5F /* RecipeQueryHistory.swift in Sources */,
+				BC9C65802C88475B00B44D75 /* ChangeFavoriteUseCase.swift in Sources */,
 				BCE0D4D42C294F1900D769DC /* RecipeRequestDTO+Mapping.swift in Sources */,
 				BC900CE42C58B9CD00DDE22D /* RecipeImageStorage.swift in Sources */,
 				BC900CF02C5B122800DDE22D /* HideTabBarBehavior.swift in Sources */,
@@ -965,12 +963,10 @@
 				83D30F192C32DD1A00F12D6B /* CoreDataFavoriteStorage.swift in Sources */,
 				BCD975352C250E7A0068B902 /* FavoriteRepository.swift in Sources */,
 				BCF6BEB42C51F03F00F0B61A /* CustomTabBarController.swift in Sources */,
-				BCD975432C2519020068B902 /* RemoveFavoriteUseCase.swift in Sources */,
 				BCD975632C2523520068B902 /* RecipeQuriesListViewController.swift in Sources */,
 				83C066D82C6A3636007C3A5F /* RecipeListTableViewController.swift in Sources */,
 				BC3A78A32C4E4606005CF727 /* RecipeListViewController.swift in Sources */,
 				BCD9753B2C2515BA0068B902 /* FetchRecentRecipeQuriesUseCase.swift in Sources */,
-				BCD975412C2518EA0068B902 /* FetchFavoriteUseCase.swift in Sources */,
 				83C6596E2C2D7B28004227BE /* AppConfigurations.swift in Sources */,
 				BC858A4F2C367D4E009B87CF /* StoryboardInstantiable.swift in Sources */,
 				BCD9756F2C2554800068B902 /* RecipeQuery.swift in Sources */,
@@ -978,7 +974,6 @@
 				BCCF6DA82C5218B3008DC47A /* ItemsNavigationBarBehavior.swift in Sources */,
 				BCF6BE9B2C4F453100F0B61A /* CALayer+addBorder.swift in Sources */,
 				83D30F1F2C32DE8100F12D6B /* RecipeQueryEntity+mapping.swift in Sources */,
-				BCD9753F2C2518BD0068B902 /* AddFavoriteUseCase.swift in Sources */,
 				BC3A78A52C4E4636005CF727 /* RecipeListViewModel.swift in Sources */,
 				BCF6BE9D2C4F454E00F0B61A /* UIColor+init.swift in Sources */,
 				BCD975672C2523840068B902 /* RecipeQuriesListViewModel.swift in Sources */,
@@ -986,6 +981,7 @@
 				83C066DC2C6A3819007C3A5F /* RecipeListItemCell.swift in Sources */,
 				BCD975482C251A5E0068B902 /* AppDIContainer.swift in Sources */,
 				BCD975572C251CB90068B902 /* RecipeSearchFlowCoordinator.swift in Sources */,
+				BC9C657E2C88324800B44D75 /* CheckFavoriteUseCase.swift in Sources */,
 				BCE0D4D12C2943F200D769DC /* CoreDataRecipeQueryStorage.swift in Sources */,
 				BCCF6DA42C520FF6008DC47A /* DefaultNavigationBarBehavior.swift in Sources */,
 				BCD975692C2523AB0068B902 /* RecipeDetailViewController.swift in Sources */,
