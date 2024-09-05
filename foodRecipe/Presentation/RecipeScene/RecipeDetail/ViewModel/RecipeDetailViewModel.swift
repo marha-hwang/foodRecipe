@@ -39,7 +39,7 @@ final class DefaultRecipeDetailViewModel:RecipeDetailViewModel{
         checkFavoriteUesCase.excute(seq: recipe.recipe_seq){ [weak self] result in
             switch result{
             case .success(let result):
-                self?.favoriteStatus.value = result  
+                self?.favoriteStatus.value = result
             case .failure(let error):
                 print(error)
             }
@@ -50,7 +50,7 @@ final class DefaultRecipeDetailViewModel:RecipeDetailViewModel{
         changeFavoriteStatusUseCase.excute(recipe: recipe){ [weak self] result in
             switch result{
             case .success(let result):
-                self?.favoriteStatus.value = result  
+                self?.favoriteStatus.value = result
             case .failure(let error):
                 print(error)
             }

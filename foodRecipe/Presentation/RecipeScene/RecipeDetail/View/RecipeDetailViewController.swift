@@ -36,9 +36,9 @@ class RecipeDetailViewController: UIViewController{
         
         name.text = viewModel.recipe.recipe_name
         
-        viewModel.favoriteStatus.observe(on: self){_ in 
+        viewModel.favoriteStatus.observe(on: self){[weak self] _ in
             DispatchQueue.main.async{
-                self.status.text = self.viewModel.favoriteStatus.value == true ? "true":"false"   
+                self?.status.text = self?.viewModel.favoriteStatus.value == true ? "true":"false"
             }
         }
         
