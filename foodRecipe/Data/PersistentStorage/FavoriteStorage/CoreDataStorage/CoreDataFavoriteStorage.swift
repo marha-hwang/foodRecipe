@@ -38,7 +38,7 @@ class CoreDataFavoriteStorage:FavoriteStorage{
     func saveFavoriteRecipe(recipe: Recipe, completion: @escaping (Result<Bool, Error>) -> Void) {
         coreDataStorage.performBackgroundTask{ context in
             do {
-                let entity = RecipeFavoriteEntity(recipe: recipe, insertInto: context)
+                let _ = RecipeFavoriteEntity(recipe: recipe, insertInto: context)
                 try context.save()
 
                 completion(.success(true))

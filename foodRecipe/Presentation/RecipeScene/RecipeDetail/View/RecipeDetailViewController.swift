@@ -19,38 +19,54 @@ class RecipeDetailViewController: UIViewController{
         vc.recipeImageRepository = recipeImageRepository
         return vc
     }
+    
+    var name = UILabel()
+    var status = UILabel()
+    var button = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .brown
         print(viewModel.recipe.recipe_name)
+        viewModel.viewDidLoad()
         
-        outer.translatesAutoresizingMaskIntoConstraints = false
         name.translatesAutoresizingMaskIntoConstraints = false
         status.translatesAutoresizingMaskIntoConstraints = false
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        outer.addSubview(name)
         name.text = viewModel.recipe.recipe_name
         
-        outer.addSubview(status)
         viewModel.favoriteStatus.observe(on: self){_ in 
-            status.text = self?.viewModel.favoriteStatus.value
+            DispatchQueue.main.async{
+                self.status.text = self.viewModel.favoriteStatus.value == true ? "true":"false"   
+            }
         }
         
-        outer.addSubview(button)
+        button.backgroundColor = .black
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(searchButtonEvent)) 
         button.isUserInteractionEnabled = true
         button.addGestureRecognizer(gestureRecognizer)
+        
+        view.addSubview(name)
+        view.addSubview(status)
+        view.addSubview(button)
+        
+        name.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+        name.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
+        name.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        status.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 30).isActive = true
+        status.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
+        status.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        button.topAnchor.constraint(equalTo: status.bottomAnchor, constant: 30).isActive = true
+        button.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
     }
     
     @objc private func searchButtonEvent(sender: UITapGestureRecognizer){
         viewModel.didTouchFavorite()
     }
-     
-    var outer:UIView = UIView(frame: CGRect(x: 50, y: 50, width: 300, height: 300))
-    var name = UILabel(frame: CGRect(x: 10, y: 10, width: 100, height: 50))
-    var status = UILabel(frame: CGRect(x: 10, y: 120, width: 100, height: 50))
-    var button = UIView(frame: CGRect(x: 10, y: 240, width: 100, height: 50))
 }

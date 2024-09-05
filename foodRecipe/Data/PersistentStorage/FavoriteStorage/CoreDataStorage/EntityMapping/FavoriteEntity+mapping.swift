@@ -11,9 +11,8 @@ import CoreData
 extension RecipeFavoriteEntity {
     convenience init(recipe:Recipe, insertInto context: NSManagedObjectContext) {
         self.init(context: context)
-        recipe_seq = recipe_seq
-        recipe_data = try? JSONEncoder().encode(recipe)
-
+        self.recipe_seq = recipe_seq
+        self.recipe_data = try? JSONEncoder().encode(recipe)
     }
 }
 
