@@ -71,7 +71,8 @@ final class CoreDataStorage : NSObject {
             fatalError("Failed to create NSPersistentStoreCoordinator")
         }
 
-       let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        //코어데이터 context작업을 담을 큐를 설정함으로써, 작업이 진행될 쓰레드를 정하는 코드
+        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
        context.persistentStoreCoordinator = coordinator
        return context
        
@@ -79,19 +80,12 @@ final class CoreDataStorage : NSObject {
     
     ///해당 함수의 목적
     ///1. private로 지정된 context에 접근할 수 있도록 함
-    ///2. 코어데이터는 기본적으로 메인쓰레드에서 동작함 따라서 global.async를 사용하면 비동기적으로 처리가 가능할줄알았음
-    ///그러나...... 에러가 발생하였고 발생 원인은 아래와 같음
-    ///
+    ///2. 비동기적으로 코어데이터를 사용하기 위함
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         guard let context = _context else{
             return
         }
-        
         context.perform{block(context)}
-//        
-//        DispatchQueue.global().async{
-//            block(context)
-//        }
     }
     
     func saveContext () {
