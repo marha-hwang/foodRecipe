@@ -11,6 +11,7 @@ enum BarType{
     case logo_searchAreaButton_blank
     case back_searchBar_serchButton
     case back_searchTitle_searchBtn
+    case blank_title_blank
 }
 
 struct ItemsNavigationBarBehavior: ViewControllerLifecycleBehavior {
@@ -38,7 +39,11 @@ struct ItemsNavigationBarBehavior: ViewControllerLifecycleBehavior {
         case .back_searchTitle_searchBtn:
             addTitleLabel(viewController: viewController)
             addSearchButton(viewController: viewController)
+            
+        case .blank_title_blank:
+            addTitleLabel(viewController: viewController)
         }
+        
         
     }
     

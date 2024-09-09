@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 protocol FavoriteRecipeFlowCoordinatorDependencies{
-    func makeFavoriteRecipeListViewController() -> FavoriteRecipeListViewController 
+    func makeFavoriteRecipeListViewController(actions:FavoriteRecipeListViewModelActions) -> FavoriteRecipeListViewController
+    func makeRecipeDetailViewController(recipe:Recipe) -> RecipeDetailViewController
 }
 
 final class FavoriteRecipeFlowCoordinator{
@@ -26,8 +27,14 @@ final class FavoriteRecipeFlowCoordinator{
     
     func start() {
         
-        let vc = dependencies.makeFavoriteRecipeListViewController()
+       let actions = FavoriteRecipeListViewModelActions(showRecipeDetail: showRecipeDetail(recipe:))
+        
+        let vc = dependencies.makeFavoriteRecipeListViewController(actions: actions)
         favoriteRecipeListVC = vc
         navigationController?.pushViewController(vc, animated: false)
     }
-}
+    
+    func showRecipeDetail(recipe:Recipe)->Void{
+        let vc = dependencies.makeRecipeDetailViewController(recipe: recipe)
+        navigationController?.pushViewController(vc, animated: false)
+    }}

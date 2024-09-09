@@ -30,6 +30,8 @@ class RecipeDetailViewController: UIViewController{
         print(viewModel.recipe.recipe_name)
         viewModel.viewDidLoad()
         
+        addBehaviors([DefaultNavigationBarBehavior(), HideTabBarBehavior()])
+        
         name.translatesAutoresizingMaskIntoConstraints = false
         status.translatesAutoresizingMaskIntoConstraints = false
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -69,4 +71,5 @@ class RecipeDetailViewController: UIViewController{
     @objc private func searchButtonEvent(sender: UITapGestureRecognizer){
         viewModel.didTouchFavorite()
     }
+    
 }

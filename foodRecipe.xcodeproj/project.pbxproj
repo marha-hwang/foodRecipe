@@ -49,7 +49,6 @@
 		BC900CF22C5B12E100DDE22D /* ShowTabBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC900CF12C5B12E100DDE22D /* ShowTabBarBehavior.swift */; };
 		BC9C657E2C88324800B44D75 /* CheckFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C657D2C88324800B44D75 /* CheckFavoriteUseCase.swift */; };
 		BC9C65802C88475B00B44D75 /* ChangeFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C657F2C88475B00B44D75 /* ChangeFavoriteUseCase.swift */; };
-		BC9C65822C8A887F00B44D75 /* RecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C65812C8A887F00B44D75 /* RecipeTableViewController.swift */; };
 		BC9C658B2C8A985F00B44D75 /* FavoriteRecipeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C658A2C8A985F00B44D75 /* FavoriteRecipeListTableViewController.swift */; };
 		BC9C658E2C8A989300B44D75 /* FavoriteRecipeListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C658D2C8A989300B44D75 /* FavoriteRecipeListItemCell.swift */; };
 		BC9C65922C8A990900B44D75 /* FavoriteRecipeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C65912C8A990900B44D75 /* FavoriteRecipeListViewModel.swift */; };
@@ -162,7 +161,6 @@
 		BC900CF12C5B12E100DDE22D /* ShowTabBarBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTabBarBehavior.swift; sourceTree = "<group>"; };
 		BC9C657D2C88324800B44D75 /* CheckFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckFavoriteUseCase.swift; sourceTree = "<group>"; };
 		BC9C657F2C88475B00B44D75 /* ChangeFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeFavoriteUseCase.swift; sourceTree = "<group>"; };
-		BC9C65812C8A887F00B44D75 /* RecipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewController.swift; sourceTree = "<group>"; };
 		BC9C658A2C8A985F00B44D75 /* FavoriteRecipeListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipeListTableViewController.swift; sourceTree = "<group>"; };
 		BC9C658D2C8A989300B44D75 /* FavoriteRecipeListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipeListItemCell.swift; sourceTree = "<group>"; };
 		BC9C65912C8A990900B44D75 /* FavoriteRecipeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipeListViewModel.swift; sourceTree = "<group>"; };
@@ -773,7 +771,6 @@
 			children = (
 				BCF6BE9F2C4F457200F0B61A /* HorizontalFolderView.swift */,
 				BCF6BEB32C51F03F00F0B61A /* CustomTabBarController.swift */,
-				BC9C65812C8A887F00B44D75 /* RecipeTableViewController.swift */,
 			);
 			path = Inheritances;
 			sourceTree = "<group>";
@@ -965,7 +962,6 @@
 				BCF6BE952C4F42C400F0B61A /* RecipeMainView.swift in Sources */,
 				83C066DE2C6A3864007C3A5F /* RecipeListItemViewModel.swift in Sources */,
 				BCE0D4D62C294F2E00D769DC /* RecipeResponseDTO+Mapping.swift in Sources */,
-				BC9C65822C8A887F00B44D75 /* RecipeTableViewController.swift in Sources */,
 				BCD975742C25683F0068B902 /* Cancellable.swift in Sources */,
 				83D30F212C32DE9A00F12D6B /* FavoriteEntity+mapping.swift in Sources */,
 				BC5911232C62F78100D656C3 /* RecipeQuriesListTableViewController.swift in Sources */,

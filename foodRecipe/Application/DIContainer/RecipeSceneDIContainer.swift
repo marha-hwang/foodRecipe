@@ -103,8 +103,13 @@ final class RecipeSceneDIContainer:RecipeSearchFlowCoordinatorDependencies,Favor
     }
     
     //MARK: FavoriteRecipe
-    func makeFavoriteRecipeListViewController() -> FavoriteRecipeListViewController{
-        FavoriteRecipeListViewController.create()
+    func makeFavoriteRecipeListViewController(actions: FavoriteRecipeListViewModelActions) -> FavoriteRecipeListViewController {
+        let viewModel = makeFavoriteRecipeListViewModel(actions: actions)
+        return FavoriteRecipeListViewController.create(with: viewModel, recipeImageRepository: makeRecipeImageRepository())
+    }
+    
+    func makeFavoriteRecipeListViewModel(actions:FavoriteRecipeListViewModelActions)->FavoriteRecipeListViewModel{
+        DefaultFavoriteRecipeListViewModel(favoriteRepository: makeFavoriteRepository(), actions: actions)
     }
     
     func makeRecipeSearchFlowCoordinator(navigationController: UINavigationController) -> RecipeSearchFlowCoordinator {

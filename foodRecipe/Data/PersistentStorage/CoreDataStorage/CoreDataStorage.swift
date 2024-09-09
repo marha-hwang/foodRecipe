@@ -79,15 +79,19 @@ final class CoreDataStorage : NSObject {
     
     ///해당 함수의 목적
     ///1. private로 지정된 context에 접근할 수 있도록 함
-    ///2. CoreData의 사용을 비동기적으로 사용하도록 강제 함
+    ///2. 코어데이터는 기본적으로 메인쓰레드에서 동작함 따라서 global.async를 사용하면 비동기적으로 처리가 가능할줄알았음
+    ///그러나...... 에러가 발생하였고 발생 원인은 아래와 같음
+    ///
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         guard let context = _context else{
             return
         }
         
-        DispatchQueue.global().async{
-            block(context)
-        }
+        context.perform{block(context)}
+//        
+//        DispatchQueue.global().async{
+//            block(context)
+//        }
     }
     
     func saveContext () {

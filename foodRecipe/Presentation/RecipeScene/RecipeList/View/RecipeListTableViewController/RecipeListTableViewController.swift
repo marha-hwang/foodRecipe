@@ -24,9 +24,7 @@ class RecipeListTableViewController:UITableViewController{
     
     private func setupViews(){
         view.translatesAutoresizingMaskIntoConstraints = false
-        tableView.contentInset = .init(top: 0, left: 0, bottom: 100, right: 0)
-        view.backgroundColor = .yellow
-        
+        tableView.contentInset = .init(top: 0, left: 0, bottom: 100, right: 0)        
         tableView.register(RecipeListItemCell.self, forCellReuseIdentifier: RecipeListItemCell.reuseIdentifier)
     
     }
