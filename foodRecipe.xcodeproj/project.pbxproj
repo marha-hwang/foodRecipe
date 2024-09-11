@@ -47,6 +47,7 @@
 		BC900CEE2C58E14A00DDE22D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC900CED2C58E14A00DDE22D /* String+Extension.swift */; };
 		BC900CF02C5B122800DDE22D /* HideTabBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC900CEF2C5B122800DDE22D /* HideTabBarBehavior.swift */; };
 		BC900CF22C5B12E100DDE22D /* ShowTabBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC900CF12C5B12E100DDE22D /* ShowTabBarBehavior.swift */; };
+		BC9783892C911F6200AA092A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = BC9783882C911F6200AA092A /* SnapKit */; };
 		BC9C657E2C88324800B44D75 /* CheckFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C657D2C88324800B44D75 /* CheckFavoriteUseCase.swift */; };
 		BC9C65802C88475B00B44D75 /* ChangeFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C657F2C88475B00B44D75 /* ChangeFavoriteUseCase.swift */; };
 		BC9C658B2C8A985F00B44D75 /* FavoriteRecipeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C658A2C8A985F00B44D75 /* FavoriteRecipeListTableViewController.swift */; };
@@ -214,6 +215,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC9783892C911F6200AA092A /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +329,7 @@
 				8396B9772C1DBE37002F2B3F /* foodRecipeTests */,
 				8396B9812C1DBE37002F2B3F /* foodRecipeUITests */,
 				8396B95C2C1DBE36002F2B3F /* Products */,
+				BC9783842C911EF800AA092A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -538,6 +541,13 @@
 				BC900CEB2C58D8BE00DDE22D /* RecipeImageEntity.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		BC9783842C911EF800AA092A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		BC9C65892C8A983000B44D75 /* FavoriteRecipeListTableViewController */ = {
@@ -837,6 +847,9 @@
 			dependencies = (
 			);
 			name = foodRecipe;
+			packageProductDependencies = (
+				BC9783882C911F6200AA092A /* SnapKit */,
+			);
 			productName = foodRecipe;
 			productReference = 8396B95B2C1DBE36002F2B3F /* foodRecipe.app */;
 			productType = "com.apple.product-type.application";
@@ -909,6 +922,9 @@
 				Base,
 			);
 			mainGroup = 8396B9522C1DBE36002F2B3F;
+			packageReferences = (
+				BC9783872C911F4A00AA092A /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 8396B95C2C1DBE36002F2B3F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1376,6 +1392,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BC9783872C911F4A00AA092A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BC9783882C911F6200AA092A /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC9783872C911F4A00AA092A /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8396B9672C1DBE36002F2B3F /* CoreDataStorage.xcdatamodeld */ = {
