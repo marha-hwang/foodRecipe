@@ -53,6 +53,7 @@
 		BC9C658B2C8A985F00B44D75 /* FavoriteRecipeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C658A2C8A985F00B44D75 /* FavoriteRecipeListTableViewController.swift */; };
 		BC9C658E2C8A989300B44D75 /* FavoriteRecipeListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C658D2C8A989300B44D75 /* FavoriteRecipeListItemCell.swift */; };
 		BC9C65922C8A990900B44D75 /* FavoriteRecipeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9C65912C8A990900B44D75 /* FavoriteRecipeListViewModel.swift */; };
+		BCCBF8D72C92CA0E00A4052F /* UIStackView+setType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBF8D62C92CA0E00A4052F /* UIStackView+setType.swift */; };
 		BCCF6DA42C520FF6008DC47A /* DefaultNavigationBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6DA32C520FF6008DC47A /* DefaultNavigationBarBehavior.swift */; };
 		BCCF6DA82C5218B3008DC47A /* ItemsNavigationBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6DA72C5218B3008DC47A /* ItemsNavigationBarBehavior.swift */; };
 		BCCF6DAA2C533750008DC47A /* CGSize+scaledSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF6DA92C533750008DC47A /* CGSize+scaledSize.swift */; };
@@ -165,6 +166,7 @@
 		BC9C658A2C8A985F00B44D75 /* FavoriteRecipeListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipeListTableViewController.swift; sourceTree = "<group>"; };
 		BC9C658D2C8A989300B44D75 /* FavoriteRecipeListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipeListItemCell.swift; sourceTree = "<group>"; };
 		BC9C65912C8A990900B44D75 /* FavoriteRecipeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipeListViewModel.swift; sourceTree = "<group>"; };
+		BCCBF8D62C92CA0E00A4052F /* UIStackView+setType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+setType.swift"; sourceTree = "<group>"; };
 		BCCF6DA32C520FF6008DC47A /* DefaultNavigationBarBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNavigationBarBehavior.swift; sourceTree = "<group>"; };
 		BCCF6DA72C5218B3008DC47A /* ItemsNavigationBarBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsNavigationBarBehavior.swift; sourceTree = "<group>"; };
 		BCCF6DA92C533750008DC47A /* CGSize+scaledSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+scaledSize.swift"; sourceTree = "<group>"; };
@@ -772,6 +774,7 @@
 				BCF6BE9A2C4F453100F0B61A /* CALayer+addBorder.swift */,
 				BCF6BE9C2C4F454E00F0B61A /* UIColor+init.swift */,
 				BCCF6DA92C533750008DC47A /* CGSize+scaledSize.swift */,
+				BCCBF8D62C92CA0E00A4052F /* UIStackView+setType.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -975,6 +978,7 @@
 				BC900CEC2C58D8BE00DDE22D /* RecipeImageEntity.swift in Sources */,
 				BCE0D4C92C2938EF00D769DC /* RepositoryTask.swift in Sources */,
 				BC5911252C62F7B200D656C3 /* RecipeQuriesListItemCell.swift in Sources */,
+				BCCBF8D72C92CA0E00A4052F /* UIStackView+setType.swift in Sources */,
 				BCF6BE952C4F42C400F0B61A /* RecipeMainView.swift in Sources */,
 				83C066DE2C6A3864007C3A5F /* RecipeListItemViewModel.swift in Sources */,
 				BCE0D4D62C294F2E00D769DC /* RecipeResponseDTO+Mapping.swift in Sources */,
