@@ -18,6 +18,11 @@ class RecipeDetailViewController: UIViewController{
         favoriteView.image = UIImage(systemName: "star")
         favoriteView.tintColor = .gray
         
+        favoriteView.snp.makeConstraints{ make in
+            make.width.equalTo(45.adjustW)
+            make.height.equalTo(45.adjustH)
+        }
+        
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(favoriteChangeEvent))
         favoriteView.isUserInteractionEnabled = true
         favoriteView.addGestureRecognizer(gestureRecognizer)
@@ -91,21 +96,38 @@ class RecipeDetailViewController: UIViewController{
                     updateImage(url: viewModel.recipe.main_image){ image in
                         mainImageView.image = image
                     }
+                    
+                    mainImageView.snp.makeConstraints{make in
+                        make.height.equalTo(219.adjustH)
+                        make.width.equalTo(393.adjustW)
+                    }
+                    
                     return mainImageView
                 }()
                 
+                
                 let mainView:UIStackView = {
                     let mainView = UIStackView(axis: .horizontal, distribution: .fillProportionally, alignment: .fill)
-
+                    
                     mainView.layer.addBorder([.bottom], width: 1, color: .black)
+                    
+                    mainView.snp.makeConstraints{ make in
+                        make.left.equalToSuperview().inset(20)
+                        make.top.equalToSuperview().inset(20)
+                    }
                     
                     let view1:UIStackView = {
                         let view1 = UIStackView(axis: .vertical, distribution: .fillProportionally, alignment: .fill)
                         
                         let title:UILabel = {
-                           let title = UILabel()
-                            
+                            let title = UILabel()
                             title.text = viewModel.recipe.recipe_name
+                            title.font = UIFont.systemFont(ofSize: CGFloat(16))
+                            
+                            title.snp.makeConstraints{ make in
+                                make.width.equalTo(96.adjustW)
+                                make.height.equalTo(16.adjustH)
+                            }
                             
                             return title
                         }()
@@ -114,20 +136,18 @@ class RecipeDetailViewController: UIViewController{
                             let subTitle = UILabel()
                             
                             subTitle.text = "\(viewModel.recipe.cookWay) / \(viewModel.recipe.recipe_type)"
+                            subTitle.font =  UIFont.systemFont(ofSize: CGFloat(10))
+                            
+                            subTitle.snp.makeConstraints{ make in
+                                make.width.equalTo(173.adjustW)
+                                make.height.equalTo(8.adjustH)
+                            }
+                            
                             return subTitle
                         }()
                         
                         view1.addArrangedSubview(title)
                         view1.addArrangedSubview(subTitle)
-                        
-//                        title.snp.makeConstraints{ make in
-//                            make.top.leading.equalToSuperview().inset(20)
-//                        }
-//                        
-//                        subTitle.snp.makeConstraints{ make in
-//                            make.leading.equalToSuperview().inset(20)
-//                            make.top.equalTo(title.snp.bottom)
-//                        }
                         
                         return view1
                     }()
@@ -138,7 +158,6 @@ class RecipeDetailViewController: UIViewController{
                         view2.addSubview(favoriteView)
                         
                         favoriteView.snp.makeConstraints{ make in
-                            make.width.height.equalTo(40)
                             make.trailing.equalToSuperview().inset(20)
                             make.top.equalToSuperview().inset(20)
                         }
@@ -151,7 +170,6 @@ class RecipeDetailViewController: UIViewController{
                     
                     return mainView
                 } ()
-                
                 let nutritionView = {
                     let nutritionView = UIStackView()
                     nutritionView.backgroundColor = .gray
@@ -176,9 +194,6 @@ class RecipeDetailViewController: UIViewController{
                 outerView.addArrangedSubview(ingredientView)
                 outerView.addArrangedSubview(recipeView)
                 
-                mainImageView.snp.makeConstraints{ make in
-                    make.height.equalTo(300)
-                }
                 
                 mainView.snp.makeConstraints{ make in
                     make.top.equalTo(mainImageView.snp.bottom).offset(20)

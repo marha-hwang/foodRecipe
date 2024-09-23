@@ -37,6 +37,7 @@
 		BC5911232C62F78100D656C3 /* RecipeQuriesListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5911222C62F78100D656C3 /* RecipeQuriesListTableViewController.swift */; };
 		BC5911252C62F7B200D656C3 /* RecipeQuriesListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5911242C62F7B200D656C3 /* RecipeQuriesListItemCell.swift */; };
 		BC5911272C632EB500D656C3 /* RecipeQuriesListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5911262C632EB500D656C3 /* RecipeQuriesListItemViewModel.swift */; };
+		BC7792FF2CA0F65200C84C01 /* Double+adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7792FE2CA0F65200C84C01 /* Double+adjust.swift */; };
 		BC858A4F2C367D4E009B87CF /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC858A4E2C367D4E009B87CF /* StoryboardInstantiable.swift */; };
 		BC858A522C368DAE009B87CF /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC858A512C368DAE009B87CF /* AppFlowCoordinator.swift */; };
 		BC858A542C368FD9009B87CF /* RecipeSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC858A532C368FD9009B87CF /* RecipeSceneDIContainer.swift */; };
@@ -151,6 +152,7 @@
 		BC5911222C62F78100D656C3 /* RecipeQuriesListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeQuriesListTableViewController.swift; sourceTree = "<group>"; };
 		BC5911242C62F7B200D656C3 /* RecipeQuriesListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeQuriesListItemCell.swift; sourceTree = "<group>"; };
 		BC5911262C632EB500D656C3 /* RecipeQuriesListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeQuriesListItemViewModel.swift; sourceTree = "<group>"; };
+		BC7792FE2CA0F65200C84C01 /* Double+adjust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+adjust.swift"; sourceTree = "<group>"; };
 		BC858A4E2C367D4E009B87CF /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
 		BC858A512C368DAE009B87CF /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		BC858A532C368FD9009B87CF /* RecipeSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -775,6 +777,7 @@
 				BCF6BE9C2C4F454E00F0B61A /* UIColor+init.swift */,
 				BCCF6DA92C533750008DC47A /* CGSize+scaledSize.swift */,
 				BCCBF8D62C92CA0E00A4052F /* UIStackView+setType.swift */,
+				BC7792FE2CA0F65200C84C01 /* Double+adjust.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1034,6 +1037,7 @@
 				BCD975672C2523840068B902 /* RecipeQuriesListViewModel.swift in Sources */,
 				BCD9754E2C251AEB0068B902 /* DefaultRecipeQueryRepository.swift in Sources */,
 				83C066DC2C6A3819007C3A5F /* RecipeListItemCell.swift in Sources */,
+				BC7792FF2CA0F65200C84C01 /* Double+adjust.swift in Sources */,
 				BCD975482C251A5E0068B902 /* AppDIContainer.swift in Sources */,
 				BCD975572C251CB90068B902 /* RecipeSearchFlowCoordinator.swift in Sources */,
 				BC9C657E2C88324800B44D75 /* CheckFavoriteUseCase.swift in Sources */,
