@@ -86,13 +86,12 @@ class RecipeDetailViewController: UIViewController{
             let scrollView = UIScrollView()
             
             let outerView:UIStackView = {
-                let outerView = UIStackView()
-                outerView.axis = .vertical
-                outerView.alignment = .fill
-                outerView.distribution = .fillProportionally
-                
+                let outerView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .center)
+                outerView.spacing = 10
+
                 let mainImageView:UIImageView = {
                     let mainImageView = UIImageView()
+
                     updateImage(url: viewModel.recipe.main_image){ image in
                         mainImageView.image = image
                     }
@@ -107,27 +106,21 @@ class RecipeDetailViewController: UIViewController{
                 
                 
                 let mainView:UIStackView = {
-                    let mainView = UIStackView(axis: .horizontal, distribution: .fillProportionally, alignment: .fill)
-                    
-                    mainView.layer.addBorder([.bottom], width: 1, color: .black)
+                    let mainView = UIStackView(axis: .horizontal, distribution: .equalSpacing, alignment: .leading)
                     
                     mainView.snp.makeConstraints{ make in
-                        make.left.equalToSuperview().inset(20)
-                        make.top.equalToSuperview().inset(20)
+                        make.width.equalTo(360.adjustW)
                     }
                     
-                    let view1:UIStackView = {
-                        let view1 = UIStackView(axis: .vertical, distribution: .fillProportionally, alignment: .fill)
+                    let leftView:UIStackView = {
+                        let leftView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .center)
                         
                         let title:UILabel = {
                             let title = UILabel()
                             title.text = viewModel.recipe.recipe_name
                             title.font = UIFont.systemFont(ofSize: CGFloat(16))
                             
-                            title.snp.makeConstraints{ make in
-                                make.width.equalTo(96.adjustW)
-                                make.height.equalTo(16.adjustH)
-                            }
+                            title.sizeToFit()
                             
                             return title
                         }()
@@ -138,41 +131,122 @@ class RecipeDetailViewController: UIViewController{
                             subTitle.text = "\(viewModel.recipe.cookWay) / \(viewModel.recipe.recipe_type)"
                             subTitle.font =  UIFont.systemFont(ofSize: CGFloat(10))
                             
-                            subTitle.snp.makeConstraints{ make in
-                                make.width.equalTo(173.adjustW)
-                                make.height.equalTo(8.adjustH)
-                            }
+                            subTitle.sizeToFit()
+                            subTitle.textAlignment = .left
                             
                             return subTitle
                         }()
                         
-                        view1.addArrangedSubview(title)
-                        view1.addArrangedSubview(subTitle)
+                        leftView.addArrangedSubview(title)
+                        leftView.addArrangedSubview(subTitle)
                         
-                        return view1
+                        return leftView
                     }()
                     
-                    let view2:UIStackView = {
-                        let view2 = UIStackView(axis: .vertical, distribution: .fill, alignment: .fill)
+                    let rightView:UIStackView = {
+                        let rightView = UIStackView(axis: .horizontal, distribution: .equalSpacing, alignment: .center)
                         
-                        view2.addSubview(favoriteView)
+                        rightView.addArrangedSubview(favoriteView)
                         
-                        favoriteView.snp.makeConstraints{ make in
-                            make.trailing.equalToSuperview().inset(20)
-                            make.top.equalToSuperview().inset(20)
-                        }
-                        
-                        return view2
+                        return rightView
                     }()
                     
-                    mainView.addArrangedSubview(view1)
-                    mainView.addArrangedSubview(view2)
+                    mainView.addArrangedSubview(leftView)
+                    mainView.addArrangedSubview(rightView)
+                    
+                    let line = UIView()
+                    mainView.addSubview(line)
+                    line.backgroundColor = .black
+                    line.snp.makeConstraints{ make in
+                        make.leading.bottom.equalToSuperview()
+                        make.height.equalTo(1)
+                        make.width.equalToSuperview()
+                    }
                     
                     return mainView
                 } ()
+                
+                
                 let nutritionView = {
-                    let nutritionView = UIStackView()
-                    nutritionView.backgroundColor = .gray
+                    let nutritionView = UIStackView(axis: .horizontal, distribution: .equalSpacing, alignment: .leading)
+                    
+                    mainView.snp.makeConstraints{ make in
+                        make.width.equalTo(360.adjustW)
+                    }
+                    
+                    let leftView:UIStackView = {
+                        let leftView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .center)
+                        
+                        let title:UILabel = {
+                            let title = UILabel()
+                            title.text = viewModel.recipe.recipe_name
+                            title.font = UIFont.systemFont(ofSize: CGFloat(16))
+                            
+                            title.sizeToFit()
+                            
+                            return title
+                        }()
+                        
+                        let subTitle:UILabel = {
+                            let subTitle = UILabel()
+                            
+                            subTitle.text = "\(viewModel.recipe.cookWay) / \(viewModel.recipe.recipe_type)"
+                            subTitle.font =  UIFont.systemFont(ofSize: CGFloat(10))
+                            
+                            subTitle.sizeToFit()
+                            subTitle.textAlignment = .left
+                            
+                            return subTitle
+                        }()
+                        
+                        leftView.addArrangedSubview(title)
+                        leftView.addArrangedSubview(subTitle)
+                        
+                        return leftView
+                    }()
+                    
+                    let rightView:UIStackView = {
+                        let leftView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .center)
+                        
+                        let title:UILabel = {
+                            let title = UILabel()
+                            title.text = viewModel.recipe.recipe_name
+                            title.font = UIFont.systemFont(ofSize: CGFloat(16))
+                            
+                            title.sizeToFit()
+                            
+                            return title
+                        }()
+                        
+                        let subTitle:UILabel = {
+                            let subTitle = UILabel()
+                            
+                            subTitle.text = "\(viewModel.recipe.cookWay) / \(viewModel.recipe.recipe_type)"
+                            subTitle.font =  UIFont.systemFont(ofSize: CGFloat(10))
+                            
+                            subTitle.sizeToFit()
+                            subTitle.textAlignment = .left
+                            
+                            return subTitle
+                        }()
+                        
+                        leftView.addArrangedSubview(title)
+                        leftView.addArrangedSubview(subTitle)
+                        
+                        return leftView
+                    }()
+                    
+                    nutritionView.addArrangedSubview(leftView)
+                    nutritionView.addArrangedSubview(rightView)
+                    
+                    let line = UIView()
+                    nutritionView.addSubview(line)
+                    line.backgroundColor = .black
+                    line.snp.makeConstraints{ make in
+                        make.leading.bottom.equalToSuperview()
+                        make.height.equalTo(1)
+                        make.width.equalToSuperview()
+                    }
                     return nutritionView
                 }()
                 
@@ -194,10 +268,8 @@ class RecipeDetailViewController: UIViewController{
                 outerView.addArrangedSubview(ingredientView)
                 outerView.addArrangedSubview(recipeView)
                 
-                
-                mainView.snp.makeConstraints{ make in
-                    make.top.equalTo(mainImageView.snp.bottom).offset(20)
-                    make.leading.trailing.equalToSuperview().offset(20)
+                nutritionView.snp.makeConstraints{ make in
+                    make.width.equalTo(360.adjustW)
                 }
                 
                 
@@ -209,7 +281,6 @@ class RecipeDetailViewController: UIViewController{
             outerView.snp.makeConstraints{ make in
                 make.top.leading.trailing.equalTo(scrollView.contentLayoutGuide)
                 make.bottom.equalToSuperview().inset(50)
-                make.width.equalToSuperview()
             }
             
             return scrollView
