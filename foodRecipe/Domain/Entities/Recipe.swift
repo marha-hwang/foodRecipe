@@ -14,6 +14,7 @@ struct Recipe:Codable{
     let recipe_type:String
     let recipe_tip:String
     let hash_tag:String
+    let info_wgt:String
     let info_na:String
     let info_pro:String
     let info_fat:String

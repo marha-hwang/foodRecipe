@@ -109,6 +109,7 @@ extension RecipeResponseDTO.RecipeDTO{
             recipe_type: RCP_PAT2,
             recipe_tip: RCP_NA_TIP,
             hash_tag: HASH_TAG,
+            info_wgt: INFO_WGT,
             info_na: INFO_NA,
             info_pro: INFO_PRO,
             info_fat: INFO_FAT,

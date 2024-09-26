@@ -15,4 +15,43 @@ extension UIStackView{
         self.distribution = distribution
         self.alignment = alignment
     }
+    
+    func addBorder(_ edgeArr:[UIRectEdge], width:CGFloat, color:UIColor){
+        edgeArr.forEach{ edge in
+            let line = UIView()
+            self.addSubview(line)
+            switch edge{
+            case .top:
+                line.snp.makeConstraints{ make in
+                    make.leading.top.equalToSuperview()
+                    make.height.equalTo(width)
+                    make.width.equalToSuperview()
+                }
+            case .bottom:
+                line.snp.makeConstraints{ make in
+                    make.leading.bottom.equalToSuperview()
+                    make.height.equalTo(width)
+                    make.width.equalToSuperview()
+                }
+            case .left:
+                line.snp.makeConstraints{ make in
+                    make.leading.top.equalToSuperview()
+                    make.width.equalTo(width)
+                    make.height.equalToSuperview()
+                }
+            case .right:
+                line.snp.makeConstraints{ make in
+                    make.trailing.top.equalToSuperview()
+                    make.width.equalTo(width)
+                    make.height.equalToSuperview()
+                }            
+            default:
+                break
+            }
+            
+            line.backgroundColor = color
+        }
+        
+        
+    }
 }
