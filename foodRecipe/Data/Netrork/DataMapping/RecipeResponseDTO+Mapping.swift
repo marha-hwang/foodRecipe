@@ -102,8 +102,30 @@ extension RecipeResponseDTO{
 
 extension RecipeResponseDTO.RecipeDTO{
     func toDomain() -> Recipe{
+        var manual:[ManualItem] = []
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG01), description: MANUAL01))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG02), description: MANUAL02))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG03), description: MANUAL03))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG04), description: MANUAL04))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG05), description: MANUAL05))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG06), description: MANUAL06))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG07), description: MANUAL07))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG08), description: MANUAL08))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG09), description: MANUAL09))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG10), description: MANUAL10))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG11), description: MANUAL11))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG12), description: MANUAL12))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG13), description: MANUAL13))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG14), description: MANUAL14))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG15), description: MANUAL15))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG16), description: MANUAL16))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG17), description: MANUAL17))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG18), description: MANUAL18))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG19), description: MANUAL19))
+        manual.append(ManualItem(imageUrl: formmationgURL(url: MANUAL_IMG20), description: MANUAL20))
+        
         return Recipe(
-            ingredients: [],
+            ingredients: RCP_PARTS_DTLS,
             main_image: "https" + ATT_FILE_NO_MAIN.getString(4, ATT_FILE_NO_MAIN.count),   
             cookWay: RCP_WAY2,
             recipe_type: RCP_PAT2,
@@ -117,26 +139,11 @@ extension RecipeResponseDTO.RecipeDTO{
             info_eng: INFO_ENG,
             recipe_seq: RCP_SEQ,
             recipe_name: RCP_NM,
-            manual1: MANUAL01, manual1_img: MANUAL_IMG01,
-            manual2: MANUAL02, manual2_img: MANUAL_IMG02,
-            manual3: MANUAL03, manual3_img: MANUAL_IMG03,
-            manual4: MANUAL04, manual4_img: MANUAL_IMG04,
-            manual5: MANUAL05, manual5_img: MANUAL_IMG05,
-            manual6: MANUAL06, manual6_img: MANUAL_IMG06,
-            manual7: MANUAL07, manual7_img: MANUAL_IMG07,
-            manual8: MANUAL08, manual8_img: MANUAL_IMG08,
-            manual9: MANUAL09, manual9_img: MANUAL_IMG09,
-            manual10: MANUAL10, manual10_img: MANUAL_IMG10,
-            manual11: MANUAL11, manual11_img: MANUAL_IMG11,
-            manual12: MANUAL12, manual12_img: MANUAL_IMG12,
-            manual13: MANUAL13, manual13_img: MANUAL_IMG13,
-            manual14: MANUAL14, manual14_img: MANUAL_IMG14,
-            manual15: MANUAL15, manual15_img: MANUAL_IMG15,
-            manual16: MANUAL16, manual16_img: MANUAL_IMG16,
-            manual17: MANUAL17, manual17_img: MANUAL_IMG17,
-            manual18: MANUAL18, manual18_img: MANUAL_IMG18,
-            manual19: MANUAL19, manual19_img: MANUAL_IMG19,
-            manual20: MANUAL20, manual20_img: MANUAL_IMG20)
-        
+            manual: manual
+        )
+    }
+    
+    func formmationgURL(url:String)->String{
+        return url == "" ? "":"https" + url.getString(4, url.count)
     }
 }

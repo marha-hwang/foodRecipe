@@ -80,8 +80,8 @@ struct ItemsNavigationBarBehavior: ViewControllerLifecycleBehavior {
         imageView.image = image
         imageView.contentMode = UIView.ContentMode.scaleToFill
 
-        imageView.widthAnchor.constraint(equalToConstant: navigationBar.frame.width * 0.3).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: navigationBar.frame.height * 0.9).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 50.adjustW).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 50.adjustH).isActive = true
         
         viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: imageView)
         
@@ -93,7 +93,7 @@ struct ItemsNavigationBarBehavior: ViewControllerLifecycleBehavior {
             return
         }
         
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: navigationBar.frame.width * 0.7, height: navigationBar.frame.height * 0.8))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300.adjustW, height: navigationBar.frame.height * 0.8))
         label.backgroundColor = UIColor.white
         label.text = "메뉴를 검색해보세요"
         label.textColor = .lightGray

@@ -15,12 +15,12 @@ class RecipeDetailViewController: UIViewController{
     private lazy var favoriteView:UIImageView = {
         let favoriteView = UIImageView()
         favoriteView.contentMode = .scaleToFill
-        favoriteView.image = UIImage(systemName: "star")
-        favoriteView.tintColor = .gray
+        favoriteView.image = UIImage(systemName: "heart")
+        favoriteView.tintColor = .red
         
         favoriteView.snp.makeConstraints{ make in
-            make.width.equalTo(45.adjustW)
-            make.height.equalTo(45.adjustH)
+            make.width.equalTo(31.adjustW)
+            make.height.equalTo(31.adjustH)
         }
         
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(favoriteChangeEvent))
@@ -53,12 +53,10 @@ class RecipeDetailViewController: UIViewController{
             print("Status Changed")
             DispatchQueue.main.async{
                 if self?.viewModel.favoriteStatus.value == true{
-                    self?.favoriteView.tintColor = .yellow
-                    print("status true")
+                    self?.favoriteView.image = UIImage(systemName: "heart.fill")
                 }
                 else{
-                    self?.favoriteView.tintColor = .green
-                    print("status false")
+                    self?.favoriteView.image = UIImage(systemName: "heart")
                 }
                 
             }
@@ -97,7 +95,7 @@ class RecipeDetailViewController: UIViewController{
                     }
                     
                     mainImageView.snp.makeConstraints{make in
-                        make.height.equalTo(219.adjustH)
+                        make.height.equalTo(300.adjustH)
                         make.width.equalTo(393.adjustW)
                     }
                     
@@ -113,7 +111,7 @@ class RecipeDetailViewController: UIViewController{
                     }
                     
                     let leftView:UIStackView = {
-                        let leftView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .center)
+                        let leftView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .leading)
                         
                         let title:UILabel = {
                             let title = UILabel()
@@ -144,7 +142,7 @@ class RecipeDetailViewController: UIViewController{
                     }()
                     
                     let rightView:UIStackView = {
-                        let rightView = UIStackView(axis: .horizontal, distribution: .equalSpacing, alignment: .center)
+                        let rightView = UIStackView(axis: .horizontal, distribution: .equalSpacing, alignment: .trailing)
                         
                         rightView.addArrangedSubview(favoriteView)
                         
@@ -222,8 +220,34 @@ class RecipeDetailViewController: UIViewController{
                 }()
                 
                 let ingredientView = {
-                    let ingredientView = UIStackView()
-                    ingredientView.backgroundColor = .green
+                    let ingredientView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .leading)
+                    ingredientView.snp.makeConstraints{ make in
+                        make.width.equalTo(360.adjustW)
+                    }
+                    
+                    let title:UILabel = {
+                        let title = UILabel()
+                        title.text = "재료정보"
+                        title.font = UIFont.systemFont(ofSize: CGFloat(16))
+                        
+                        title.sizeToFit()
+                        
+                        return title
+                    }()
+                    
+                    let content:UILabel = {
+                        let content = UILabel()
+                        content.text = viewModel.recipe.ingredients
+                        content.font = UIFont.systemFont(ofSize: CGFloat(16))
+                        
+                        content.sizeToFit()
+                        
+                        return content
+                    }()
+                    
+                    ingredientView.addArrangedSubview(title)
+                    ingredientView.addArrangedSubview(content)
+                    
                     return ingredientView
                 }()
                 
@@ -233,11 +257,12 @@ class RecipeDetailViewController: UIViewController{
                     tipView.snp.makeConstraints{ make in
                         make.width.equalTo(360.adjustW)
                     }
-                    
+                    tipView.backgroundColor = UIColor(hex: "ECEDE4", alpha: 1.0)
                     tipView.layer.shadowColor = UIColor.black.cgColor
-                    tipView.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+                    tipView.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
                     tipView.layer.shadowOpacity = 0.2
                     tipView.layer.shadowRadius = 4.0
+                    
                     
                     let title:UILabel = {
                         let title = UILabel()
@@ -267,8 +292,17 @@ class RecipeDetailViewController: UIViewController{
                 }()
                 
                 let recipeView = {
-                    let recipeView = UIStackView()
-                    ingredientView.backgroundColor = .magenta
+                    let recipeView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .leading)
+                    
+                    
+                    for i in 1...viewModel.recipe.manual.count{
+                        
+                        if viewModel.recipe.manual[i-1].description == "" { break }
+                        
+                        let recipeItem = makeRecipeItem(index: i, item: viewModel.recipe.manual[i-1])
+                        recipeView.addArrangedSubview(recipeItem)
+                    }
+                    
                     return recipeView
                 }()
                 
@@ -340,12 +374,63 @@ class RecipeDetailViewController: UIViewController{
         return item
     }
     
+    private func makeRecipeItem(index:Int, item:ManualItem)->UIStackView{
+            let recipeItem = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .leading)
+            
+            recipeItem.snp.makeConstraints{ make in
+                make.width.equalTo(360.adjustW)
+            }
+            
+            let stageLabel:UILabel = {
+                let stageLabel = UILabel()
+                stageLabel.text = "STEP\(index)"
+                
+                stageLabel.font = UIFont.systemFont(ofSize: CGFloat(16))
+                stageLabel.sizeToFit()
+                
+                return stageLabel
+            }()
+            
+            let stageImage:UIImageView = {
+                let stageImage:UIImageView = UIImageView()
+                
+                stageImage.snp.makeConstraints{ make in
+                    make.height.equalTo(180.adjustH)
+                    make.width.equalTo(319.adjustW)
+                }
+                
+                updateImage(url: item.imageUrl){ image in
+                    stageImage.image = image
+                }
+                
+                return stageImage
+            }()
+            
+            let stageText:UILabel = {
+                let stageText = UILabel()
+                stageText.text = item.description
+                stageText.numberOfLines = 0
+                stageText.font = UIFont.systemFont(ofSize: CGFloat(16))
+                stageText.sizeToFit()
+                
+                return stageText
+            }()
+            
+            recipeItem.addArrangedSubview(stageLabel)
+            recipeItem.addArrangedSubview(stageImage)
+            recipeItem.addArrangedSubview(stageText)
+            
+            return recipeItem
+    }
+    
     private func updateImage(url:String, completion:@escaping (UIImage)->Void){
         let _ = recipeImageRepository?.fetchImage(with: url){ result in
             switch result{
             case .success(let data):
                 if let image = UIImage(data: data){
-                    completion(image)
+                    DispatchQueue.main.async{
+                        completion(image)
+                    }
                 }
                 
             case .failure(let error):

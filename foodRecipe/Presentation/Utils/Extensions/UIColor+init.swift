@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 ///hex값을 이용하여 UIColor을 생성하기 위해 extention
+///ex) UIColor(hex: "ECEDE4", alpha: 1.0)
 extension UIColor{
     convenience init(hex:String, alpha:CGFloat) {
         var hexFormatted: String = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()

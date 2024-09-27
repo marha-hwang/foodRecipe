@@ -25,19 +25,19 @@ struct RecipeMainItemViewModel{
         func calculateDifficulty(recipe:Recipe)->Int{
             var star = 5
             
-            if recipe.manual16 == ""{
+            if recipe.manual[15].description == ""{
                 star-=1
             }
             
-            if recipe.manual2 == ""{
+            if recipe.manual[11].description == ""{
                 star-=1
             }
             
-            if recipe.manual8 == ""{
+            if recipe.manual[7].description == ""{
                 star-=1
             }
             
-            if recipe.manual4 == ""{
+            if recipe.manual[3].description == ""{
                 star-=1
             }
             
