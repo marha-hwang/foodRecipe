@@ -15,146 +15,98 @@ class RecipeMainItemCell:UICollectionViewCell{
     
     lazy var imageView:UIImageView = {
         let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleToFill
+        
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 10
+        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.borderWidth = 1
+        
+        imageView.snp.makeConstraints{ make in
+            make.height.equalTo(260.adjustH)
+        }
         
         return imageView
     }()
     
-    lazy var recipeName:UITextView = {
-        let recipeName = UITextView()
-        recipeName.translatesAutoresizingMaskIntoConstraints = false
-        recipeName.textAlignment = .center
+    lazy var recipeName:UILabel = {
+        let recipeName = UILabel()
+        recipeName.textAlignment = .left
+        recipeName.font = UIFont.systemFont(ofSize: 14)
+        recipeName.sizeToFit()
         
         return recipeName
     }()
     
-    lazy var recipeType:UITextView = {
-        let recipeType = UITextView()
-        recipeType.translatesAutoresizingMaskIntoConstraints = false
+    lazy var recipeType:UILabel = {
+        let recipeType = UILabel()
+        recipeType.textAlignment = .center
+        recipeType.font = UIFont.systemFont(ofSize: 12)
+        recipeType.sizeToFit()
         
         return recipeType
     }()
     
-    lazy var recipeCategory:UITextView = {
-        let recipeCategory = UITextView()
-        recipeCategory.translatesAutoresizingMaskIntoConstraints = false
- 
+    lazy var recipeCategory:UILabel = {
+        let recipeCategory = UILabel()
+        recipeCategory.textAlignment = .center
+        recipeCategory.font = UIFont.systemFont(ofSize: 12)
+        recipeCategory.sizeToFit()
+        
         return recipeCategory
     }()
     
-    lazy var difficultyStar:UIStackView = {
-        let difficultyStar = UIStackView()
-        difficultyStar.translatesAutoresizingMaskIntoConstraints = false
-        difficultyStar.axis = .horizontal
-        difficultyStar.alignment = .center
-        difficultyStar.distribution = .fillProportionally
+    lazy var difficulty:UILabel = {
+        let difficulty = UILabel()
+        difficulty.textAlignment = .center
+        difficulty.font = UIFont.systemFont(ofSize: 12)
+        difficulty.sizeToFit()
         
-        
-        for i in 0..<5{
-            lazy var imageView:UIImageView = {
-                let imageView = UIImageView()
-                imageView.translatesAutoresizingMaskIntoConstraints = false
-                imageView.contentMode = .scaleToFill
-                imageView.image = UIImage(systemName: "star")
-                imageView.tintColor = .yellow
-                
-                return imageView
-            }()
-            
-            difficultyStar.addArrangedSubview(imageView)
-        }
-        
-        
-        return difficultyStar
+        return difficulty
     }()
     
     private lazy var outerView:UIStackView = {
-        let outerView = UIStackView()
-        outerView.axis = .vertical
-        outerView.alignment = .center
-        outerView.distribution = .fillProportionally
-        
-        outerView.translatesAutoresizingMaskIntoConstraints = false
+        let outerView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .leading)
+        outerView.addArrangedSubview(imageView)
+        outerView.addArrangedSubview(recipeName)
+
         
         lazy var infoStack:UIStackView = {
-            let infoStack = UIStackView()
-            infoStack.axis = .horizontal
-            infoStack.alignment = .center
-            infoStack.distribution = .fillProportionally
+            let infoStack = UIStackView(axis: .horizontal, distribution: .equalSpacing, alignment: .leading)
+
+            let difficultyStack:UIStackView = {
+                let difficultyStack = UIStackView(axis: .horizontal, distribution: .equalSpacing, alignment: .top)
+                
+                difficultyStack.snp.makeConstraints{ make in
+                    make.height.equalTo(30)
+                }
+                
+                let difficultyImage:UIImageView = {
+                    let difficultyImage = UIImageView()
+                    difficultyImage.contentMode = .scaleToFill
+                    difficultyImage.image = UIImage(systemName: "star.fill")
+                    difficultyImage.tintColor = .black
+                    return difficultyImage
+                }()
+                
+                difficultyStack.addArrangedSubview(difficultyImage)
+                difficultyStack.addArrangedSubview(difficulty)
+                
+
+                return difficultyStack
+            }() 
             
-            infoStack.translatesAutoresizingMaskIntoConstraints = false
-            infoStack.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
-            
+            infoStack.addArrangedSubview(difficultyStack)
             infoStack.addArrangedSubview(recipeType)
             infoStack.addArrangedSubview(recipeCategory)
-            
-            recipeCategory.widthAnchor.constraint(equalToConstant: contentView.frame.width*0.5).isActive = true
-            recipeCategory.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.1).isActive = true
-            
-            recipeType.widthAnchor.constraint(equalToConstant: contentView.frame.width*0.5).isActive = true
-            recipeType.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.1).isActive = true
             
             return infoStack
         }()
         
-        lazy var difficultyStack:UIStackView = {
-            let difficultyStack = UIStackView()
-            difficultyStack.axis = .horizontal
-            difficultyStack.alignment = .center
-            difficultyStack.distribution = .fillProportionally
-            
-            recipeCategory.translatesAutoresizingMaskIntoConstraints = false
-            
-            lazy var difficultyLabel:UITextView = {
-                let difficultyLabel = UITextView()
-                difficultyLabel.translatesAutoresizingMaskIntoConstraints = false
-                difficultyLabel.text = "조리 난이도"
-                difficultyLabel.sizeToFit()
-                
-                return difficultyLabel
-            }()
-            
-            difficultyStack.addArrangedSubview(difficultyLabel)
-            difficultyStack.addArrangedSubview(difficultyStar)
-            
-            difficultyLabel.widthAnchor.constraint(equalToConstant: contentView.frame.width*0.5).isActive = true
-            difficultyLabel.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.2).isActive = true
-            
-            difficultyStar.widthAnchor.constraint(equalToConstant: contentView.frame.width*0.5).isActive = true
-            difficultyStar.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.2).isActive = true
-            
-            return difficultyStack
-        }()
-        
-        outerView.addArrangedSubview(imageView)
-        outerView.addArrangedSubview(recipeName)
         outerView.addArrangedSubview(infoStack)
-        outerView.addArrangedSubview(difficultyStack)
-        
-        imageView.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.7).isActive = true
-        
-        recipeName.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.1).isActive = true
-        recipeName.widthAnchor.constraint(equalToConstant: contentView.frame.width).isActive = true
-        
-        infoStack.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.1).isActive = true
-        infoStack.widthAnchor.constraint(equalToConstant: contentView.frame.width).isActive = true
-        
-        difficultyStack.heightAnchor.constraint(equalToConstant: contentView.frame.height*0.1).isActive = true
-        difficultyStack.widthAnchor.constraint(equalToConstant: contentView.frame.width).isActive = true
         
         return outerView
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addViews()
-        addLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     public func fill(viewModel:RecipeMainItemViewModel, recipeImageRepository:RecipeImageRepository?){
         self.viewModel = viewModel
@@ -164,14 +116,9 @@ class RecipeMainItemCell:UICollectionViewCell{
         updateImage()
         
         self.recipeName.text = viewModel.recipeName
+        self.difficulty.text = String(viewModel.difficulty) + " / "
+        self.recipeType.text = viewModel.recipeType + " / "
         self.recipeCategory.text = viewModel.recipeCategory
-        self.recipeType.text = viewModel.recipeType
-        
-        //viewModel의 난이도에 따라서 difficultyStar의 별을 그려야함
-        for i in 0..<viewModel.difficulty{
-            let imageView = difficultyStar.subviews[i] as? UIImageView
-            imageView?.image = UIImage(systemName: "star.fill")
-        }
     }
     
     private func updateImage(){
@@ -193,19 +140,17 @@ class RecipeMainItemCell:UICollectionViewCell{
         }
     }
     
-    private func addViews(){
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         contentView.addSubview(outerView)
-    }
-    
-    private func addLayout(){
         outerView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         outerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         outerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        outerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        
-        ///outerView는 크기가 정해지지 않았는데 contentView는 이미 정해져 있는 이유는? collectionView를 생성할 때 셀의 크기를 미리 선언하고 생성해서임
-        //print(outerView.frame) 
-        //print(contentView.frame)
+        outerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true    
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 

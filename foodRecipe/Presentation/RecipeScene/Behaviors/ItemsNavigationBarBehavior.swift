@@ -95,7 +95,7 @@ struct ItemsNavigationBarBehavior: ViewControllerLifecycleBehavior {
         
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300.adjustW, height: navigationBar.frame.height * 0.8))
         label.backgroundColor = UIColor.white
-        label.text = "메뉴를 검색해보세요"
+        label.text = "레시피를 검색해보세요"
         label.textColor = .lightGray
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 15)

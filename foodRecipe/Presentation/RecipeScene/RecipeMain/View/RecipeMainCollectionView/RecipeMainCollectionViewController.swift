@@ -17,7 +17,7 @@ class RecipeMainCollectionViewController:UICollectionViewController{
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 300, height: 300)
+        layout.itemSize = CGSize(width: 300.adjustW, height: 320.adjustH)
         super.init(collectionViewLayout: layout)
     }
     

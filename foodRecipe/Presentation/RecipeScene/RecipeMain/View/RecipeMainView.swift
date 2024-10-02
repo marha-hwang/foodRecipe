@@ -15,14 +15,7 @@ class RecipeMainView:UIView{
         categoryView.translatesAutoresizingMaskIntoConstraints = false
         categoryView.axis = .vertical
         categoryView.alignment = .center
-        categoryView.distribution = .fillProportionally
-        categoryView.spacing = 10
-        
-        categoryView.layer.borderWidth = 1
-        categoryView.layer.masksToBounds = true
-        categoryView.layer.cornerRadius = 10
-        categoryView.layer.borderColor = UIColor.black.cgColor
-        categoryView.layer.borderWidth = 1
+        categoryView.distribution = .equalCentering
         
         return categoryView
     }()
@@ -89,11 +82,12 @@ class RecipeMainView:UIView{
 
 class RecommandView:UIStackView{
 
-    lazy var titleView:UITextView = {
-        let textView = UITextView()
+    lazy var titleView:UILabel = {
+        let textView = UILabel()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.textAlignment = .center
+        textView.textAlignment = .left
         textView.backgroundColor = .white
+        textView.font = UIFont.systemFont(ofSize: 16)
         
         return textView
         
@@ -137,16 +131,10 @@ class RecommandView:UIStackView{
         alignment = .fill
         distribution = .fillProportionally
         backgroundColor = .white
-        
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.black.cgColor
-
-        layer.masksToBounds = true        
-        layer.cornerRadius = 10
     
         addArrangedSubview(headerView)
         addArrangedSubview(recipeContainer)
-        recipeContainer.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        recipeContainer.heightAnchor.constraint(equalToConstant: 300.adjustH).isActive = true
 
     }
     

@@ -14,6 +14,7 @@ extension UIStackView{
         self.axis = axis
         self.distribution = distribution
         self.alignment = alignment
+        self.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func addBorder(_ edgeArr:[UIRectEdge], width:CGFloat, color:UIColor){

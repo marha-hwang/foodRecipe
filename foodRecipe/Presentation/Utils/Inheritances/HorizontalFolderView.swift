@@ -39,46 +39,45 @@ class HorizontalFolderView:UIStackView{
                 rowItems.append(items[index])
             }
             
-            self.addArrangedSubview(makeCategoryRowView(rowItems:rowItems))
+            let row = makeCategoryRowView(rowItems:rowItems)
+            self.addArrangedSubview(row)
+
         }
         
         
     }
     
     private func makeCategoryRowView(rowItems:[FolderViewItem]) -> UIStackView{
-        let rowView = UIStackView()
-        rowView.translatesAutoresizingMaskIntoConstraints = false
-        rowView.axis = .horizontal
-        rowView.alignment = .center
-        rowView.distribution = .fillEqually
-        rowView.spacing = 30
-        
+        let rowView = UIStackView(axis: .horizontal, distribution: .equalSpacing, alignment: .center)
+        rowView.spacing = 15.adjustW
         rowItems.forEach{
             let cell = makeCategoryCellView(item: $0)
             rowView.addArrangedSubview(cell)
+            
+            cell.snp.makeConstraints{ make in
+                make.top.equalToSuperview().offset(10)
+            }
+        
         }
         return rowView
     }
     
     private func makeCategoryCellView(item:FolderViewItem) -> UIStackView{
         
-        let cellView = UIStackView()
-        cellView.translatesAutoresizingMaskIntoConstraints = false
-        cellView.axis = .vertical
-        cellView.alignment = .center
-        cellView.distribution = .fillProportionally
-        cellView.spacing = 5
+        let cellView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .center)
         
         let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        imageView.snp.makeConstraints{ make in
+            make.width.equalTo(45.adjustW)
+            make.height.equalTo(45.adjustH)
+        }
         
         let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        textView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         textView.textAlignment = .center
+        textView.snp.makeConstraints{ make in
+            make.width.equalTo(60.adjustW)
+            make.height.equalTo(40.adjustH)
+        }
         
         switch item.type{
         case .empty:
@@ -136,8 +135,6 @@ class HorizontalFolderView:UIStackView{
         guard let items = self.items, let col = self.col, let defaultRow = self.defaultRow else{
             return
         }
-        
-        print("openForder")
         
         let openRow = self.arrangedSubviews[defaultRow-1] as! UIStackView
         let removeCell = openRow.arrangedSubviews[col-1]

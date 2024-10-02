@@ -55,7 +55,7 @@ class RecipeListViewController: UIViewController{
             }()
             
             categoryScrollView.addSubview(categoryStackView)
-            
+            categoryStackView.addBorder([.bottom], width: 1, color: .gray)
             categoryStackView.topAnchor.constraint(equalTo: categoryScrollView.contentLayoutGuide.topAnchor).isActive = true
             categoryStackView.bottomAnchor.constraint(equalTo: categoryScrollView.contentLayoutGuide.bottomAnchor).isActive = true
             categoryStackView.trailingAnchor.constraint(equalTo: categoryScrollView.contentLayoutGuide.trailingAnchor).isActive = true
@@ -156,7 +156,6 @@ class RecipeListViewController: UIViewController{
             label.text = items[i]
             label.textAlignment = .center
             view.addArrangedSubview(label)
-            label.layer.addBorder([.bottom], width: 1, color: .black)
             
             let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tabCategoryEvent))
             gestureRecognizer.name = items[i]
