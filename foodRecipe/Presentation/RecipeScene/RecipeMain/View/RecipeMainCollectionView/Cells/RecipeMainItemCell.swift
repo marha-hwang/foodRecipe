@@ -19,8 +19,6 @@ class RecipeMainItemCell:UICollectionViewCell{
         
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 10
-        imageView.layer.borderColor = UIColor.white.cgColor
-        imageView.layer.borderWidth = 1
         
         imageView.snp.makeConstraints{ make in
             make.height.equalTo(260.adjustH)

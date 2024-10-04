@@ -85,7 +85,7 @@ class RecipeDetailViewController: UIViewController{
             
             let outerView:UIStackView = {
                 let outerView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .center)
-                outerView.spacing = 10
+                outerView.spacing = 20.adjustH
 
                 let mainImageView:UIImageView = {
                     let mainImageView = UIImageView()
@@ -112,6 +112,7 @@ class RecipeDetailViewController: UIViewController{
                     
                     let leftView:UIStackView = {
                         let leftView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .leading)
+                        leftView.spacing = 5.adjustH
                         
                         let title:UILabel = {
                             let title = UILabel()
@@ -152,6 +153,9 @@ class RecipeDetailViewController: UIViewController{
                     mainView.addArrangedSubview(leftView)
                     mainView.addArrangedSubview(rightView)
                     
+                    leftView.snp.makeConstraints{ make in
+                        make.bottom.equalToSuperview().inset(5)
+                    }
                     mainView.addBorder([.bottom], width: 1, color: .black)
                     
                     return mainView
@@ -160,6 +164,7 @@ class RecipeDetailViewController: UIViewController{
                 
                 let nutritionView = {
                     let nutritionView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .leading)
+                    nutritionView.spacing = 5.adjustH
                     
                     let title:UILabel = {
                         let title = UILabel()
@@ -215,15 +220,13 @@ class RecipeDetailViewController: UIViewController{
                     
                     nutritionView.addArrangedSubview(title)
                     nutritionView.addArrangedSubview(elementsView)
-                    nutritionView.addBorder([.bottom], width: 1, color: .black)
+                    
                     return nutritionView
                 }()
                 
                 let ingredientView = {
                     let ingredientView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .leading)
-                    ingredientView.snp.makeConstraints{ make in
-                        make.width.equalTo(360.adjustW)
-                    }
+                    ingredientView.spacing = 10.adjustH
                     
                     let title:UILabel = {
                         let title = UILabel()
@@ -237,10 +240,19 @@ class RecipeDetailViewController: UIViewController{
                     
                     let content:UILabel = {
                         let content = UILabel()
-                        content.text = viewModel.recipe.ingredients
-                        content.font = UIFont.systemFont(ofSize: CGFloat(16))
                         
-                        content.sizeToFit()
+                        content.snp.makeConstraints{ make in
+                            make.width.equalTo(360.adjustW)
+                        }
+                        
+                        content.text = viewModel.recipe.ingredients
+                        content.font = UIFont.systemFont(ofSize: CGFloat(14))
+                        content.numberOfLines = 0
+                        
+                        content.layer.cornerRadius = 5
+                        content.layer.masksToBounds = true
+                        content.layer.borderColor = UIColor.black.cgColor
+                        content.layer.borderWidth = 1
                         
                         return content
                     }()
@@ -263,11 +275,10 @@ class RecipeDetailViewController: UIViewController{
                     tipView.layer.shadowOpacity = 0.2
                     tipView.layer.shadowRadius = 4.0
                     
-                    
                     let title:UILabel = {
                         let title = UILabel()
-                        title.text = "조리 Tip!!!"
-                        title.font = UIFont.systemFont(ofSize: CGFloat(20))
+                        title.text = "  조리 Tip"
+                        title.font = UIFont.systemFont(ofSize: CGFloat(16))
                         
                         title.sizeToFit()
                         
@@ -277,7 +288,7 @@ class RecipeDetailViewController: UIViewController{
                     let tip:UILabel = {
                         let tip = UILabel()
                         tip.text = viewModel.recipe.recipe_tip == "" ? "정보없음" : viewModel.recipe.recipe_tip
-                        tip.font = UIFont.systemFont(ofSize: CGFloat(16))
+                        tip.font = UIFont.systemFont(ofSize: CGFloat(14))
                         tip.numberOfLines = 0
                         
                         tip.sizeToFit()
@@ -292,8 +303,8 @@ class RecipeDetailViewController: UIViewController{
                 }()
                 
                 let recipeView = {
-                    let recipeView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .leading)
-                    
+                    let recipeView = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .center)
+                    recipeView.spacing = 10.adjustH
                     
                     for i in 1...viewModel.recipe.manual.count{
                         
@@ -312,7 +323,7 @@ class RecipeDetailViewController: UIViewController{
                 outerView.addArrangedSubview(ingredientView)
                 outerView.addArrangedSubview(tipView)
                 outerView.addArrangedSubview(recipeView)
-                
+
                 nutritionView.snp.makeConstraints{ make in
                     make.width.equalTo(360.adjustW)
                 }
@@ -343,13 +354,13 @@ class RecipeDetailViewController: UIViewController{
         
         item.snp.makeConstraints{ make in
             make.width.equalTo(134.adjustW)
-            make.height.equalTo(18.adjustH)
+            make.height.equalTo(38.adjustH)
         }
         
         let label1:UILabel = {
             let label1 = UILabel()
             label1.text = key
-            label1.font = UIFont.systemFont(ofSize: CGFloat(16))
+            label1.font = UIFont.systemFont(ofSize: CGFloat(14))
             
             label1.sizeToFit()
             
@@ -360,7 +371,7 @@ class RecipeDetailViewController: UIViewController{
             let label2 = UILabel()
             print(viewModel.recipe.info_wgt)
             label2.text = value
-            label2.font = UIFont.systemFont(ofSize: CGFloat(16))
+            label2.font = UIFont.systemFont(ofSize: CGFloat(14))
             
             label2.sizeToFit()
             
@@ -369,58 +380,66 @@ class RecipeDetailViewController: UIViewController{
         
         item.addArrangedSubview(label1)
         item.addArrangedSubview(label2)
-        item.addBorder([.bottom], width: 1, color: .black)
+        item.addBorder([.bottom], width: 1, color: .lightGray)
+        
+        label1.snp.makeConstraints{ make in make.bottom.equalToSuperview().inset(5.adjustH)}
         
         return item
     }
     
     private func makeRecipeItem(index:Int, item:ManualItem)->UIStackView{
-            let recipeItem = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .leading)
+        let recipeItem = UIStackView(axis: .vertical, distribution: .equalSpacing, alignment: .center)
+        recipeItem.spacing = 10.adjustH
+        
+        recipeItem.layer.masksToBounds = true        
+        recipeItem.layer.cornerRadius = 10
+        recipeItem.layer.borderWidth = 1
+        recipeItem.layer.borderColor = UIColor.black.cgColor
+        
+        recipeItem.snp.makeConstraints{ make in
+            make.width.equalTo(330.adjustW)
+        }
+        
+        let stageLabel:UILabel = {
+            let stageLabel = UILabel()
+            stageLabel.text = "STEP\(index)"
             
-            recipeItem.snp.makeConstraints{ make in
-                make.width.equalTo(360.adjustW)
+            stageLabel.font = UIFont.systemFont(ofSize: CGFloat(16))
+            stageLabel.sizeToFit()
+            
+            return stageLabel
+        }()
+        
+        let stageImage:UIImageView = {
+            let stageImage:UIImageView = UIImageView()
+            
+            stageImage.snp.makeConstraints{ make in
+                make.height.equalTo(200.adjustH)
+                make.width.equalTo(330.adjustW)
             }
             
-            let stageLabel:UILabel = {
-                let stageLabel = UILabel()
-                stageLabel.text = "STEP\(index)"
-                
-                stageLabel.font = UIFont.systemFont(ofSize: CGFloat(16))
-                stageLabel.sizeToFit()
-                
-                return stageLabel
-            }()
+            updateImage(url: item.imageUrl){ image in
+                stageImage.image = image
+            }
             
-            let stageImage:UIImageView = {
-                let stageImage:UIImageView = UIImageView()
-                
-                stageImage.snp.makeConstraints{ make in
-                    make.height.equalTo(180.adjustH)
-                    make.width.equalTo(319.adjustW)
-                }
-                
-                updateImage(url: item.imageUrl){ image in
-                    stageImage.image = image
-                }
-                
-                return stageImage
-            }()
+            return stageImage
+        }()
+        
+        let stageText:UILabel = {
+            let stageText = UILabel()
+            stageText.text = item.description
+            stageText.numberOfLines = 0
+            stageText.font = UIFont.systemFont(ofSize: CGFloat(16))
+            stageText.sizeToFit()
             
-            let stageText:UILabel = {
-                let stageText = UILabel()
-                stageText.text = item.description
-                stageText.numberOfLines = 0
-                stageText.font = UIFont.systemFont(ofSize: CGFloat(16))
-                stageText.sizeToFit()
-                
-                return stageText
-            }()
-            
-            recipeItem.addArrangedSubview(stageLabel)
-            recipeItem.addArrangedSubview(stageImage)
-            recipeItem.addArrangedSubview(stageText)
-            
-            return recipeItem
+            return stageText
+        }()
+        
+        recipeItem.addArrangedSubview(stageLabel)
+        recipeItem.addArrangedSubview(stageImage)
+        recipeItem.addArrangedSubview(stageText)
+        
+        return recipeItem
     }
     
     private func updateImage(url:String, completion:@escaping (UIImage)->Void){

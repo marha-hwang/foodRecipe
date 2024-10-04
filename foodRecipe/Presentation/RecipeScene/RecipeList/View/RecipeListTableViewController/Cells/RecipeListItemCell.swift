@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 
-import UIKit
-
 class RecipeListItemCell:UITableViewCell{
     static let reuseIdentifier = String(describing: RecipeMainItemCell.self)
     private var viewModel: RecipeListItemViewModel!

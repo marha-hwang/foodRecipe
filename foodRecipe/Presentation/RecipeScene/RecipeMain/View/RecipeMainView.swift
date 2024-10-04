@@ -134,7 +134,7 @@ class RecommandView:UIStackView{
     
         addArrangedSubview(headerView)
         addArrangedSubview(recipeContainer)
-        recipeContainer.heightAnchor.constraint(equalToConstant: 300.adjustH).isActive = true
+        recipeContainer.heightAnchor.constraint(equalToConstant: 320.adjustH).isActive = true
 
     }
     

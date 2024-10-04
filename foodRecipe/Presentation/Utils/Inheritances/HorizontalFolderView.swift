@@ -74,6 +74,7 @@ class HorizontalFolderView:UIStackView{
         
         let textView = UITextView()
         textView.textAlignment = .center
+        textView.isEditable = false
         textView.snp.makeConstraints{ make in
             make.width.equalTo(60.adjustW)
             make.height.equalTo(40.adjustH)
@@ -91,6 +92,7 @@ class HorizontalFolderView:UIStackView{
             let image = UIImage(systemName: "chevron.down")
             imageView.image = image
             imageView.contentMode = .scaleToFill
+            imageView.tintColor = .black
             
             textView.text = "열림"
 
@@ -103,7 +105,8 @@ class HorizontalFolderView:UIStackView{
             let image = UIImage(systemName: "chevron.compact.up")
             imageView.image = image
             imageView.contentMode = .scaleToFill
-            
+            imageView.tintColor = .black
+
             textView.text = "닫힘"
             
             let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(closeForderView))
