@@ -47,6 +47,7 @@ final class AppFlowCoordinator {
         let tabbar = CustomTabBarController()
         tabbar.setViewControllers([searchNav, favoriteNav], animated: false)
         searchNav.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "menucard"), selectedImage: UIImage(systemName: "menucard.fill"))
+        
         favoriteNav.tabBarItem = UITabBarItem(title: "즐겨찾기", image: UIImage(systemName: "bookmark"), selectedImage: UIImage(systemName: "bookmark.fill"))       
         
         navigationController.pushViewController(tabbar, animated: false)

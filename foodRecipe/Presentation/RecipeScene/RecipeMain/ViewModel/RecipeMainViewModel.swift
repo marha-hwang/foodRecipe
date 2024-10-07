@@ -27,6 +27,7 @@ protocol RecipeMainViewModelOutput{
     var firstRecommandItems:Observable<[Recipe]> {get}
     var secondRecommandTitle:String {get}
     var secondRecommandItems:Observable<[Recipe]> {get}
+    var loading:Observable<Bool> {get}
 }
 
 typealias RecipeMainViewModel = RecipeMainViewModelInput&RecipeMainViewModelOutput
@@ -47,6 +48,7 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
     var firstRecommandItems: Observable<[Recipe]> = Observable([])
     var secondRecommandTitle:String = ""
     var secondRecommandItems: Observable<[Recipe]> = Observable([])
+    var loading: Observable<Bool> = Observable(false)
     
     init(searchRecipeUsecase: SearchRecipeUseCase, actions: RecipeMainViewModelActions?) {
         self.searchRecipeUsecase = searchRecipeUsecase
@@ -75,6 +77,7 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
     
     //MARK: private
     private func updateRecommand(recipe_name:String, completion:@escaping(RecipePage)->Void){
+        loading.value = true
         let _ = searchRecipeUsecase.execute(
             requestValue: SearchRecipeUseCaseRequestValue( 
                 query: RecipeQuery(
@@ -84,12 +87,14 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
             page: 1,
             isSave: false)
         ) { result in
-                switch result {
-                case .success(let page):
-                    completion(page)
-                case .failure(let error):
-                    print(error)
-                }
+            switch result {
+            case .success(let page):
+                completion(page)
+            case .failure(let error):
+                print(error)
+            }
+            
+            self.loading.value = false
         }
     }
     

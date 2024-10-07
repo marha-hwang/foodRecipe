@@ -58,6 +58,17 @@ class RecipeMainViewController: UIViewController{
             self?.recipeMainView.secondRecommandView.recipeController.items = viewModel.secondRecommandItems.value
             self?.recipeMainView.secondRecommandView.recipeController.reload()
         }
+        
+        viewModel.loading.observe(on: self){ [weak self] _ in
+            DispatchQueue.main.async{
+                if self?.viewModel.loading.value == true{
+                    LoadingIndicator.showLoading()
+                }
+                else if self?.viewModel.loading.value == false{
+                    LoadingIndicator.hideLoading()
+                }
+            }
+        }
 
     }
     

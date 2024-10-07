@@ -118,11 +118,9 @@ class RecipeListViewController: UIViewController{
             DispatchQueue.main.async{
                 if self?.viewModel.loading.value == true{
                     LoadingIndicator.showLoading()
-                    print("loading true")
                 }
                 else if self?.viewModel.loading.value == false{
                     LoadingIndicator.hideLoading()
-                    print("loading false")
                 }
             }
         }
