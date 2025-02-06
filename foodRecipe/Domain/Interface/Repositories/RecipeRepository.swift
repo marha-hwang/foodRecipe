@@ -8,10 +8,9 @@
 import Foundation
 
 protocol RecipeRepository {
-    @discardableResult
     func fetchRecipesList(
         query: RecipeQuery,
         page: Int,
         completion: @escaping (Result<RecipePage, Error>) -> Void
-    ) -> Cancellable?
+    ) async throws -> RecipePage?
 }
