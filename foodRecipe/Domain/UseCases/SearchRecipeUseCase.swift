@@ -10,9 +10,8 @@ import Foundation
 //Cancellable : 네트워크 작업에서 중간에 작업을 취소하기 위해 사용하는 프로토콜이다.
 protocol SearchRecipeUseCase {
     func execute(
-        requestValue: SearchRecipeUseCaseRequestValue,
-        completion: @escaping (Result<RecipePage, Error>) -> Void
-    ) -> Cancellable?
+        requestValue: SearchRecipeUseCaseRequestValue
+    ) async throws-> RecipePage?
 }
 
 final class DefaultSearchRecipeUseCase: SearchRecipeUseCase {
@@ -30,9 +29,8 @@ final class DefaultSearchRecipeUseCase: SearchRecipeUseCase {
     }
 
     func execute(
-        requestValue: SearchRecipeUseCaseRequestValue,
-        completion: @escaping (Result<RecipePage, Error>) -> Void
-    ) -> Cancellable? {
+        requestValue: SearchRecipeUseCaseRequestValue
+    ) async throws -> RecipePage? {
 
         //검색한 내용을 저장하기 위한 코드
         if requestValue.isSave{
@@ -46,12 +44,9 @@ final class DefaultSearchRecipeUseCase: SearchRecipeUseCase {
             self.recipeQueryQueriesRepository.saveRecentQuery(query: queryHistory) { _ in }
         }
         
+        let result = try? await recipeRepository.fetchRecipesList(query: requestValue.query, page: requestValue.page)
 
-        return recipeRepository.fetchRecipesList(
-            query: requestValue.query,
-            page: requestValue.page,
-            completion: { result in completion(result) }
-        )
+        return result
     }
 }
 

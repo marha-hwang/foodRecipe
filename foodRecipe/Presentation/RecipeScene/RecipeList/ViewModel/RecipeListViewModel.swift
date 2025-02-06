@@ -66,38 +66,59 @@ final class DefaultRecipeListViewModel:RecipeListViewModel{
         recipeItems.value.removeAll()
     }
     
-    private func loadPage(nextPage:Int, category:String?, keyword:String?){
+    private func loadPage(nextPage:Int, category:String?, keyword:String?) async{
         loading.value = true
-        let _ = searchRecipeUseCase.execute(
-            requestValue: SearchRecipeUseCaseRequestValue(
-                query: RecipeQuery(
-                    recipe_name: keyword,
-                    recipe_ingredient: category,
-                    recipe_type: nil),
-            page: nextPage,
-            isSave: listType == .byKeyword ? true:false)
-        ) { result in
-                switch result {
-                case .success(let page):
-                    self.currentPage = nextPage
-                    self.totalPage = page.total_count/page.perPage + (page.total_count%page.perPage == 0 ? 0:1)
-                    DispatchQueue.main.async{
-                        page.recpies.forEach{ self.recipeItems.value.append($0) }
-                    }
-                case .failure(let error):
-                    print(error)
-                }
-            self.loading.value = false
+        
+        let page = try? await searchRecipeUseCase.execute(
+        requestValue: SearchRecipeUseCaseRequestValue(
+            query: RecipeQuery(
+                recipe_name: keyword,
+                recipe_ingredient: category,
+                recipe_type: nil),
+        page: nextPage,
+        isSave: listType == .byKeyword ? true:false))
+        
+        let totalCount = page?.total_count ?? 0
+        let perCount = page?.perPage ?? 0
+        
+        self.currentPage = nextPage
+        self.totalPage = totalCount/perCount + (totalCount%perCount == 0 ? 0:1)
+        DispatchQueue.main.async{
+            page?.recpies.forEach{ self.recipeItems.value.append($0) }
         }
+        
+        loading.value = false
+//        let _ = searchRecipeUseCase.execute(
+//            requestValue: SearchRecipeUseCaseRequestValue(
+//                query: RecipeQuery(
+//                    recipe_name: keyword,
+//                    recipe_ingredient: category,
+//                    recipe_type: nil),
+//            page: nextPage,
+//            isSave: listType == .byKeyword ? true:false)
+//        ) { result in
+//                switch result {
+//                case .success(let page):
+//                    self.currentPage = nextPage
+//                    self.totalPage = page.total_count/page.perPage + (page.total_count%page.perPage == 0 ? 0:1)
+//                    DispatchQueue.main.async{
+//                        page.recpies.forEach{ self.recipeItems.value.append($0) }
+//                    }
+//                case .failure(let error):
+//                    print(error)
+//                }
+//            self.loading.value = false
+//        }
     }
     
+    //MARK: async호출 지점구현필요
     private func updatePage(){
-        if listType == .byKeyword{
-            loadPage(nextPage: currentPage+1, category: nil, keyword: title.value)
-        }
-        else if listType == .byCategory{
-            loadPage(nextPage: currentPage+1, category: title.value, keyword: nil)
-        }
+//        if listType == .byKeyword{
+//            loadPage(nextPage: currentPage+1, category: nil, keyword: title.value)
+//        }
+//        else if listType == .byCategory{
+//            loadPage(nextPage: currentPage+1, category: title.value, keyword: nil)
+//        }
     }
     
 }

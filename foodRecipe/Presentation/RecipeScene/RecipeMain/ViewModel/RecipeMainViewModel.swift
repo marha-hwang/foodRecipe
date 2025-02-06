@@ -55,56 +55,81 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
         self.actions = actions
     }
     
-    private func setRecommand(){
+    private func setRecommand() async{
         let firsteRcommandItem = RecommandItems.getRecommandItem()
         let secondRecommandItem = RecommandItems.getRecommandItem()
         firsteRcommandTitle = firsteRcommandItem.title
         secondRecommandTitle = secondRecommandItem.title
         
+        let firstRecommand = try? await searchRecipeUsecase.execute(requestValue:SearchRecipeUseCaseRequestValue(
+            query: RecipeQuery(
+                recipe_name: firsteRcommandItem.foods.randomElement()!,
+                recipe_ingredient: nil,
+                recipe_type: nil),
+            page: 1,
+            isSave: false))
+        
+        firstRecommandItems.value = firstRecommand?.recpies ?? []
+        
+        let secondRecommand = try? await searchRecipeUsecase.execute(requestValue:SearchRecipeUseCaseRequestValue(
+            query: RecipeQuery(
+                recipe_name: secondRecommandItem.foods.randomElement()!,
+                recipe_ingredient: nil,
+                recipe_type: nil),
+            page: 1,
+            isSave: false))
+        
+        secondRecommandItems.value = secondRecommand?.recpies ?? []
+        
         ///동일한 인증키로 api를 동시에 호출하는 경우 인증키 에러가 발생하였음, 따라서 순차적으로 api를 호출하기 위해 아래와 같이 작성
-        updateRecommand(recipe_name: firsteRcommandItem.foods.randomElement()!){ [weak self] page in
-            DispatchQueue.main.async{
-                self?.firstRecommandItems.value = page.recpies
-            }
-            
-            self?.updateRecommand(recipe_name: secondRecommandItem.foods.randomElement()!){ [weak self] page in
-                DispatchQueue.main.async{
-                    self?.secondRecommandItems.value = page.recpies
-                }
-            }
-        }
+        //        updateRecommand(recipe_name: firsteRcommandItem.foods.randomElement()!){ [weak self] page in
+        //            DispatchQueue.main.async{
+        //                self?.firstRecommandItems.value = page.recpies
+        //            }
+        //
+        //            self?.updateRecommand(recipe_name: secondRecommandItem.foods.randomElement()!){ [weak self] page in
+        //                DispatchQueue.main.async{
+        //                    self?.secondRecommandItems.value = page.recpies
+        //                }
+        //            }
+        //        }
     }
+}
     
     //MARK: private
-    private func updateRecommand(recipe_name:String, completion:@escaping(RecipePage)->Void){
-        loading.value = true
-        let _ = searchRecipeUsecase.execute(
-            requestValue: SearchRecipeUseCaseRequestValue( 
-                query: RecipeQuery(
-                    recipe_name: recipe_name,
-                    recipe_ingredient: nil,
-                    recipe_type: nil),
-            page: 1,
-            isSave: false)
-        ) { result in
-            switch result {
-            case .success(let page):
-                completion(page)
-            case .failure(let error):
-                print(error)
-            }
-            
-            self.loading.value = false
-        }
-    }
-    
-}
+//    private func updateRecommand(recipe_name:String, completion:@escaping(RecipePage)->Void){
+//        loading.value = true
+//        
+//        
+////        let _ = searchRecipeUsecase.execute(
+////            requestValue: SearchRecipeUseCaseRequestValue( 
+////                query: RecipeQuery(
+////                    recipe_name: recipe_name,
+////                    recipe_ingredient: nil,
+////                    recipe_type: nil),
+////            page: 1,
+////            isSave: false)
+////        ) { result in
+////            switch result {
+////            case .success(let page):
+////                completion(page)
+////            case .failure(let error):
+////                print(error)
+////            }
+//            
+//            self.loading.value = false
+//        }
+//    }
+//    
+//}
 
 
 //MARK: INPUT
 extension DefaultRecipeMainViewModel{
+    
+    //MARK: async호출 지점구현필요
     func viewDidLoad() {
-        setRecommand()
+//        setRecommand()
     }
     
     func showRecipeQuriesList() {
