@@ -69,7 +69,10 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
             page: 1,
             isSave: false))
         
-        firstRecommandItems.value = firstRecommand?.recpies ?? []
+        DispatchQueue.main.async { [weak self] in
+            self?.firstRecommandItems.value = firstRecommand?.recpies ?? []
+
+        }
         
         let secondRecommand = try? await searchRecipeUsecase.execute(requestValue:SearchRecipeUseCaseRequestValue(
             query: RecipeQuery(
@@ -79,7 +82,9 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
             page: 1,
             isSave: false))
         
-        secondRecommandItems.value = secondRecommand?.recpies ?? []
+        DispatchQueue.main.async{ [weak self] in
+            self?.secondRecommandItems.value = secondRecommand?.recpies ?? []
+        }
         
         ///동일한 인증키로 api를 동시에 호출하는 경우 인증키 에러가 발생하였음, 따라서 순차적으로 api를 호출하기 위해 아래와 같이 작성
         //        updateRecommand(recipe_name: firsteRcommandItem.foods.randomElement()!){ [weak self] page in
@@ -128,8 +133,10 @@ final class DefaultRecipeMainViewModel:RecipeMainViewModel{
 extension DefaultRecipeMainViewModel{
     
     //MARK: async호출 지점구현필요
-    func viewDidLoad() {
-//        setRecommand()
+    func viewDidLoad(){
+        Task{
+            await setRecommand()
+        }
     }
     
     func showRecipeQuriesList() {
